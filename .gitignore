@@ -1,0 +1,27 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# editor
+.vscode
+.idea
+
+# package manager
+node_modules
+*.tgz
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+
+# serverless cache
+.serverless
+
+# next.js build output
+.next
+
+# TypeScript build output
+dist
