@@ -8,7 +8,7 @@ const Title = styled.h1`
   font-size: 50px;
 `;
 
-const Index: React.FunctionComponent = () => {
+const Index: React.FunctionComponent = (): JSX.Element => {
   return (
     <Layout title="Home | Battles.dev">
       <Title>Battles.dev</Title>

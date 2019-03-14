@@ -3,19 +3,20 @@ import Document, {
   Head,
   Main,
   NextScript,
-  NextDocumentContext
+  NextDocumentContext,
 } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 
 export default class MyDocument extends Document {
-  public static async getInitialProps(ctx: NextDocumentContext) {
+  public static async getInitialProps(ctx: NextDocumentContext): Promise<any> {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
 
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: App => props => sheet.collectStyles(<App {...props} />)
+          enhanceApp: (App) => (props) =>
+            sheet.collectStyles(<App {...props} />),
         });
 
       const initialProps = await Document.getInitialProps(ctx);
@@ -26,14 +27,14 @@ export default class MyDocument extends Document {
             {initialProps.styles}
             {sheet.getStyleElement()}
           </React.Fragment>
-        )
+        ),
       };
     } finally {
       sheet.seal();
     }
   }
 
-  public render() {
+  public render(): JSX.Element {
     return (
       <html>
         <Head>

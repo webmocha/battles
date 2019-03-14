@@ -5,7 +5,7 @@ export interface Props {
   title?: string;
 }
 
-const Layout: React.FunctionComponent<Props> = (props) => {
+const Layout: React.FunctionComponent<Props> = (props): JSX.Element => {
   const { children, title = "Battles.dev" } = props;
 
   return (
