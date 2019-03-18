@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint --ext .tsx,.ts .",
     "format": "pretty-quick",
-    "type:check": "tsc"
+    "type:check": "tsc",
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "storybook:build": "build-storybook -c .storybook"
   },
   "dependencies": {
     "@zeit/next-typescript": "^1.1.1",
@@ -31,6 +33,7 @@
     "@typescript-eslint/eslint-plugin": "^1.4.2",
     "@typescript-eslint/parser": "^1.4.2",
     "awesome-typescript-loader": "^5.2.1",
+    "babel-loader": "^8.0.5",
     "babel-plugin-styled-components": "^1.10.0",
     "eslint": "^5.15.1",
     "eslint-config-prettier": "^4.1.0",
