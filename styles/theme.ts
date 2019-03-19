@@ -1,26 +1,33 @@
 export const colors = {
   // Colors
+  primary: "#FFBB00",
+  // primary: "#EAB845",
   white: "#FFFFFF",
   liteGrey: "#F9F9F9",
   blue: "#0082df",
 
   // Text
-  liteText: "#CCCCCC",
+  liteText: "#DDDDDD",
   text: "#8A8A8A",
-  darkText: "#3D4B50",
+  // darkText: "#3D4B50",
+  darkText: "#5c6e75",
+
+  // Backgrounds
+  darkBackground: "#1E1F20",
 
   // Border
   border: "#EDEDED",
 
   // Status
   success: "#2AD955",
-  warn: "#FFBB00",
   error: "#FF6D26",
 };
 
 export const fonts = {
   base:
     '-apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif',
+  mono: '"Ubuntu Mono", Monaco, monospace',
+  title: "RoadRage, sans-serif",
 };
 
 export const sizes: { [key: string]: number } = {
