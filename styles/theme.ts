@@ -2,7 +2,6 @@ export const colors = {
   // Colors
   white: "#FFFFFF",
   liteGrey: "#F9F9F9",
-  black: "#3D4B50",
   blue: "#0082df",
 
   // Text

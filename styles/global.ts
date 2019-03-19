@@ -5,6 +5,8 @@ const GlobalStyles = createGlobalStyle`
   :root {
     font-size: 16px;
     overflow-x: hidden;
+    background: #161719;
+    background: #1E1F20;
   }
 
   * {
@@ -19,6 +21,8 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 300;
     letter-spacing: 0.1px;
     overflow-x: hidden;
+    color: #EAB845;
+    /* color: #F8CB4F; */
   }
 `;
 
