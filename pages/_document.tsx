@@ -43,6 +43,10 @@ export default class MyDocument extends Document {
             name="viewport"
             content="initial-scale=1.0, width=device-width"
           />
+          <link
+            href="https://fonts.googleapis.com/css?family=Ubuntu+Mono"
+            rel="stylesheet"
+          />
         </Head>
         <body>
           <Main />

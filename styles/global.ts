@@ -1,12 +1,13 @@
 import { createGlobalStyle } from "./styled-components";
-import { colors, fonts } from "./theme";
+import theme from "./theme";
+import fonts from "./fonts";
 
 const GlobalStyles = createGlobalStyle`
   :root {
     font-size: 16px;
     overflow-x: hidden;
     background: #161719;
-    background: #1E1F20;
+    background: ${theme.colors.darkBackground};
   }
 
   * {
@@ -16,14 +17,18 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    color: ${colors.darkText};
-    font-family: ${fonts.base};
+    color: ${theme.colors.darkText};
+    font-family: ${theme.fonts.base};
     font-weight: 300;
     letter-spacing: 0.1px;
     overflow-x: hidden;
-    color: #EAB845;
-    /* color: #F8CB4F; */
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+  }
+
+  ${fonts}
 `;
 
 export default GlobalStyles;
