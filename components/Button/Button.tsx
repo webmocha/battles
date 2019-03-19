@@ -3,21 +3,33 @@ import { colors } from "../../styles/theme";
 
 interface Props {
   variant?: "primary" | "secondary";
+  size?: "large" | "medium";
   color?: keyof typeof colors;
 }
 
 const Button = styled.button<Props>`
-  ${({ theme, variant = "secondary", color = "success" }) => css`
+  ${({
+    theme,
+    variant = "secondary",
+    color = "primary",
+    size = "medium",
+  }) => css`
     padding: 0.8rem 1.4rem;
-    border-radius: 0.25rem;
     border: 0;
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 700;
     cursor: pointer;
+
+    ${size === "large" &&
+      css`
+        padding: 1rem;
+        font-size: 2rem;
+        min-width: 250px;
+      `}
 
     ${variant === "primary" &&
       css`
-        color: ${theme.colors.white};
+        color: ${theme.colors.darkBackground};
         background: ${theme.colors[color]};
       `}
 

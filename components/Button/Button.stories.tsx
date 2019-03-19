@@ -9,7 +9,8 @@ storiesOf("Button", module).add("Default", () => (
   <Button
     variant={select("variant", ["primary", "secondary"], "primary")}
     onClick={action("Clicked")}
-    color={select("color", Object.keys(colors), "success") as "success"}
+    color={select("color", Object.keys(colors), "primary") as "primary"}
+    size={select("size", ["medium", "large"], "medium")}
   >
     {text("children", "Button")}
   </Button>
