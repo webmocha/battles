@@ -1,4 +1,4 @@
-import styled, { css } from "../../styles/styled-components";
+import styled, { css, keyframes } from "../../styles/styled-components";
 import { colors } from "../../styles/theme";
 
 interface Props {
@@ -7,6 +7,13 @@ interface Props {
   color?: keyof typeof colors;
 }
 
+const rippleOut = keyframes`
+  100% {
+    transform: scale(1.1, 1.3);
+    opacity: 0;
+  }
+`;
+
 const Button = styled.button<Props>`
   ${({
     theme,
@@ -14,6 +21,7 @@ const Button = styled.button<Props>`
     color = "primary",
     size = "medium",
   }) => css`
+    position: relative;
     padding: 0.8rem 1.4rem;
     border: 0;
     font-size: 1rem;
@@ -25,6 +33,12 @@ const Button = styled.button<Props>`
         padding: 1rem;
         font-size: 2rem;
         min-width: 250px;
+        outline: 0;
+
+        &:hover:before,
+        &:focus:before {
+          animation: ${rippleOut} 1s forwards;
+        }
       `}
 
     ${variant === "primary" &&
@@ -42,6 +56,16 @@ const Button = styled.button<Props>`
 
     &:hover {
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 1px solid ${theme.colors[color]}
     }
   `}
 `;
