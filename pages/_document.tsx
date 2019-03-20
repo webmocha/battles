@@ -5,7 +5,7 @@ import Document, {
   NextScript,
   NextDocumentContext,
 } from "next/document";
-import { ServerStyleSheet } from "styled-components";
+import { ServerStyleSheet } from "../styles/styled-components";
 
 export default class MyDocument extends Document {
   public static async getInitialProps(ctx: NextDocumentContext): Promise<any> {
@@ -42,6 +42,10 @@ export default class MyDocument extends Document {
           <meta
             name="viewport"
             content="initial-scale=1.0, width=device-width"
+          />
+          <link
+            href="https://fonts.googleapis.com/css?family=Ubuntu+Mono"
+            rel="stylesheet"
           />
         </Head>
         <body>
