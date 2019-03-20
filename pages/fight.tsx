@@ -4,8 +4,8 @@ import styled from "styled-components";
 import Layout from "../components/Layout";
 
 const Title = styled.h1`
-  color: red;
-  font-size: 50px;
+  font-size: 7.5rem;
+  font-family: ${(props) => props.theme.fonts.title};
 `;
 
 const Fight: React.FunctionComponent = (): JSX.Element => {

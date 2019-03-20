@@ -5,11 +5,15 @@ interface Props {
   variant?: "primary" | "secondary";
   size?: "large" | "medium";
   color?: keyof typeof colors;
+  ripple?: boolean;
 }
 
 const rippleOut = keyframes`
   100% {
-    transform: scale(1.1, 1.3);
+    top: -14px;
+    left: -14px;
+    right: -14px;
+    bottom: -14px;
     opacity: 0;
   }
 `;
@@ -20,12 +24,14 @@ const Button = styled.button<Props>`
     variant = "secondary",
     color = "primary",
     size = "medium",
+    ripple = false,
   }) => css`
     position: relative;
     padding: 0.8rem 1.4rem;
     border: 0;
+    font-family: ${theme.fonts.base};
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: 600;
     cursor: pointer;
 
     ${size === "large" &&
@@ -33,12 +39,6 @@ const Button = styled.button<Props>`
         padding: 1rem;
         font-size: 2rem;
         min-width: 250px;
-        outline: 0;
-
-        &:hover:before,
-        &:focus:before {
-          animation: ${rippleOut} 1s forwards;
-        }
       `}
 
     ${variant === "primary" &&
@@ -54,18 +54,33 @@ const Button = styled.button<Props>`
         background: transparent;
       `}
 
+    ${ripple &&
+      css`
+        will-change: top, left, right, bottom;
+        outline: 0;
+
+        &:before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          border: 1px solid ${theme.colors[color]};
+          pointer-events: none;
+        }
+
+        &:hover:before {
+          animation: ${rippleOut} 1s forwards;
+        }
+
+        &:focus:before {
+          animation: ${rippleOut} 1s infinite;
+        }
+      `}
+
     &:hover {
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-    }
-
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border: 1px solid ${theme.colors[color]}
     }
   `}
 `;

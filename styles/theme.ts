@@ -5,6 +5,7 @@ export const colors = {
   white: "#FFFFFF",
   liteGrey: "#F9F9F9",
   blue: "#0082df",
+  red: "#ff3f00",
 
   // Text
   liteText: "#DDDDDD",
@@ -24,8 +25,9 @@ export const colors = {
 };
 
 export const fonts = {
-  base:
-    '-apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif',
+  // base:
+  //   '-apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif',
+  base: '"Ubuntu Mono", Monaco, monospace',
   mono: '"Ubuntu Mono", Monaco, monospace',
   title: "RoadRage, sans-serif",
 };
