@@ -1,5 +1,6 @@
 import React from "react";
 import { configure, addDecorator, addParameters } from "@storybook/react";
+import { themes } from "@storybook/theming";
 import { withKnobs } from "@storybook/addon-knobs";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import GlobalStyles from "../styles/global";
@@ -9,7 +10,6 @@ const StorybookGlobalStyles = createGlobalStyle`
   body {
     height: 100vh;
     padding: 0.5rem;
-    background: #fff;
   }
 `;
 
@@ -38,6 +38,7 @@ addParameters({
     enableShortcuts: false,
     hierarchyRootSeparator: /\|/,
     hierarchySeparator: /\//,
+    theme: themes.dark,
   },
 });
 
