@@ -1,10 +1,23 @@
 import * as React from "react";
-import styled from "../../styles/styled-components";
+import styled, { css } from "../../styles/styled-components";
+
+interface Props {
+  name: string;
+  description: string;
+  isActive?: boolean;
+}
 
 const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 0.5rem;
+  ${(props: { isActive?: boolean }) => css`
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+
+    ${props.isActive &&
+      css`
+        background: rgba(255, 255, 255, 0.1);
+      `}
+  `}
 `;
 
 const Content = styled.div`
@@ -35,15 +48,10 @@ const Description = styled.p`
   text-overflow: ellipsis;
 `;
 
-interface Props {
-  name: string;
-  description: string;
-}
-
 const Suggestion: React.FunctionComponent<Props> = (props): JSX.Element => {
-  const { name, description, ...restProps } = props;
+  const { name, description, isActive, ...restProps } = props;
   return (
-    <Wrapper {...restProps}>
+    <Wrapper isActive={isActive} {...restProps}>
       <Logo />
       <Content>
         <Title dangerouslySetInnerHTML={{ __html: name }} />
