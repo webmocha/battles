@@ -2,9 +2,8 @@ import * as React from "react";
 import Downshift from "downshift";
 import styled from "../../styles/styled-components";
 import Input from "../Input";
-// import Suggestions from "../Suggestions";
-import Suggestion from "../Suggestions/Suggestion";
-import mockData from "../Suggestions/mockData";
+import Suggestion from "./Suggestion";
+import mockData from "./mockData";
 
 const SuggestionsWrapper = styled.div`
   position: relative;

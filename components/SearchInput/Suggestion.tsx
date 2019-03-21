@@ -12,6 +12,7 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     padding: 0.5rem;
+    cursor: pointer;
 
     ${props.isActive &&
       css`
