@@ -3,9 +3,10 @@ import { storiesOf } from "@storybook/react";
 import { text } from "@storybook/addon-knobs";
 import Suggestions from "./Suggestions";
 import Suggestion from "./Suggestion";
+import mockData from "./mockData";
 
 storiesOf("Suggestions", module)
-  .add("Default", () => <Suggestions />)
+  .add("Default", () => <Suggestions data={mockData.objects} />)
   .add("Suggestion", () => (
     <Suggestion
       name={text("name", "react")}
