@@ -11,18 +11,24 @@ const Wrapper = styled.div`
   }
 `;
 
-const Suggestions: React.FunctionComponent<{}> = (props): JSX.Element => {
-  const {} = props;
+interface SuggestionObject {
+  package: {
+    name: string;
+    version: string;
+    description: string;
+  };
+  highlight: string;
+}
+
+const Suggestions: React.FunctionComponent<{ data: SuggestionObject[] }> = (
+  props,
+): JSX.Element => {
+  const { data } = props;
   return (
     <Wrapper>
-      <Suggestion
-        name="react"
-        description="React is a JavaScript library for building user interfaces"
-      />
-      <Suggestion
-        name="<em>reac</em>t-redux"
-        description="Official React bindings for Redux"
-      />
+      {data.map(({ package: { name, description }, highlight }) => (
+        <Suggestion key={name} name={highlight} description={description} />
+      ))}
     </Wrapper>
   );
 };
