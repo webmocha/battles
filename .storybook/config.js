@@ -7,6 +7,8 @@ import GlobalStyles from "../styles/global";
 import theme from "../styles/theme";
 
 const StorybookGlobalStyles = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700');
+
   body {
     height: 100vh;
     padding: 0.5rem;

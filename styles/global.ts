@@ -17,7 +17,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    color: ${theme.colors.darkText};
+    color: ${theme.colors.text};
     font-family: ${theme.fonts.base};
     font-weight: 300;
     letter-spacing: 0.1px;
