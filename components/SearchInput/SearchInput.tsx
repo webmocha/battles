@@ -1,4 +1,5 @@
 import * as React from "react";
+import debounce from "lodash/debounce";
 import Downshift from "downshift";
 import styled from "../../styles/styled-components";
 import Input from "../Input";
@@ -25,16 +26,15 @@ const SearchInput: React.FunctionComponent<{}> = (props): JSX.Element => {
   const [items, setItems] = React.useState([]);
   const {} = props;
 
-  const onChange = async (event: any): Promise<void> => {
-    const value = event.target.value;
+  const fetchSearchSuggestions = debounce(async (text): Promise<void> => {
     const response = await fetch(
-      `https://cors-anywhere.herokuapp.com/https://api.npmjs.org/search/suggestions?text=${value}&size=10`,
+      `https://cors-anywhere.herokuapp.com/https://api.npmjs.org/search/suggestions?text=${text}&size=10`,
     );
     const data: any = await response.json();
-    if (data.objects && data.objects.length) {
+    if (data.objects) {
       setItems(data.objects);
     }
-  };
+  }, 200);
 
   return (
     <Downshift
@@ -55,7 +55,10 @@ const SearchInput: React.FunctionComponent<{}> = (props): JSX.Element => {
             {...getInputProps({
               isOpen,
               placeholder: "Search packages",
-              onChange,
+              onChange: (event: any) => {
+                const value = event.target.value;
+                fetchSearchSuggestions(value);
+              },
             })}
           />
           <SuggestionsWrapper>
