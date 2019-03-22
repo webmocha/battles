@@ -26,8 +26,8 @@ const Content = styled.div`
 `;
 
 const Logo = styled.div`
-  width: 32px;
-  height: 32px;
+  width: 2rem;
+  height: 2rem;
   background: ${(props) => props.theme.colors.border};
 `;
 
@@ -43,7 +43,7 @@ const Title = styled.p`
 
 const Description = styled.p`
   font-size: 0.8rem;
-  width: 300px;
+  width: 18.75rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -1,53 +1,9 @@
 import * as React from "react";
-import debounce from "lodash/debounce";
 import Downshift from "downshift";
-import styled from "../../styles/styled-components";
 import Input from "../Input";
 import Suggestion from "./Suggestion";
-
-const SuggestionsWrapper = styled.div`
-  position: relative;
-  top: -1px;
-  z-index: 999;
-`;
-
-const Suggestions = styled.div`
-  max-width: 22.5rem;
-  border: 2px solid ${(props) => props.theme.colors.darkText};
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: ${(props) => props.theme.colors.darkBackground};
-
-  ${Suggestion}:not(:last-child) {
-    border-bottom: 1px solid ${(props) => props.theme.colors.darkText};
-  }
-`;
-
-interface SearchResultObject {
-  package: {
-    name: string;
-    version: string;
-    description: string;
-  };
-  highlight: string;
-}
-
-interface SearchResults {
-  objects: SearchResultObject[];
-}
-
-const fetchSearchSuggestions = debounce(async ({ text, setItems }): Promise<
-  void
-> => {
-  const response = await fetch(
-    `https://cors-anywhere.herokuapp.com/https://api.npmjs.org/search/suggestions?text=${text}&size=10`,
-  );
-  const data: SearchResults = await response.json();
-  if (data.objects) {
-    setItems(data.objects);
-  }
-}, 200);
+import { SuggestionsWrapper, Suggestions } from "./styles";
+import { fetchSearchSuggestions, SearchResultObject } from "./api";
 
 const SearchInput: React.FunctionComponent<{}> = (props): JSX.Element => {
   const [items, setItems] = React.useState([]);

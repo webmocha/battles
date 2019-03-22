@@ -12,10 +12,6 @@ const Input = styled.input`
   &:focus {
     outline: 2px solid ${(props) => props.theme.colors.blue};
   }
-
-  /* &:not(:last-child) {
-    margin-right: 1rem;
-  } */
 `;
 
 export default Input as any;
