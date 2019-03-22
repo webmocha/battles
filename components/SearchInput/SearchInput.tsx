@@ -24,13 +24,26 @@ const Suggestions = styled.div`
   }
 `;
 
+interface SearchResultObject {
+  package: {
+    name: string;
+    version: string;
+    description: string;
+  };
+  highlight: string;
+}
+
+interface SearchResults {
+  objects: SearchResultObject[];
+}
+
 const fetchSearchSuggestions = debounce(async ({ text, setItems }): Promise<
   void
 > => {
   const response = await fetch(
     `https://cors-anywhere.herokuapp.com/https://api.npmjs.org/search/suggestions?text=${text}&size=10`,
   );
-  const data: any = await response.json();
+  const data: SearchResults = await response.json();
   if (data.objects) {
     setItems(data.objects);
   }
@@ -65,8 +78,8 @@ const SearchInput: React.FunctionComponent<{}> = (props): JSX.Element => {
             {...getInputProps({
               isOpen,
               placeholder: "Search packages",
-              onChange: (event: any) => {
-                const value = event.target.value;
+              onChange: (event: React.FormEvent<HTMLInputElement>) => {
+                const value = event.currentTarget.value;
                 setItems([]);
                 fetchSearchSuggestions({ text: value, setItems });
               },
@@ -76,7 +89,7 @@ const SearchInput: React.FunctionComponent<{}> = (props): JSX.Element => {
             {isOpen && inputValue ? (
               <Suggestions {...getMenuProps()}>
                 {items && items.length > 0 ? (
-                  items.map((item: any, index) => (
+                  items.map((item: SearchResultObject, index) => (
                     <Suggestion
                       key={item.package.name}
                       {...getItemProps({
