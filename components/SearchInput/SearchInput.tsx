@@ -22,19 +22,23 @@ const Suggestions = styled.div`
   }
 `;
 
+const fetchSearchSuggestions = debounce(async ({ text, setItems }): Promise<
+  void
+> => {
+  const response = await fetch(
+    `https://cors-anywhere.herokuapp.com/https://api.npmjs.org/search/suggestions?text=${text}&size=10`,
+  );
+  const data: any = await response.json();
+  if (data.objects) {
+    setItems(data.objects);
+  }
+}, 200);
+
 const SearchInput: React.FunctionComponent<{}> = (props): JSX.Element => {
   const [items, setItems] = React.useState([]);
   const {} = props;
 
-  const fetchSearchSuggestions = debounce(async (text): Promise<void> => {
-    const response = await fetch(
-      `https://cors-anywhere.herokuapp.com/https://api.npmjs.org/search/suggestions?text=${text}&size=10`,
-    );
-    const data: any = await response.json();
-    if (data.objects) {
-      setItems(data.objects);
-    }
-  }, 200);
+  console.log("items.length", items.length);
 
   return (
     <Downshift
@@ -57,15 +61,16 @@ const SearchInput: React.FunctionComponent<{}> = (props): JSX.Element => {
               placeholder: "Search packages",
               onChange: (event: any) => {
                 const value = event.target.value;
-                fetchSearchSuggestions(value);
+                setItems([]);
+                fetchSearchSuggestions({ text: value, setItems });
               },
             })}
           />
           <SuggestionsWrapper>
             {isOpen ? (
-              <Suggestions {...getMenuProps()}>
-                {items &&
-                  items.map((item: any, index) => (
+              items && items.length > 0 ? (
+                <Suggestions {...getMenuProps()}>
+                  {items.map((item: any, index) => (
                     <Suggestion
                       key={item.package.name}
                       {...getItemProps({
@@ -77,7 +82,10 @@ const SearchInput: React.FunctionComponent<{}> = (props): JSX.Element => {
                       isActive={highlightedIndex === index}
                     />
                   ))}
-              </Suggestions>
+                </Suggestions>
+              ) : (
+                <p>...</p>
+              )
             ) : null}
           </SuggestionsWrapper>
         </div>
