@@ -17,6 +17,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
+    height: 100vh;
     color: ${theme.colors.text};
     font-family: ${theme.fonts.base};
     font-weight: 300;
