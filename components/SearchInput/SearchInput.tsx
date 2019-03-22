@@ -8,6 +8,7 @@ import Suggestion from "./Suggestion";
 const SuggestionsWrapper = styled.div`
   position: relative;
   top: -1px;
+  z-index: 999;
 `;
 
 const Suggestions = styled.div`
@@ -16,6 +17,7 @@ const Suggestions = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+  background: ${(props) => props.theme.colors.darkBackground};
 
   ${Suggestion}:not(:last-child) {
     border-bottom: 1px solid ${(props) => props.theme.colors.darkText};

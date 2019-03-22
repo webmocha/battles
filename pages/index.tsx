@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Layout from "../components/Layout";
 import { Button, ButtonIcon } from "../components/Button";
 import AddIcon from "../components/icons/Add";
-import Input from "../components/Input";
+import SearchInput from "../components/SearchInput";
 
 const Title = styled.h1`
   display: flex;
@@ -35,11 +35,11 @@ const Container = styled.div`
   max-width: 1024px;
   margin: 0 auto;
   padding: 20px;
-  text-align: center;
 `;
 
 const FightButton = styled(Button)`
-  margin-top: 5rem;
+  display: block;
+  margin: 5rem auto;
 `;
 
 const Versus = styled.span`
@@ -68,9 +68,9 @@ const Index: React.FunctionComponent = (): JSX.Element => {
         <Blurb>Find out who will win today.</Blurb>
 
         <Form>
-          <Input placeholder="Search packages" />
+          <SearchInput />
           <Versus>vs</Versus>
-          <Input placeholder="Search packages" />
+          <SearchInput />
           <ButtonIcon
             variant="secondary"
             style={{ marginLeft: "1.25rem" }}
