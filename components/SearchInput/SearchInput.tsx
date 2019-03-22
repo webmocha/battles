@@ -11,7 +11,7 @@ const SuggestionsWrapper = styled.div`
 `;
 
 const Suggestions = styled.div`
-  max-width: 360px;
+  max-width: 22.5rem;
   border: 2px solid ${(props) => props.theme.colors.darkText};
   position: absolute;
   top: 0;
@@ -36,16 +36,20 @@ const fetchSearchSuggestions = debounce(async ({ text, setItems }): Promise<
 
 const SearchInput: React.FunctionComponent<{}> = (props): JSX.Element => {
   const [items, setItems] = React.useState([]);
+  const [inputValue, setInputValue] = React.useState("");
   const {} = props;
-
-  console.log("items.length", items.length);
 
   return (
     <Downshift
-      onChange={(selection) =>
-        console.log(`You selected ${selection.package.name}`)
-      }
-      itemToString={(item) => (item ? item.package.name : "")}
+      onChange={(selection) => console.log(`You selected ${selection}`)}
+      selectedItem={inputValue}
+      onStateChange={(changes) => {
+        if (changes.hasOwnProperty("selectedItem")) {
+          setInputValue(changes.selectedItem);
+        } else if (changes.hasOwnProperty("inputValue")) {
+          setInputValue(changes.inputValue || "");
+        }
+      }}
     >
       {({
         getInputProps,
@@ -67,25 +71,32 @@ const SearchInput: React.FunctionComponent<{}> = (props): JSX.Element => {
             })}
           />
           <SuggestionsWrapper>
-            {isOpen ? (
-              items && items.length > 0 ? (
-                <Suggestions {...getMenuProps()}>
-                  {items.map((item: any, index) => (
+            {isOpen && inputValue ? (
+              <Suggestions {...getMenuProps()}>
+                {items && items.length > 0 ? (
+                  items.map((item: any, index) => (
                     <Suggestion
                       key={item.package.name}
                       {...getItemProps({
-                        item,
+                        item: item.package.name,
                         index,
                       })}
                       name={item.highlight}
                       description={item.package.description}
                       isActive={highlightedIndex === index}
                     />
-                  ))}
-                </Suggestions>
-              ) : (
-                <p>...</p>
-              )
+                  ))
+                ) : (
+                  <p
+                    style={{
+                      width: "22.25rem",
+                      padding: "0.7rem 0.5rem",
+                    }}
+                  >
+                    ...
+                  </p>
+                )}
+              </Suggestions>
             ) : null}
           </SuggestionsWrapper>
         </div>
