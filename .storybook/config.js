@@ -1,15 +1,17 @@
 import React from "react";
 import { configure, addDecorator, addParameters } from "@storybook/react";
+import { themes } from "@storybook/theming";
 import { withKnobs } from "@storybook/addon-knobs";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import GlobalStyles from "../styles/global";
 import theme from "../styles/theme";
 
 const StorybookGlobalStyles = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700');
+
   body {
     height: 100vh;
     padding: 0.5rem;
-    background: #fff;
   }
 `;
 
@@ -38,6 +40,7 @@ addParameters({
     enableShortcuts: false,
     hierarchyRootSeparator: /\|/,
     hierarchySeparator: /\//,
+    theme: themes.dark,
   },
 });
 

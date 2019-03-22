@@ -44,7 +44,7 @@ export default class MyDocument extends Document {
             content="initial-scale=1.0, width=device-width"
           />
           <link
-            href="https://fonts.googleapis.com/css?family=Ubuntu+Mono"
+            href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700"
             rel="stylesheet"
           />
         </Head>
