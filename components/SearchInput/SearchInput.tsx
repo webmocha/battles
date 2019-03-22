@@ -3,7 +3,6 @@ import Downshift from "downshift";
 import styled from "../../styles/styled-components";
 import Input from "../Input";
 import Suggestion from "./Suggestion";
-import mockData from "./mockData";
 
 const SuggestionsWrapper = styled.div`
   position: relative;
@@ -23,12 +22,25 @@ const Suggestions = styled.div`
 `;
 
 const SearchInput: React.FunctionComponent<{}> = (props): JSX.Element => {
+  const [items, setItems] = React.useState([]);
   const {} = props;
-  const items = mockData.objects;
+
+  const onChange = async (event: any): Promise<void> => {
+    const value = event.target.value;
+    const response = await fetch(
+      `https://cors-anywhere.herokuapp.com/https://api.npmjs.org/search/suggestions?text=${value}&size=10`,
+    );
+    const data: any = await response.json();
+    if (data.objects && data.objects.length) {
+      setItems(data.objects);
+    }
+  };
 
   return (
     <Downshift
-      onChange={(selection) => alert(`You selected ${selection.package.name}`)}
+      onChange={(selection) =>
+        console.log(`You selected ${selection.package.name}`)
+      }
       itemToString={(item) => (item ? item.package.name : "")}
     >
       {({
@@ -43,23 +55,25 @@ const SearchInput: React.FunctionComponent<{}> = (props): JSX.Element => {
             {...getInputProps({
               isOpen,
               placeholder: "Search packages",
+              onChange,
             })}
           />
           <SuggestionsWrapper>
             {isOpen ? (
               <Suggestions {...getMenuProps()}>
-                {items.map((item, index) => (
-                  <Suggestion
-                    key={item.package.name}
-                    {...getItemProps({
-                      item,
-                      index,
-                    })}
-                    name={item.highlight}
-                    description={item.package.description}
-                    isActive={highlightedIndex === index}
-                  />
-                ))}
+                {items &&
+                  items.map((item: any, index) => (
+                    <Suggestion
+                      key={item.package.name}
+                      {...getItemProps({
+                        item,
+                        index,
+                      })}
+                      name={item.highlight}
+                      description={item.package.description}
+                      isActive={highlightedIndex === index}
+                    />
+                  ))}
               </Suggestions>
             ) : null}
           </SuggestionsWrapper>
