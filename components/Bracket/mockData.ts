@@ -50,7 +50,7 @@ export const packages = {
 };
 
 export const matches = [
-  ["react", "vue", "angular"],
-  ["vue", "angular"],
+  [["react", "vue"], ["angular"]],
+  [["vue", "angular"]],
   ["angular"],
 ];
