@@ -1,29 +1,34 @@
 import * as React from "react";
 import styled from "../../styles/styled-components";
 
-interface Props {
+export interface Props {
   logo: string;
   name: string;
   dark?: boolean;
+  y?: number;
 }
 
 const Name = styled.p`
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
   font-size: 0.75rem;
   text-align: center;
   color: #fff;
 `;
 
 const Contender: React.FunctionComponent<Props> = (props): JSX.Element => {
-  const { logo, name, dark } = props;
+  const { logo, name, dark, ...restProps } = props;
   const width = 120;
   const height = 100;
+  const contentOffset = height / 2 + 20;
 
   return (
-    <svg width={width} height={height}>
+    <svg width={width} height={height} {...restProps}>
       <rect width={width} height={height} fill={dark ? "#333" : "#fff"} />
-      <rect width={width} height={height} y={height / 2 + 20} fill="#333" />
+      <rect
+        width={width}
+        height={height - contentOffset}
+        y={contentOffset}
+        fill="#333"
+      />
       <image
         x="10"
         y="10"
@@ -33,9 +38,9 @@ const Contender: React.FunctionComponent<Props> = (props): JSX.Element => {
       />
       <foreignObject
         x="10"
-        y={height / 2 + 30}
+        y={contentOffset + 10}
         width={width - 20}
-        height="100%"
+        height="24"
       >
         <Name>{name}</Name>
       </foreignObject>
