@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "../../styles/styled-components";
+import useBounds from "../hooks/useBounds";
 
 export interface Props {
   logo: string;
@@ -8,24 +9,31 @@ export interface Props {
   y?: number;
 }
 
+const fontSize = 12;
+
 const Name = styled.p`
-  font-size: 0.75rem;
+  font-size: ${fontSize}px;
   text-align: center;
   color: #fff;
 `;
 
 const Contender: React.FunctionComponent<Props> = (props): JSX.Element => {
   const { logo, name, dark, ...restProps } = props;
+  const [contentBounds, contentRef] = useBounds();
   const width = 120;
   const height = 100;
   const contentOffset = height / 2 + 20;
 
   return (
-    <svg width={width} height={height} {...restProps}>
+    <svg
+      width={width}
+      height={height + contentBounds.height - fontSize}
+      {...restProps}
+    >
       <rect width={width} height={height} fill={dark ? "#333" : "#fff"} />
       <rect
         width={width}
-        height={height - contentOffset}
+        height={height + contentBounds.height - contentOffset - fontSize}
         y={contentOffset}
         fill="#333"
       />
@@ -40,9 +48,9 @@ const Contender: React.FunctionComponent<Props> = (props): JSX.Element => {
         x="10"
         y={contentOffset + 10}
         width={width - 20}
-        height="24"
+        height={contentBounds.height}
       >
-        <Name>{name}</Name>
+        <Name ref={contentRef}>{name}</Name>
       </foreignObject>
     </svg>
   );
