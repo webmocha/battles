@@ -7,6 +7,7 @@ export interface Props {
   name: string;
   dark?: boolean;
   y?: number;
+  forwardRef?: any;
 }
 
 const fontSize = 12;
@@ -18,7 +19,7 @@ const Name = styled.p`
 `;
 
 const Contender: React.FunctionComponent<Props> = (props): JSX.Element => {
-  const { logo, name, dark, ...restProps } = props;
+  const { logo, name, dark, forwardRef, ...restProps } = props;
   const [contentBounds, contentRef] = useBounds();
   const width = 120;
   const height = 100;
@@ -28,6 +29,7 @@ const Contender: React.FunctionComponent<Props> = (props): JSX.Element => {
     <svg
       width={width}
       height={height + contentBounds.height - fontSize}
+      ref={forwardRef}
       {...restProps}
     >
       <rect width={width} height={height} fill={dark ? "#333" : "#fff"} />
