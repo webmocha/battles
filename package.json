@@ -2,6 +2,9 @@
   "name": "battles.dev",
   "version": "1.0.0",
   "main": "index.js",
+  "engines": {
+    "node": ">8.11.2 <=8.15.0"
+  },
   "scripts": {
     "dev": "next",
     "build": "next build",
