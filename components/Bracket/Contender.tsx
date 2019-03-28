@@ -7,7 +7,6 @@ export interface Props {
   name: string;
   dark?: boolean;
   y?: number;
-  forwardRef?: any;
 }
 
 const fontSize = 12;
@@ -18,44 +17,48 @@ const Name = styled.p`
   color: #fff;
 `;
 
-const Contender: React.FunctionComponent<Props> = (props): JSX.Element => {
-  const { logo, name, dark, forwardRef, ...restProps } = props;
-  const [contentBounds, contentRef] = useBounds();
-  const width = 120;
-  const height = 100;
-  const contentOffset = height / 2 + 20;
+const Contender = React.forwardRef<SVGSVGElement, Props>(
+  (props, ref): JSX.Element => {
+    const { logo, name, dark, ...restProps } = props;
+    const [contentBounds, contentRef] = useBounds();
+    const width = 120;
+    const height = 100;
+    const contentOffset = height / 2 + 20;
 
-  return (
-    <svg
-      width={width}
-      height={height + contentBounds.height - fontSize}
-      ref={forwardRef}
-      {...restProps}
-    >
-      <rect width={width} height={height} fill={dark ? "#333" : "#fff"} />
-      <rect
+    return (
+      <svg
         width={width}
-        height={height + contentBounds.height - contentOffset - fontSize}
-        y={contentOffset}
-        fill="#333"
-      />
-      <image
-        x="10"
-        y="10"
-        width={width - 20}
-        height={height / 2}
-        xlinkHref={logo}
-      />
-      <foreignObject
-        x="10"
-        y={contentOffset + 10}
-        width={width - 20}
-        height={contentBounds.height}
+        height={height + contentBounds.height - fontSize}
+        ref={ref}
+        {...restProps}
       >
-        <Name ref={contentRef}>{name}</Name>
-      </foreignObject>
-    </svg>
-  );
-};
+        <rect width={width} height={height} fill={dark ? "#333" : "#fff"} />
+        <rect
+          width={width}
+          height={height + contentBounds.height - contentOffset - fontSize}
+          y={contentOffset}
+          fill="#333"
+        />
+        <image
+          x="10"
+          y="10"
+          width={width - 20}
+          height={height / 2}
+          xlinkHref={logo}
+        />
+        <foreignObject
+          x="10"
+          y={contentOffset + 10}
+          width={width - 20}
+          height={contentBounds.height}
+        >
+          <Name ref={contentRef}>{name}</Name>
+        </foreignObject>
+      </svg>
+    );
+  },
+);
+
+Contender.displayName = "Contender";
 
 export default Contender;

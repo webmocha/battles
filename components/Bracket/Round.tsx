@@ -41,7 +41,7 @@ const Round: React.FunctionComponent<Props> = (props): JSX.Element => {
         return (
           <Match
             key={index}
-            forwardRef={matchRef}
+            ref={matchRef}
             contenders={match.map((contender) => ({
               name: packages[contender.toLowerCase()].package,
               logo: "https://api.adorable.io/avatars/285",
