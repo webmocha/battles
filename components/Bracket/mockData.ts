@@ -47,6 +47,54 @@ export const packages = {
     start: "2019-03-25",
     end: "2019-03-26",
   },
+  mithril: {
+    outcome: -321,
+    downloads: [
+      {
+        downloads: 2380,
+        day: "2019-03-25",
+      },
+      {
+        downloads: 0,
+        day: "2019-03-26",
+      },
+    ],
+    package: "mithril",
+    start: "2019-03-25",
+    end: "2019-03-26",
+  },
+  knockout: {
+    outcome: 567,
+    downloads: [
+      {
+        downloads: 4532,
+        day: "2019-03-25",
+      },
+      {
+        downloads: 4578,
+        day: "2019-03-26",
+      },
+    ],
+    package: "knockout",
+    start: "2019-03-25",
+    end: "2019-03-26",
+  },
+  preact: {
+    outcome: -567,
+    downloads: [
+      {
+        downloads: 25314,
+        day: "2019-03-25",
+      },
+      {
+        downloads: 27271,
+        day: "2019-03-26",
+      },
+    ],
+    package: "preact",
+    start: "2019-03-25",
+    end: "2019-03-26",
+  },
 };
 
 export const matches = [
