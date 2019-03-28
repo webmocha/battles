@@ -1,6 +1,6 @@
 import * as React from "react";
 
-interface Bounds {
+export interface Bounds {
   x: number;
   y: number;
   width: number;
@@ -19,12 +19,24 @@ const getBounds = (node?: HTMLElement): Bounds => {
 
 const useBounds = (): [Bounds, any] => {
   const [bounds, setBounds] = React.useState(getBounds());
+  const [node, setNode] = React.useState();
 
-  const ref = React.useCallback((node) => {
-    if (node !== null) {
-      setBounds(getBounds(node));
-    }
+  const ref = React.useCallback((element) => {
+    setNode(element);
   }, []);
+
+  React.useLayoutEffect(() => {
+    if (node) {
+      const updateBounds = (): number =>
+        window.requestAnimationFrame(() => setBounds(getBounds(node)));
+      updateBounds();
+
+      window.addEventListener("resize", updateBounds);
+      return () => {
+        window.removeEventListener("resize", updateBounds);
+      };
+    }
+  }, [node]);
 
   return [bounds, ref];
 };
