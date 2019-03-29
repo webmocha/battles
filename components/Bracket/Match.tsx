@@ -2,19 +2,18 @@ import * as React from "react";
 import useBounds, { Bounds } from "../hooks/useBounds";
 import Contender, { Props as ContenderProps } from "./Contender";
 
-interface Props {
+interface Props extends React.SVGProps<SVGGElement> {
   contenders: ContenderProps[];
-  transform?: string;
+  margin?: number;
 }
 
 const Match = React.forwardRef<SVGGElement, Props>(
   (props, ref): JSX.Element => {
-    const { contenders, transform } = props;
+    const { contenders, margin = 50, ...restProps } = props;
     const contendersBoundsRef: React.RefObject<Bounds[]> = React.useRef([]);
-    const margin = 50;
 
     return (
-      <g ref={ref} transform={transform}>
+      <g ref={ref} {...restProps}>
         {contenders.map((contender, index) => {
           const [contenderBounds, contenderRef] = useBounds();
           contendersBoundsRef.current![index] = contenderBounds;

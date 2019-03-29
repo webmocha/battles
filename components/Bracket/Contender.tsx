@@ -2,11 +2,10 @@ import * as React from "react";
 import styled from "../../styles/styled-components";
 import useBounds from "../hooks/useBounds";
 
-export interface Props {
+export interface Props extends React.SVGProps<SVGSVGElement> {
   logo: string;
   name: string;
   dark?: boolean;
-  y?: number;
 }
 
 const fontSize = 12;
