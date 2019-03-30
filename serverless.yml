@@ -1,0 +1,53 @@
+service: battles-ui
+app: battles
+tenant: theremix
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${opt:stage, 'dev'}
+  region: us-west-2
+  memorySize: 512
+  timeout: 15
+  environment:
+    NODE_ENV: production
+
+package:
+  exclude:
+    - components/**
+    - pages/**
+    - tests/**
+    - node_modules/.cache/**
+    - .cache
+    - package.json
+    - yarn.lock
+    - package-lock.json
+    - "**.test.js"
+    - "__snapshots__/"
+  include:
+    - handlers/
+    - static/
+    - .next/**
+
+functions:
+  index:
+    handler: handlers/index.handler
+    events:
+      - http:
+          path: /
+          method: GET
+  fight:
+    handler: handlers/fight.handler
+    events:
+      - http:
+          path: /fight
+          method: GET
+  api-npm:
+    handler: handlers/api-npm.handler
+    events:
+      - http:
+          path: /api/npm/{any+}
+          method: GET
+          response:
+            headers:
+              Content-Type: "application/json"
