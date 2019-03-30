@@ -1,4 +1,5 @@
 import * as React from "react";
+import flattenDeep from "lodash/flattenDeep";
 import useBounds, { Bounds } from "../hooks/useBounds";
 import { BracketStoreContext } from "./Store";
 import Match from "./Match";
@@ -8,26 +9,36 @@ interface Props extends React.SVGProps<SVGSVGElement> {
   packages?: any;
   round?: number;
   rounds?: string[][][];
+  oddOffset?: number;
 }
 
 const Round: React.FunctionComponent<Props> = (props): JSX.Element => {
-  const { matches, round = 0, rounds = [], height, ...restProps } = props;
+  const {
+    matches,
+    round = 0,
+    rounds = [],
+    oddOffset = 0,
+    height,
+    ...restProps
+  } = props;
   const { state } = React.useContext(BracketStoreContext);
   const SVGHeight = Number(height) || state.height;
+  const isFirstRound = round === 0;
   const [offsetY, setOffsetY] = React.useState(0);
-  const margin = round ? SVGHeight / (matches.length * 2) - 88 : 50; // 100
+  const margin = !isFirstRound
+    ? SVGHeight / flattenDeep(matches).length - 88
+    : 50; // 100
   const isFinals = rounds.length - 1 === round;
   const hasConnnectors = Boolean(rounds.length) && !isFinals;
 
   const matchesBoundsRef: any = React.useRef([]);
-
   React.useLayoutEffect(() => {
-    if (round) {
+    if (!isFirstRound) {
       const calculatedOffset = matchesBoundsRef.current.reduce(
         (acc: number, bounds: Bounds) => acc + bounds.height,
         (matchesBoundsRef.current.length - 1) * margin,
       );
-      setOffsetY((SVGHeight - calculatedOffset) / 2);
+      setOffsetY((SVGHeight - calculatedOffset) / 2 + oddOffset);
     }
   });
 

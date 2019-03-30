@@ -26,18 +26,33 @@ const Bracket: React.FunctionComponent = (): JSX.Element => {
   }, [bracketBounds.height]);
 
   return (
-    <svg width={bracketBounds.width} height={state.height}>
+    <svg
+      width={bracketBounds.width}
+      height={state.height}
+      viewBox={`0 0 ${bracketBounds.width} ${bracketBounds.height}`}
+    >
       <g ref={bracketRef}>
-        {data.map((matches, i) => (
+        {data.map((matches, index) => {
+          const prevRound = data[index - 1];
+          const flattenPrevRound = flattenDeep(prevRound);
+          if (flattenPrevRound.length % 2) {
+            oddIndexRef.current = index;
+          }
+          const hasOddOffset =
+            oddIndexRef.current > 0 && index >= oddIndexRef.current;
+
+          return (
           <Round
             height={state.height}
-            key={i}
-            x={i * 250}
-            round={i}
+              key={index}
+              x={index * 250}
+              round={index}
             rounds={data}
             matches={matches}
+              oddOffset={hasOddOffset ? state.height / 11.3 : 0}
           />
-        ))}
+          );
+        })}
       </g>
     </svg>
   );
