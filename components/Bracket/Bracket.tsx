@@ -54,7 +54,9 @@ const Bracket: React.FunctionComponent<Props> = (props): JSX.Element => {
   );
 };
 
-const BracketConnected = (props: any): JSX.Element => {
+const BracketConnected: React.FunctionComponent<Props> = (
+  props,
+): JSX.Element => {
   return (
     <BracketStore>
       <Bracket {...props} />
