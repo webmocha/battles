@@ -40,7 +40,7 @@ const useBounds = (): [Bounds, any] => {
         window.removeEventListener("resize", updateBounds);
       };
     }
-  }, [node]);
+  }, [node, bounds.height, bounds.width]);
 
   return [bounds, ref];
 };
