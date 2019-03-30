@@ -7,16 +7,7 @@ import Match from "./Match";
 import Round from "./Round";
 
 storiesOf("Bracket", module)
-  .add("Default", () => <Bracket>Hello</Bracket>)
-  .add("Round", () => (
-    <Round
-      matches={[
-        ["react", "vue"],
-        ["angular", "mithril"],
-        // ["preact", "knockout"],
-      ]}
-    />
-  ))
+  .add("Default", () => <Bracket />)
   .add("Match", () => (
     <svg width="200" height="300">
       <Match
@@ -31,6 +22,31 @@ storiesOf("Bracket", module)
           },
         ]}
       />
+    </svg>
+  ));
+
+storiesOf("Bracket/Round", module)
+  .add("Default", () => (
+    <Round
+      height="850"
+      matches={[
+        ["react", "vue"],
+        ["angular", "mithril"],
+        ["preact", "knockout"],
+      ]}
+    />
+  ))
+  .add("Multi Round", () => (
+    <svg width="620" height="600">
+      <g>
+        <Round
+          height="600"
+          x={0}
+          matches={[["react", "vue"], ["angular", "mithril"]]}
+        />
+        <Round height="600" x={250} matches={[["vue", "angular"]]} />
+        <Round height="600" x={500} matches={[["angular"]]} />
+      </g>
     </svg>
   ));
 
