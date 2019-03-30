@@ -7,8 +7,13 @@ export interface Bounds {
   height: number;
 }
 
-const getBounds = (node?: HTMLElement): Bounds => {
-  const rect = node ? (node.getBoundingClientRect() as DOMRect) : null;
+const getBounds = (node?: SVGSVGElement): Bounds => {
+  const rect = node
+    ? Boolean(node.getBBox)
+      ? node.getBBox()
+      : (node.getBoundingClientRect() as DOMRect)
+    : null;
+
   return {
     x: rect ? rect.x : 0,
     y: rect ? rect.y : 0,
