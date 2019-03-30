@@ -32,7 +32,7 @@ const Round: React.FunctionComponent<Props> = (props): JSX.Element => {
   const hasConnnectors = Boolean(rounds.length) && !isFinals;
 
   const matchesBoundsRef: any = React.useRef([]);
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     if (!isFirstRound) {
       const calculatedOffset = matchesBoundsRef.current.reduce(
         (acc: number, bounds: Bounds) => acc + bounds.height,

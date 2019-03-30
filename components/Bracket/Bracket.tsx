@@ -14,7 +14,7 @@ const Bracket: React.FunctionComponent<Props> = (props): JSX.Element => {
   const [bracketBounds, bracketRef] = useBounds();
   const oddIndexRef = React.useRef(0);
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     dispatch({
       type: "SET_HEIGHT",
       height: bracketBounds.height > 0 ? bracketBounds.height : 250,

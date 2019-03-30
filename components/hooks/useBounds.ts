@@ -30,7 +30,7 @@ const useBounds = (): [Bounds, any] => {
     setNode(element);
   }, []);
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     if (node) {
       const updateBounds = (): number =>
         window.requestAnimationFrame(() => setBounds(getBounds(node)));
