@@ -1,22 +1,18 @@
 import * as React from "react";
+import flattenDeep from "lodash/flattenDeep";
 import useBounds from "../hooks/useBounds";
 import BracketStore, { BracketStoreContext } from "./Store";
 import Round from "./Round";
 
-const Bracket: React.FunctionComponent = (): JSX.Element => {
+interface Props extends React.SVGProps<SVGSVGElement> {
+  matchup: string[][][];
+}
+
+const Bracket: React.FunctionComponent<Props> = (props): JSX.Element => {
+  const { matchup } = props;
   const { state, dispatch } = React.useContext(BracketStoreContext);
   const [bracketBounds, bracketRef] = useBounds();
-  const data = [
-    [
-      ["react", "vue"],
-      ["angular", "mithril"],
-      ["angular1", "mithril1"],
-      ["angular2", "mithril2"],
-    ],
-    [["react", "vue"], ["angular", "mithril"]],
-    [["vue", "angular"]],
-    [["angular"]],
-  ];
+  const oddIndexRef = React.useRef(0);
 
   React.useLayoutEffect(() => {
     dispatch({
@@ -32,8 +28,8 @@ const Bracket: React.FunctionComponent = (): JSX.Element => {
       viewBox={`0 0 ${bracketBounds.width} ${bracketBounds.height}`}
     >
       <g ref={bracketRef}>
-        {data.map((matches, index) => {
-          const prevRound = data[index - 1];
+        {matchup.map((matches, index) => {
+          const prevRound = matchup[index - 1];
           const flattenPrevRound = flattenDeep(prevRound);
           if (flattenPrevRound.length % 2) {
             oddIndexRef.current = index;
@@ -47,7 +43,7 @@ const Bracket: React.FunctionComponent = (): JSX.Element => {
               key={index}
               x={index * 250}
               round={index}
-            rounds={data}
+              rounds={matchup}
             matches={matches}
               oddOffset={hasOddOffset ? state.height / 11.3 : 0}
           />

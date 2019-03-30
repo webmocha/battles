@@ -6,8 +6,24 @@ import Contender from "./Contender";
 import Match from "./Match";
 import Round from "./Round";
 
+const matchup2 = [[["A", "B"]], [["A"]]];
+const matchup3 = [[["A", "B"], ["C"]], [["A", "C"]], [["C"]]];
+const matchup4 = [[["A", "B"], ["C", "D"]], [["A", "C"]], [["C"]]];
+const matchup6 = [
+  [["A", "B"], ["C", "D"], ["E", "F"]],
+  [["A", "C"], ["E"]],
+  [["C", "E"]],
+  [["E"]],
+];
+const matchup8 = [
+  [["A", "B"], ["C", "D"], ["E", "F"], ["G", "H"]],
+  [["A", "C"], ["E", "G"]],
+  [["C", "G"]],
+  [["G"]],
+];
+
 storiesOf("Bracket", module)
-  .add("Default", () => <Bracket />)
+  .add("Default", () => <Bracket matchup={matchup2} />)
   .add("Match", () => (
     <svg width="200" height="300">
       <Match
@@ -24,6 +40,13 @@ storiesOf("Bracket", module)
       />
     </svg>
   ));
+
+storiesOf("Bracket/Brackets", module)
+  .add("Versus 2", () => <Bracket matchup={matchup2} />)
+  .add("Versus 3", () => <Bracket matchup={matchup3} />)
+  .add("Versus 4", () => <Bracket matchup={matchup4} />)
+  .add("Versus 6", () => <Bracket matchup={matchup6} />)
+  .add("Versus 8", () => <Bracket matchup={matchup8} />);
 
 storiesOf("Bracket/Round", module)
   .add("Default", () => (
