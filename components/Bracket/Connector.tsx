@@ -4,10 +4,9 @@ import styled from "../../styles/styled-components";
 const Path = styled.path`
   fill: none;
   stroke: red;
-  stroke-width: 3;
+  stroke-width: 1;
   stroke-linecap: round;
   stroke-linejoin: round;
-  transition: 0.2s;
   fill-opacity: 0;
   filter: url(#glow);
 `;
@@ -26,7 +25,6 @@ const Connector: React.FunctionComponent<Props> = (props): JSX.Element => {
   const verticalLength = matchHeight / 2 - contenderMiddle;
   const startY = index === 0 ? contenderMiddle : matchHeight - contenderMiddle;
   const horizontalPadding = 10;
-  console.log("matchHeight", matchHeight);
 
   const pathDefinition = [
     `M ${contenderWidth - horizontalPadding} ${startY}`,

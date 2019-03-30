@@ -51,8 +51,13 @@ const Bracket: React.FunctionComponent<Props> = (props): JSX.Element => {
         })}
       </g>
       <defs>
-        <filter id="glow">
-          <feGaussianBlur result="coloredBlur" stdDeviation="2" />
+        <filter
+          id="glow"
+          width={bracketBounds.width}
+          height={state.height}
+          filterUnits="userSpaceOnUse"
+        >
+          <feGaussianBlur result="coloredBlur" stdDeviation="2.5" />
           <feMerge>
             <feMergeNode in="coloredBlur" />
             <feMergeNode in="coloredBlur" />
