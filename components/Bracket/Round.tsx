@@ -1,7 +1,7 @@
 import * as React from "react";
 import useBounds, { Bounds } from "../hooks/useBounds";
+import { BracketStoreContext } from "./Store";
 import Match from "./Match";
-// import { packages as mockPackages } from "./mockData";
 
 interface Props extends React.SVGProps<SVGSVGElement> {
   matches: string[][];
@@ -9,39 +9,27 @@ interface Props extends React.SVGProps<SVGSVGElement> {
   round?: number;
 }
 
-const SVGHeight = 600;
-
 const Round: React.FunctionComponent<Props> = (props): JSX.Element => {
-  // const { matches, packages = mockPackages, ...restProps } = props;
-  const { matches, round = 0, ...restProps } = props;
-  const minHeight = 250;
-  const [height, setHeight] = React.useState(minHeight);
+  const { matches, round = 0, height, ...restProps } = props;
+  const { state } = React.useContext(BracketStoreContext);
+  const SVGHeight = Number(height) || state.height;
   const [offsetY, setOffsetY] = React.useState(0);
-  const margin = round ? SVGHeight / (matches.length * 2) - 100 : 50;
+  const margin = round ? SVGHeight / (matches.length * 2) - 88 : 50; // 100
 
   const matchesBoundsRef: any = React.useRef([]);
+
   React.useLayoutEffect(() => {
-    // TODO: Move to utils
-    if (round === 0) {
-      const calculatedHeight = matchesBoundsRef.current.reduce(
+    if (round) {
+      const calculatedOffset = matchesBoundsRef.current.reduce(
         (acc: number, bounds: Bounds) => acc + bounds.height,
-        (matchesBoundsRef.current.length - 1) * 50,
+        (matchesBoundsRef.current.length - 1) * margin,
       );
-      setHeight(calculatedHeight > 0 ? calculatedHeight : minHeight);
+      setOffsetY((SVGHeight - calculatedOffset) / 2);
     }
-
-    const calculatedOffset = matchesBoundsRef.current.reduce(
-      (acc: number, bounds: Bounds) => acc + bounds.height,
-      (matchesBoundsRef.current.length - 1) * margin,
-    );
-
-    setOffsetY(round ? (SVGHeight - calculatedOffset) / 2 : 0);
   });
 
-  console.log("height", height);
-
   return (
-    <svg width={120} height={SVGHeight} {...restProps}>
+    <svg width={250} height={SVGHeight} {...restProps}>
       <g transform={`translate(0, ${offsetY})`}>
         {matches.map((match, index) => {
           const [matchBounds, matchRef] = useBounds();
