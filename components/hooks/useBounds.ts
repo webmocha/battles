@@ -31,6 +31,10 @@ const useBounds = (): [Bounds, any] => {
         window.requestAnimationFrame(() => setBounds(getBounds(node)));
       updateBounds();
 
+      setTimeout(() => {
+        updateBounds();
+      }, 0);
+
       window.addEventListener("resize", updateBounds);
       return () => {
         window.removeEventListener("resize", updateBounds);
