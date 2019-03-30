@@ -7,14 +7,17 @@ interface Props extends React.SVGProps<SVGSVGElement> {
   matches: string[][];
   packages?: any;
   round?: number;
+  rounds?: string[][][];
 }
 
 const Round: React.FunctionComponent<Props> = (props): JSX.Element => {
-  const { matches, round = 0, height, ...restProps } = props;
+  const { matches, round = 0, rounds = [], height, ...restProps } = props;
   const { state } = React.useContext(BracketStoreContext);
   const SVGHeight = Number(height) || state.height;
   const [offsetY, setOffsetY] = React.useState(0);
   const margin = round ? SVGHeight / (matches.length * 2) - 88 : 50; // 100
+  const isFinals = rounds.length - 1 === round;
+  const hasConnnectors = Boolean(rounds.length) && !isFinals;
 
   const matchesBoundsRef: any = React.useRef([]);
 
@@ -52,6 +55,8 @@ const Round: React.FunctionComponent<Props> = (props): JSX.Element => {
               }))}
               transform={`translate(0, ${sumPreviousHeight})`}
               margin={margin}
+              height={matchBounds.height}
+              hasConnnectors={hasConnnectors}
             />
           );
         })}

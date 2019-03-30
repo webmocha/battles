@@ -1,15 +1,24 @@
 import * as React from "react";
 import useBounds, { Bounds } from "../hooks/useBounds";
 import Contender, { Props as ContenderProps } from "./Contender";
+import Connector from "./Connector";
 
 interface Props extends React.SVGProps<SVGGElement> {
   contenders: ContenderProps[];
   margin?: number;
+  hasConnnectors?: boolean;
 }
 
 const Match = React.forwardRef<SVGGElement, Props>(
   (props, ref): JSX.Element => {
-    const { contenders, margin = 50, ...restProps } = props;
+    const {
+      contenders,
+      hasConnnectors,
+      margin = 50,
+      height,
+      ...restProps
+    } = props;
+    const matchHeight = Number(height);
     const contendersBoundsRef: React.RefObject<Bounds[]> = React.useRef([]);
 
     return (
@@ -25,13 +34,21 @@ const Match = React.forwardRef<SVGGElement, Props>(
               0,
             );
           return (
-            <Contender
-              key={contender.name}
-              ref={contenderRef}
-              logo={contender.logo}
-              name={contender.name}
-              y={sumPreviousHeight}
-            />
+            <React.Fragment key={contender.name}>
+              {hasConnnectors && (
+                <Connector
+                  index={index}
+                  matchWidth={250}
+                  matchHeight={matchHeight || 250}
+                />
+              )}
+              <Contender
+                ref={contenderRef}
+                logo={contender.logo}
+                name={contender.name}
+                y={sumPreviousHeight}
+              />
+            </React.Fragment>
           );
         })}
       </g>

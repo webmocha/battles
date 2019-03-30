@@ -34,6 +34,7 @@ const Bracket: React.FunctionComponent = (): JSX.Element => {
             key={i}
             x={i * 250}
             round={i}
+            rounds={data}
             matches={matches}
           />
         ))}
