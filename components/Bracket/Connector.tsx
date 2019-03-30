@@ -9,6 +9,7 @@ const Path = styled.path`
   stroke-linejoin: round;
   transition: 0.2s;
   fill-opacity: 0;
+  filter: url(#glow);
 `;
 
 interface Props extends React.SVGProps<SVGPathElement> {

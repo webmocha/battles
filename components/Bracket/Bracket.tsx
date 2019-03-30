@@ -38,18 +38,29 @@ const Bracket: React.FunctionComponent<Props> = (props): JSX.Element => {
             oddIndexRef.current > 0 && index >= oddIndexRef.current;
 
           return (
-          <Round
-            height={state.height}
+            <Round
+              height={state.height}
               key={index}
               x={index * 250}
               round={index}
               rounds={matchup}
-            matches={matches}
+              matches={matches}
               oddOffset={hasOddOffset ? state.height / 11.3 : 0}
-          />
+            />
           );
         })}
       </g>
+      <defs>
+        <filter id="glow">
+          <feGaussianBlur result="coloredBlur" stdDeviation="2" />
+          <feMerge>
+            <feMergeNode in="coloredBlur" />
+            <feMergeNode in="coloredBlur" />
+            <feMergeNode in="coloredBlur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
     </svg>
   );
 };
