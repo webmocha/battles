@@ -24,12 +24,19 @@ const Fight = (): JSX.Element => {
 };
 
 Fight.getInitialProps = async ({ req, res, query }) => {
-  const { packages } = query;
-  const twoDaysBefore = format(subDays(new Date(), 2), "YYYY-MM-DD");
-  const oneDayBefore = format(subDays(new Date(), 1), "YYYY-MM-DD");
-  const url = `/downloads/ranges/${twoDaysBefore}:${oneDayBefore}/${packages}`;
-  console.log("url", url);
-  return {};
+  if (!req) {
+    const { packages } = query;
+    const twoDaysBefore = format(subDays(new Date(), 2), "YYYY-MM-DD");
+    const oneDayBefore = format(subDays(new Date(), 1), "YYYY-MM-DD");
+    const url = `/downloads/range/${twoDaysBefore}:${oneDayBefore}/${packages}`;
+    const response = await fetch(
+      `/api/npm/search/suggestions?text=${text}&size=10`,
+    );
+    const data: SearchResults = await response.json();
+    return data;
+  } else {
+    return res.data;
+  }
 };
 //  !req ? await getFightData() : res.data;
 

@@ -15,19 +15,24 @@
  *   queryParams: ['id']
  * },
  *
+ * handlers :
+ * {
+ *   "/fight": require("./handlers/fight").fetchData,
+ *   "/fight/:packages": require("./handlers/fight").fetchData
+ * }
+ *
  */
 
 const paths = [
   {
-    route: "/fight/*",
+    route: "/fight/:packages",
     actualPage: "/fight",
-    queryParams: [],
+    queryParams: ["packages"],
+    fetchData: require("./handlers/fight").fetchData,
   },
 ];
 
-const handlers = {
-  "/fight": require("./handlers/fight").fetchData,
-};
+const handlers = {};
 
 const apis = {
   "/api/npm/*": require("./handlers/proxy").fetchData,
@@ -50,20 +55,23 @@ app
   .then(() => {
     const server = express();
 
-    for (let { route, actualPage, queryParams } of paths) {
-      server.get(route, (req, res) =>
-        app.render(
-          req,
-          res,
-          actualPage,
-          queryParams.reduce(
-            (params, param) => ({
-              ...params,
-              [param]: req.params[param],
-            }),
-            {},
+    for (let { route, actualPage, queryParams, fetchData } of paths) {
+      server.get(
+        route,
+        async (req, res) =>
+          (await fetchData(req, res)) ||
+          app.render(
+            req,
+            res,
+            actualPage,
+            queryParams.reduce(
+              (params, param) => ({
+                ...params,
+                [param]: req.params[param],
+              }),
+              {},
+            ),
           ),
-        ),
       );
     }
 
