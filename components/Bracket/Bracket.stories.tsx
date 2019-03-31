@@ -23,7 +23,9 @@ const matchup8 = [
 ];
 
 storiesOf("Bracket", module)
-  .add("Default", () => <Bracket matchup={matchup2} />)
+  .add("Default", () => (
+    <Bracket matchup={matchup2} animate={boolean("animate", true)} />
+  ))
   .add("Match", () => (
     <svg width="200" height="300">
       <Match

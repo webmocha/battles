@@ -6,11 +6,12 @@ import Round from "./Round";
 
 interface Props extends React.SVGProps<SVGSVGElement> {
   matchup: string[][][];
+  animate?: boolean;
 }
 
 const Bracket: React.FunctionComponent<Props> = (props): JSX.Element => {
-  const { matchup } = props;
   const { state, dispatch } = React.useContext(BracketStoreContext);
+  const { matchup, animate = state.animate } = props;
   const [bracketBounds, bracketRef] = useBounds();
   const oddIndexRef = React.useRef(0);
 
@@ -20,6 +21,13 @@ const Bracket: React.FunctionComponent<Props> = (props): JSX.Element => {
       height: bracketBounds.height > 0 ? bracketBounds.height : 250,
     });
   }, [bracketBounds.height]);
+
+  React.useEffect(() => {
+    dispatch({
+      type: "SET_ANIMATE",
+      animate,
+    });
+  }, [animate]);
 
   return (
     <svg

@@ -4,6 +4,7 @@ interface State {
   packages: {};
   matches: [];
   highlight: string;
+  animate: boolean;
 }
 
 export const initialState: State = {
@@ -12,11 +13,13 @@ export const initialState: State = {
   packages: {},
   matches: [],
   highlight: "",
+  animate: false,
 };
 
 export type Action =
   // | { type: "SET_WIDTH"; width: number }
   | { type: "SET_HEIGHT"; height: number }
+  | { type: "SET_ANIMATE"; animate: boolean }
   | { type: "LOAD_PACKAGES"; packages: {} };
 
 function bracketReducer(state: State, action: Action): State {
@@ -25,6 +28,8 @@ function bracketReducer(state: State, action: Action): State {
     //   return { ...state, width: action.width };
     case "SET_HEIGHT":
       return { ...state, height: action.height };
+    case "SET_ANIMATE":
+      return { ...state, animate: action.animate };
     default:
       throw new Error();
   }
