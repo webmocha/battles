@@ -7,6 +7,7 @@ interface Props extends React.SVGProps<SVGGElement> {
   contenders: ContenderProps[];
   margin?: number;
   hasConnnectors?: boolean;
+  round?: number;
 }
 
 const Match = React.forwardRef<SVGGElement, Props>(
@@ -16,6 +17,7 @@ const Match = React.forwardRef<SVGGElement, Props>(
       hasConnnectors,
       margin = 50,
       height,
+      round = 0,
       ...restProps
     } = props;
     const matchHeight = Number(height);
@@ -40,6 +42,7 @@ const Match = React.forwardRef<SVGGElement, Props>(
                   index={index}
                   matchWidth={250}
                   matchHeight={matchHeight || 250}
+                  round={round}
                 />
               )}
               <Contender
@@ -47,6 +50,7 @@ const Match = React.forwardRef<SVGGElement, Props>(
                 logo={contender.logo}
                 name={contender.name}
                 y={sumPreviousHeight}
+                round={round}
               />
             </React.Fragment>
           );

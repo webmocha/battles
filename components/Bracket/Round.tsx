@@ -68,6 +68,7 @@ const Round: React.FunctionComponent<Props> = (props): JSX.Element => {
               margin={margin}
               height={matchBounds.height}
               hasConnnectors={hasConnnectors}
+              round={round}
             />
           );
         })}

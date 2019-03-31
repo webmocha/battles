@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useSpring, animated } from "react-spring";
 import styled from "../../styles/styled-components";
+import delay from "../../utils/delay";
 import { BracketStoreContext } from "./Store";
 
 const Path = styled(animated.path)`
@@ -25,10 +26,11 @@ interface Props extends React.SVGProps<SVGPathElement> {
   index: number;
   matchWidth: number;
   matchHeight: number;
+  round?: number;
 }
 
 const Connector: React.FunctionComponent<Props> = (props): JSX.Element => {
-  const { index, matchWidth, matchHeight } = props;
+  const { index, matchWidth, matchHeight, round = 0 } = props;
   const { state } = React.useContext(BracketStoreContext);
   const animate = state.animate;
   const contenderWidth = 120;
@@ -44,20 +46,20 @@ const Connector: React.FunctionComponent<Props> = (props): JSX.Element => {
     totalLength = pathEl.current.getTotalLength();
   }
 
-  const pathSpring = useSpring({
-    x: totalLength || 0,
+  const pathSpring: any = useSpring({
     from: { x: 0 },
     to: async (next: any) => {
       if (totalLength) {
+        await delay(round * 4000);
         await next({ x: totalLength - 65 });
+        await delay(500);
         await next({ x: totalLength });
       }
     },
-    // config: {
-    //   mass: 10,
-    //   tension: 280,
-    //   friction: 75,
-    // },
+    config: {
+      duration: 500,
+      easing: (t: number) => --t * t * t + 1,
+    },
   });
 
   const pathDefinition = [
@@ -76,7 +78,7 @@ const Connector: React.FunctionComponent<Props> = (props): JSX.Element => {
         strokeDasharray={totalLength}
         strokeDashoffset={
           totalLength
-            ? pathSpring.x.interpolate((x) => totalLength! - x)
+            ? pathSpring.x.interpolate((x: number) => totalLength! - x)
             : undefined
         }
       />
