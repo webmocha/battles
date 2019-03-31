@@ -22,9 +22,7 @@ const api = async (path) => {
 };
 
 const fetchData = async (req, res) => {
-  const path = req.path;
-
-  const { status, payload } = await api(path);
+  const { status, payload } = await api(req.originalUrl);
 
   res.status(status).end(payload);
 };

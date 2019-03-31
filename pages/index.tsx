@@ -1,5 +1,5 @@
 import * as React from "react";
-import Link from "next/link";
+import LinkAs from "../components/link-as";
 import styled from "styled-components";
 import Layout from "../components/Layout";
 import { Button, ButtonIcon } from "../components/Button";
@@ -51,13 +51,19 @@ const Versus = styled.span`
   letter-spacing: 2px;
 `;
 
-const Form = styled.form`
+const Form = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
 const Index: React.FunctionComponent = (): JSX.Element => {
+  const [packages, setPackages] = React.useState([] as string[]);
+  const addPackages = (nodePackage: string, index: number): void => {
+    const newPackages = [...packages];
+    newPackages[index] = nodePackage;
+    setPackages(newPackages);
+  };
   return (
     <Layout title="Home | Battles.dev">
       <Container>
@@ -68,9 +74,9 @@ const Index: React.FunctionComponent = (): JSX.Element => {
         <Blurb>Find out who will win today.</Blurb>
 
         <Form>
-          <SearchInput />
+          <SearchInput index={0} addPackages={addPackages} />
           <Versus>vs</Versus>
-          <SearchInput />
+          <SearchInput index={1} addPackages={addPackages} />
           <ButtonIcon
             variant="secondary"
             style={{ marginLeft: "1.25rem" }}
@@ -80,11 +86,11 @@ const Index: React.FunctionComponent = (): JSX.Element => {
           </ButtonIcon>
         </Form>
 
-        <Link href="/fight">
+        <LinkAs route="./fight/:packages" packages={packages.join(",")}>
           <FightButton variant="primary" size="large" ripple={true}>
             Fight!
           </FightButton>
-        </Link>
+        </LinkAs>
       </Container>
     </Layout>
   );

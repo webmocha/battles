@@ -1,8 +1,13 @@
 const proxyApi = require("./proxy").api;
+const { format, subDays } = require("date-fns");
 
 const fetchData = async (req, res) => {
-  const result = await proxyApi(req.path);
-  res.data = result;
+  const { packages } = req.params;
+  const twoDaysBefore = format(subDays(new Date(), 2), "YYYY-MM-DD");
+  const oneDayBefore = format(subDays(new Date(), 1), "YYYY-MM-DD");
+  const url = `/api/npm/downloads/range/${twoDaysBefore}:${oneDayBefore}/${packages}`;
+
+  res.data = await proxyApi(url);
 };
 
 exports.fetchData = fetchData;
@@ -20,8 +25,12 @@ exports.handler = (event, context) => {
   )}`);
 
   const server = awsServerlessExpress.createServer(async (req, res) => {
+    const queryParams = {
+      packages: req.originalUrl.replace("/fight/", ""),
+    };
+    req.params = queryParams;
     await fetchData(req, res);
-    page.render(req, res, "/fight");
+    page.render(req, res, "/fight", queryParams);
   });
 
   awsServerlessExpress.proxy(server, event, context);
