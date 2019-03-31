@@ -52,7 +52,7 @@ const Connector: React.FunctionComponent<Props> = (props): JSX.Element => {
       if (totalLength) {
         await delay(round * 4000);
         await next({ x: totalLength - 65 });
-        await delay(500);
+        await delay(1000);
         await next({ x: totalLength });
       }
     },
@@ -69,6 +69,45 @@ const Connector: React.FunctionComponent<Props> = (props): JSX.Element => {
     `h ${horizontalLength}`,
   ].join(" ");
 
+  const boomSize = 75;
+  const boomX = matchWidth - 65;
+  const boomY = matchHeight / 2;
+
+  const boomSpring: any = useSpring({
+    from: {
+      opacity: 0,
+      fontSize: 0,
+      x: boomX,
+      y: boomY,
+    },
+    to: async (next: any) => {
+      if (totalLength) {
+        await next({
+          fontSize: boomSize,
+          x: boomX - boomSize / 2,
+          y: boomY + boomSize / 2,
+        });
+        await delay(round * 4000 + 500);
+        await next({
+          opacity: 0.9,
+          fontSize: boomSize,
+          x: boomX - boomSize / 2,
+          y: boomY + boomSize / 2,
+        });
+        await delay(250);
+        await next({
+          opacity: 0,
+          fontSize: 0,
+          x: boomX,
+          y: boomY,
+        });
+      }
+    },
+    config: {
+      duration: 200,
+    },
+  });
+
   return (
     <React.Fragment>
       <BackPath d={pathDefinition} />
@@ -82,7 +121,16 @@ const Connector: React.FunctionComponent<Props> = (props): JSX.Element => {
             : undefined
         }
       />
-      ;
+      {animate && index === 1 && (
+        <animated.text
+          x={boomSpring.x}
+          y={boomSpring.y}
+          opacity={boomSpring.opacity}
+          fontSize={boomSpring.fontSize}
+        >
+          💥
+        </animated.text>
+      )}
     </React.Fragment>
   );
 };
