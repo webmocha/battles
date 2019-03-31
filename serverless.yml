@@ -42,8 +42,8 @@ functions:
       - http:
           path: /fight
           method: GET
-  api-npm:
-    handler: handlers/api-npm.handler
+  proxy:
+    handler: handlers/proxy.handler
     events:
       - http:
           path: /api/npm/{any+}

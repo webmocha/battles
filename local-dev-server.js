@@ -29,6 +29,10 @@ const handlers = {
   "/fight": require("./handlers/fight").fetchData,
 };
 
+const apis = {
+  "/api/npm/*": require("./handlers/proxy").fetchData,
+};
+
 /*
  * Everything below is boilerplate
  */
@@ -61,6 +65,10 @@ app
           ),
         ),
       );
+    }
+
+    for (let route of Object.keys(apis)) {
+      server.get(route, apis[route]);
     }
 
     // originalUrl: '/fight',

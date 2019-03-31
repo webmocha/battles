@@ -1,5 +1,8 @@
+const proxyApi = require("./proxy").api;
+
 const fetchData = async (req, res) => {
-  res.data = { fight: true };
+  const result = await proxyApi(req.path);
+  res.data = result;
 };
 
 exports.fetchData = fetchData;
