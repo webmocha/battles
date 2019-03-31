@@ -1,5 +1,5 @@
 import * as React from "react";
-import Link from "next/link";
+import LinkAs from "../components/link-as";
 import styled from "styled-components";
 import Layout from "../components/Layout";
 import { Button, ButtonIcon } from "../components/Button";
@@ -86,15 +86,11 @@ const Index: React.FunctionComponent = (): JSX.Element => {
           </ButtonIcon>
         </Form>
 
-        <Link
-          href={`/fight?packages=${packages.join(
-            ",",
-          )}`} /*as={`/fight/${packages.join(",")}`}*/
-        >
+        <LinkAs route="./fight/:packages" packages={packages.join(",")}>
           <FightButton variant="primary" size="large" ripple={true}>
             Fight!
           </FightButton>
-        </Link>
+        </LinkAs>
       </Container>
     </Layout>
   );
