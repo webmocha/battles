@@ -61,6 +61,7 @@ const Form = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  flex-wrap: wrap;
 
   ${media.small`
     flex-direction: row;
@@ -79,6 +80,7 @@ const StyledButtonIcon = styled(ButtonIcon)`
 
 const Index: React.FunctionComponent = (): JSX.Element => {
   const [packages, setPackages] = React.useState([] as string[]);
+  const [inputCount, setInputCount] = React.useState(2);
   const addPackages = (nodePackage: string, index: number): void => {
     const newPackages = [...packages];
     newPackages[index] = nodePackage;
@@ -94,10 +96,20 @@ const Index: React.FunctionComponent = (): JSX.Element => {
         <Blurb>Find out who will win today.</Blurb>
 
         <Form>
-          <SearchInput index={0} addPackages={addPackages} />
-          <Versus>vs</Versus>
-          <SearchInput index={1} addPackages={addPackages} />
-          <StyledButtonIcon variant="secondary" ripple={true}>
+          {Array.from(Array(inputCount)).map((_, index) => (
+            <React.Fragment key={index}>
+              <SearchInput index={index} addPackages={addPackages} />
+              {index < inputCount - 1 && <Versus>vs</Versus>}
+            </React.Fragment>
+          ))}
+
+          <StyledButtonIcon
+            variant="secondary"
+            ripple={true}
+            onClick={() =>
+              inputCount < 8 ? setInputCount(inputCount + 1) : {}
+            }
+          >
             <AddIcon width={52} stroke="#FFBB00" />
           </StyledButtonIcon>
         </Form>
