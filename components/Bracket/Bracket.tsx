@@ -1,5 +1,6 @@
 import * as React from "react";
 import flattenDeep from "lodash/flattenDeep";
+import useTimeout from "../hooks/useTimeout";
 import useBounds from "../hooks/useBounds";
 import BracketStore, { BracketStoreContext } from "./Store";
 import Round from "./Round";
@@ -12,6 +13,7 @@ interface Props extends React.SVGProps<SVGSVGElement> {
 const Bracket: React.FunctionComponent<Props> = (props): JSX.Element => {
   const { state, dispatch } = React.useContext(BracketStoreContext);
   const { matchup, animate = state.animate } = props;
+  const mouseEventsReady = useTimeout((matchup.length - 1) * 4250);
   const [bracketBounds, bracketRef] = useBounds();
   const oddIndexRef = React.useRef(0);
 
@@ -34,6 +36,7 @@ const Bracket: React.FunctionComponent<Props> = (props): JSX.Element => {
       width={bracketBounds.width}
       height={state.height}
       viewBox={`0 0 ${bracketBounds.width} ${bracketBounds.height}`}
+      pointerEvents={mouseEventsReady ? "auto" : "none"}
     >
       <g ref={bracketRef}>
         {matchup.map((matches, index) => {
