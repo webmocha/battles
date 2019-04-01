@@ -5,14 +5,19 @@ import Suggestion from "./Suggestion";
 import { SuggestionsWrapper, Suggestions } from "./styles";
 import { fetchSearchSuggestions, SearchResultObject } from "./api";
 
-const SearchInput: React.FunctionComponent<{}> = (props): JSX.Element => {
+interface Props {
+  addPackages?: any;
+  index: number;
+}
+
+const SearchInput: React.FunctionComponent<Props> = (props): JSX.Element => {
   const [items, setItems] = React.useState([]);
   const [inputValue, setInputValue] = React.useState("");
-  const {} = props;
+  const { addPackages = () => {}, index } = props;
 
   return (
     <Downshift
-      onChange={(selection) => console.log(`You selected ${selection}`)}
+      onChange={(selection) => addPackages(selection, index)}
       selectedItem={inputValue}
       onStateChange={(changes) => {
         if (changes.hasOwnProperty("selectedItem")) {
@@ -38,6 +43,10 @@ const SearchInput: React.FunctionComponent<{}> = (props): JSX.Element => {
                 const value = event.currentTarget.value;
                 setItems([]);
                 fetchSearchSuggestions({ text: value, setItems });
+              },
+              onBlur: (event: React.FormEvent<HTMLInputElement>) => {
+                const value = event.currentTarget.value;
+                addPackages(value, index);
               },
             })}
           />

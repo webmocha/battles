@@ -1,4 +1,5 @@
 import debounce from "lodash/debounce";
+import * as fetch from "isomorphic-unfetch";
 
 export interface SearchResultObject {
   package: {
@@ -16,7 +17,7 @@ export interface SearchResults {
 export const fetchSearchSuggestions = debounce(
   async ({ text, setItems }): Promise<void> => {
     const response = await fetch(
-      `https://cors-anywhere.herokuapp.com/https://api.npmjs.org/search/suggestions?text=${text}&size=10`,
+      `/api/npm/search/suggestions?text=${text}&size=10`,
     );
     const data: SearchResults = await response.json();
     if (data.objects) {
