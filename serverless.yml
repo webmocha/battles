@@ -17,8 +17,18 @@ package:
     - components/**
     - pages/**
     - tests/**
+    - styles/**
+    - static/**
+    - .storybook
+    - tsconfig.json
+    - .babelrc
+    - .editorconfig
+    - .eslintrc
+    - .prettier*
     - node_modules/.cache/**
     - .cache
+    - local-dev-server.js
+    - next.config.js
     - package.json
     - yarn.lock
     - package-lock.json
@@ -26,7 +36,6 @@ package:
     - "__snapshots__/"
   include:
     - handlers/
-    - static/
     - .next/**
 
 functions:
@@ -35,6 +44,12 @@ functions:
     events:
       - http:
           path: /
+          method: GET
+  next:
+    handler: handlers/next.handler
+    events:
+      - http:
+          path: /_next/{any+}
           method: GET
   fight:
     handler: handlers/fight.handler
@@ -48,6 +63,3 @@ functions:
       - http:
           path: /api/npm/{any+}
           method: GET
-          response:
-            headers:
-              Content-Type: "application/json"

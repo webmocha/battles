@@ -22,9 +22,9 @@ const api = async (path) => {
 };
 
 const fetchData = async (req, res) => {
-  const { status, payload } = await api(req.originalUrl);
-
-  res.status(status).end(payload);
+  const { status, payload } = await api(req.url);
+  res.writeHead(status);
+  res.end(payload);
 };
 
 exports.api = api;

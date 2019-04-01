@@ -26,7 +26,7 @@ exports.handler = (event, context) => {
 
   const server = awsServerlessExpress.createServer(async (req, res) => {
     const queryParams = {
-      packages: req.originalUrl.replace("/fight/", ""),
+      packages: req.url.replace("/fight/", ""),
     };
     req.params = queryParams;
     await fetchData(req, res);
