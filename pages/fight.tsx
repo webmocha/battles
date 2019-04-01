@@ -31,15 +31,13 @@ const checkBadPackage = (data: DownloadsResponse): string[] =>
 
 const Fight = (props: any): JSX.Element => {
   const { payload } = props;
-  const parsedPayload =
-    typeof payload === "string" ? JSON.parse(payload) : payload;
   const [packages, setPackages] = React.useState({});
-  const badPackages = checkBadPackage(parsedPayload);
+  const badPackages = checkBadPackage(payload);
   const hasBadPackages = badPackages.length > 0;
 
   React.useEffect(() => {
     if (!hasBadPackages) {
-      setPackages(processDataOutcome(parsedPayload));
+      setPackages(processDataOutcome(payload));
     }
   }, []);
 
@@ -63,12 +61,10 @@ const Fight = (props: any): JSX.Element => {
 
 Fight.getInitialProps = async ({ req, res, query }: any) => {
   if (!req) {
-    const { packages } = query;
-    const response = await getFightData(packages);
-    const data = await response.json();
-    return { payload: data };
+    const payload = await getFightData(query.packages);
+    return { payload };
   } else {
-    return res.data;
+    return { payload: res.data };
   }
 };
 
