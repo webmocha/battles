@@ -16,9 +16,28 @@ export interface DownloadsResponse {
   [key: string]: PackageEntry;
 }
 
-export const getFightData = (packages: string): Promise<any> => {
+export const getFightData = async (packages: string): Promise<any> => {
   const twoDaysBefore = format(subDays(new Date(), 2), "YYYY-MM-DD");
   const oneDayBefore = format(subDays(new Date(), 1), "YYYY-MM-DD");
-  const endpoint = `downloads/range/${twoDaysBefore}:${oneDayBefore}/${packages}`;
-  return fetch(`/api/npm/${endpoint}`);
+  const responses = await Promise.all(
+    packages
+      .split(",")
+      .map((p) =>
+        fetch(`/api/npm/downloads/range/${twoDaysBefore}:${oneDayBefore}/${p}`),
+      ),
+  );
+
+  const payload = await Promise.all(
+    responses
+      .filter((r) => console.log("status", r.status) || r.status === 200)
+      .map((r) => r.json()),
+  );
+
+  return payload.reduce(
+    (packages, p) => ({
+      ...packages,
+      [p.package]: p,
+    }),
+    {},
+  );
 };

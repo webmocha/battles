@@ -1,7 +1,7 @@
 /*
  * This is used for local development
  *   to support dynamic routes
- *     ex: '/api/npm/*'
+ *     ex: /api/npm/*
  *
  *   it will not be deployed
  *
@@ -25,9 +25,9 @@
 
 const paths = [
   {
-    route: "/fight/:packages",
+    route: "/fight/*",
     actualPage: "/fight",
-    queryParams: ["packages"],
+    queryParams: [],
     fetchData: require("./handlers/fight").fetchData,
   },
 ];
