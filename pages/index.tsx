@@ -1,6 +1,7 @@
 import * as React from "react";
 import LinkAs from "../components/link-as";
-import styled from "styled-components";
+import styled from "../styles/styled-components";
+import { media } from "../styles/utils/breakpoint";
 import Layout from "../components/Layout";
 import { Button, ButtonIcon } from "../components/Button";
 import AddIcon from "../components/icons/Add";
@@ -9,11 +10,15 @@ import SearchInput from "../components/SearchInput";
 const Title = styled.h1`
   display: flex;
   flex-direction: column;
-  margin-top: 5rem;
+  margin-top: 1rem;
   font-family: ${(props) => props.theme.fonts.title};
   font-size: 7.5rem;
   line-height: 1;
   text-align: center;
+
+  ${media.small`
+    margin-top: 5rem;
+  `}
 
   em {
     font-size: 14rem;
@@ -55,6 +60,21 @@ const Form = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+
+  ${media.small`
+    flex-direction: row;
+  `}
+`;
+
+const StyledButtonIcon = styled(ButtonIcon)`
+  margin-top: 1rem;
+  margin-left: 0;
+
+  ${media.small`
+    margin-left: 1.25rem;
+    margin-top: 0;
+  `}
 `;
 
 const Index: React.FunctionComponent = (): JSX.Element => {
@@ -77,13 +97,9 @@ const Index: React.FunctionComponent = (): JSX.Element => {
           <SearchInput index={0} addPackages={addPackages} />
           <Versus>vs</Versus>
           <SearchInput index={1} addPackages={addPackages} />
-          <ButtonIcon
-            variant="secondary"
-            style={{ marginLeft: "1.25rem" }}
-            ripple={true}
-          >
+          <StyledButtonIcon variant="secondary" ripple={true}>
             <AddIcon width={52} stroke="#FFBB00" />
-          </ButtonIcon>
+          </StyledButtonIcon>
         </Form>
 
         <LinkAs route="./fight/:packages" packages={packages.join(",")}>

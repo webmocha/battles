@@ -1,13 +1,21 @@
 import { createGlobalStyle } from "./styled-components";
+import { media } from "./utils/breakpoint";
 import theme from "./theme";
 import fonts from "./fonts";
 
 const GlobalStyles = createGlobalStyle`
   :root {
-    font-size: 16px;
+    font-size: 12px;
     overflow-x: hidden;
     background: #161719;
     background: ${theme.colors.darkBackground};
+
+    ${media.small`
+      font-size: 14px;
+    `}
+    ${media.large`
+      font-size: 16px;
+    `}
   }
 
   * {
