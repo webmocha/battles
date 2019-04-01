@@ -1,0 +1,148 @@
+[
+  {
+    "packages": ["angular", "@angular/cli"],
+    "logoUrl": "https://angular.io/assets/images/logos/angular/angular.svg"
+  },
+  {
+    "packages": ["babel", "babel-core", "babel-runtime", "babel-polyfill"],
+    "logoUrl": "https://cdn.worldvectorlogo.com/logos/babel-10.svg"
+  },
+  {
+    "packages": ["backbone"],
+    "logoUrl": "https://www.vectorlogo.zone/logos/backbonejs/backbonejs-icon.svg"
+  },
+  {
+    "packages": ["bootstrap"],
+    "logoUrl": "https://cdn.worldvectorlogo.com/logos/bootstrap-4.svg"
+  },
+  {
+    "packages": ["chai"],
+    "logoUrl": "https://cdn.worldvectorlogo.com/logos/chai.svg"
+  },
+  {
+    "packages": ["dojo"],
+    "logoUrl": "https://cdn.worldvectorlogo.com/logos/dojo-1.svg"
+  },
+  {
+    "packages": ["electron"],
+    "logoUrl": "https://cdn.worldvectorlogo.com/logos/electron-4.svg"
+  },
+  {
+    "packages": ["ember"],
+    "logoUrl": "https://cdn.worldvectorlogo.com/logos/ember-tomster.svg"
+  },
+  {
+    "packages": ["express"],
+    "logoUrl": "https://cdn.worldvectorlogo.com/logos/express-109.svg"
+  },
+  {
+    "packages": ["graphql"],
+    "logoUrl": "https://cdn.worldvectorlogo.com/logos/graphql.svg"
+  },
+  {
+    "packages": ["grommet"],
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Grommet-icon.svg/600px-Grommet-icon.svg.png"
+  },
+  {
+    "packages": ["gulp"],
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/7/72/Gulp.js_Logo.svg"
+  },
+  {
+    "packages": ["handlebars"],
+    "logoUrl": "https://cdn.worldvectorlogo.com/logos/handlebars.svg"
+  },
+  {
+    "packages": ["jade"],
+    "logoUrl": "https://cdn.worldvectorlogo.com/logos/jade-3.svg"
+  },
+  {
+    "packages": ["jest"],
+    "logoUrl": "https://cdn.worldvectorlogo.com/logos/jest-0.svg"
+  },
+  {
+    "packages": ["jquery"],
+    "logoUrl": "https://cdn.worldvectorlogo.com/logos/jquery-1.svg"
+  },
+  {
+    "packages": ["knockout"],
+    "logoUrl": "https://cdn.worldvectorlogo.com/logos/knockout.svg"
+  },
+  {
+    "packages": ["less"],
+    "logoUrl": "http://lesscss.org/public/img/less_logo.png"
+  },
+  {
+    "packages": ["lodash"],
+    "logoUrl": "https://lodash.com/assets/img/lodash.svg"
+  },
+  {
+    "packages": ["mithril"],
+    "logoUrl": "https://cdn.worldvectorlogo.com/logos/mithril.svg"
+  },
+  {
+    "packages": ["marko"],
+    "logoUrl": "https://seeklogo.com/images/M/marko-logo-4EE85ACE69-seeklogo.com.png"
+  },
+  {
+    "packages": [
+      "material-ui",
+      "@material-ui/core",
+      "@material-ui/icons",
+      "@material-ui/utils",
+      "@material-ui/system"
+    ],
+    "logoUrl": "https://material-ui.com/static/images/material-ui-logo.svg"
+  },
+  {
+    "packages": ["npm"],
+    "logoUrl": "https://cdn.worldvectorlogo.com/logos/npm.svg"
+  },
+  {
+    "packages": ["parcel", "parcel-bundler"],
+    "logoUrl": "https://parceljs.org/assets/parcel-og.png"
+  },
+  {
+    "packages": ["polymer"],
+    "logoUrl": "https://cdn.worldvectorlogo.com/logos/polymer-2.svg"
+  },
+  {
+    "packages": ["postcss"],
+    "logoUrl": "https://postcss.org/_/web_modules/Hero/postcss.svg"
+  },
+  {
+    "packages": ["sass"],
+    "logoUrl": "https://rawgit.com/sass/sass-site/master/source/assets/img/logos/logo.svg"
+  },
+  {
+    "packages": ["react", "react-dom"],
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
+  },
+  {
+    "packages": ["redux", "react-redux"],
+    "logoUrl": "https://cdn.worldvectorlogo.com/logos/redux.svg"
+  },
+  {
+    "packages": ["riot"],
+    "logoUrl": "https://cdn.worldvectorlogo.com/logos/riot.svg"
+  },
+  {
+    "packages": ["rollup"],
+    "logoUrl": "https://rollupjs.org/logo.svg"
+  },
+  {
+    "packages": ["typescript"],
+    "logoUrl": "https://cdn.worldvectorlogo.com/logos/typescript.svg"
+  },
+  {
+    "packages": ["webpack", "webpack-dev-server"],
+    "logoUrl": "https://webpack.js.org/assets/icon-square-big.svg"
+  },
+  {
+    "packages": ["vue"],
+    "logoUrl": "https://vuejs.org/images/logo.png"
+  },
+  {
+    "packages": ["yeoman", "yeoman-generator"],
+    "logoUrl": "https://cdn.worldvectorlogo.com/logos/yeoman.svg"
+  }
+]
