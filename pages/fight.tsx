@@ -1,15 +1,43 @@
 import * as React from "react";
 import Link from "next/link";
-import styled from "styled-components";
+import styled from "../styles/styled-components";
+import { media } from "../styles/utils/breakpoint";
 import percentChange from "../utils/percentChange";
 import generateMatchUp from "../utils/generateMatchUp";
 import { Bracket } from "../components/Bracket";
+import { Button } from "../components/Button";
 import Layout from "../components/Layout";
 import { getFightData, DownloadsResponse } from "../api/fight";
 
 const Title = styled.h1`
-  font-size: 7.5rem;
+  display: flex;
+  flex-direction: column;
+  margin-top: 4rem;
   font-family: ${(props) => props.theme.fonts.title};
+  font-size: 7.5rem;
+  line-height: 1;
+  text-align: center;
+  color: ${(props) => props.theme.colors.primary};
+
+  ${media.small`
+    margin-top: 7rem;
+  `}
+`;
+
+const StyledSVGWrapper = styled.div`
+  text-align: center;
+  overflow: scroll;
+  padding: 2rem;
+  margin-top: 2rem;
+
+  ${media.small`
+    margin-top: 5rem;
+  `}
+`;
+
+const BackButton = styled(Button)`
+  display: block;
+  margin: 5rem auto;
 `;
 
 const processDataOutcome = (data: DownloadsResponse): any => {
@@ -51,12 +79,13 @@ const Fight = (props: any): JSX.Element => {
       {hasBadPackages && (
         <p>Invalid packages: {`"${badPackages.join(", ")}"`}</p>
       )}
-      {matchup.length > 0 && <Bracket matchup={matchup} animate={true} />}
-      <p>
-        <Link href="/">
-          <a>Back</a>
-        </Link>
-      </p>
+      <StyledSVGWrapper>
+        {matchup.length > 0 && <Bracket matchup={matchup} animate={true} />}
+      </StyledSVGWrapper>
+
+      <Link href="/">
+        <BackButton ripple={true}>Back</BackButton>
+      </Link>
     </Layout>
   );
 };
