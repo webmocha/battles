@@ -2,6 +2,7 @@ import * as React from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import percentChange from "../utils/percentChange";
+import generateMatchUp from "../utils/generateMatchUp";
 import { Bracket } from "../components/Bracket";
 import Layout from "../components/Layout";
 import { getFightData, DownloadsResponse } from "../api/fight";
@@ -11,17 +12,15 @@ const Title = styled.h1`
   font-family: ${(props) => props.theme.fonts.title};
 `;
 
-const matchup = [[["A", "B"], ["C", "D"]], [["A", "C"]], [["C"]]];
-
 const processDataOutcome = (data: DownloadsResponse): any => {
-  return Object.keys(data).map((key) => {
+  return Object.keys(data).reduce((acc, key) => {
     const d = data[key];
     const outcome = percentChange(
       d.downloads[0].downloads,
       d.downloads[1].downloads,
     );
-    return { ...d, outcome };
-  });
+    return { ...acc, [key]: { ...d, outcome } };
+  }, {});
 };
 
 const checkBadPackage = (data: DownloadsResponse): string[] =>
@@ -34,6 +33,7 @@ const Fight = (props: any): JSX.Element => {
   const parsedPayload =
     typeof payload === "string" ? JSON.parse(payload) : payload;
   const [packages, setPackages] = React.useState({});
+  const [matchup, setMatchup] = React.useState([] as string[][][]);
   const badPackages = checkBadPackage(parsedPayload);
   const hasBadPackages = badPackages.length > 0;
 
@@ -43,7 +43,9 @@ const Fight = (props: any): JSX.Element => {
     }
   }, []);
 
-  console.log("packages", packages);
+  React.useEffect(() => {
+    setMatchup(generateMatchUp(packages));
+  }, [packages]);
 
   return (
     <Layout title="Fight | Battles.dev">
@@ -51,7 +53,7 @@ const Fight = (props: any): JSX.Element => {
       {hasBadPackages && (
         <p>Invalid packages: {`"${badPackages.join(", ")}"`}</p>
       )}
-      <Bracket matchup={matchup} />
+      {matchup.length > 0 && <Bracket matchup={matchup} />}
       <p>
         <Link href="/">
           <a>Back</a>
