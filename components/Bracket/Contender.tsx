@@ -3,10 +3,11 @@ import { useSpring, animated } from "react-spring";
 import styled from "../../styles/styled-components";
 import delay from "../../utils/delay";
 import useBounds from "../hooks/useBounds";
+import DefaultLogo from "../DefaultLogo";
 import { BracketStoreContext } from "./Store";
 
 export interface Props extends React.SVGProps<SVGSVGElement> {
-  logo: string;
+  logo?: string;
   name: string;
   dark?: boolean;
   round?: number;
@@ -104,13 +105,18 @@ const Contender = React.forwardRef<SVGSVGElement, Props>(
           y={contentOffset}
           fill="#333"
         />
-        <image
-          x="10"
-          y="10"
-          width={width - 20}
-          height={height / 2}
-          xlinkHref={logo}
-        />
+        {logo ? (
+          <image
+            x="10"
+            y="10"
+            width={width - 20}
+            height={height / 2}
+            xlinkHref={logo}
+          />
+        ) : (
+          <DefaultLogo x={(width - 50) / 2} y="10" name={name} />
+        )}
+
         <foreignObject
           x="10"
           y={contentOffset + 10}
