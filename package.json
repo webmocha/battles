@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "nodemon local-dev-server",
     "build": "next build",
-    "deploy:pre": "npm run build",
+    "monkey:patch:encoding": "awk -i inplace '!x{x=sub(\"Iconv = .*\",\"Iconv = null;\")}1' node_modules/encoding/lib/iconv-loader.js && echo 'monkey patched encoding'",
+    "deploy:pre": "npm run monkey:patch:encoding && npm run build",
     "deploy:dev": "npm run deploy:pre && serverless deploy",
     "deploy:prod": "npm run deploy:pre && serverless deploy --stage prod",
     "start": "next start",
