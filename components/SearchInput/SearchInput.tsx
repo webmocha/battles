@@ -7,13 +7,13 @@ import { fetchSearchSuggestions, SearchResultObject } from "./api";
 
 interface Props {
   addPackages?: any;
-  index: number;
+  index?: number;
 }
 
 const SearchInput: React.FunctionComponent<Props> = (props): JSX.Element => {
   const [items, setItems] = React.useState([]);
   const [inputValue, setInputValue] = React.useState("");
-  const { addPackages = () => {}, index } = props;
+  const { addPackages = () => {}, index = 0 } = props;
 
   return (
     <Downshift
