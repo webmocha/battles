@@ -36,7 +36,7 @@ const Bracket: React.FunctionComponent<Props> = (props): JSX.Element => {
       width={bracketBounds.width}
       height={state.height}
       viewBox={`0 0 ${bracketBounds.width} ${bracketBounds.height}`}
-      pointerEvents={mouseEventsReady ? "auto" : "none"}
+      pointerEvents={mouseEventsReady || !state.animate ? "auto" : "none"}
     >
       <g ref={bracketRef}>
         {matchup.map((matches, index) => {

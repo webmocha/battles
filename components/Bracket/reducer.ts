@@ -13,7 +13,7 @@ export const initialState: State = {
   packages: {},
   matches: [],
   highlight: "",
-  animate: true,
+  animate: false,
 };
 
 export type Action =

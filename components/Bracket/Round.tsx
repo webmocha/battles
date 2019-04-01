@@ -29,7 +29,7 @@ const Round: React.FunctionComponent<Props> = (props): JSX.Element => {
     ? SVGHeight / flattenDeep(matches).length - 88
     : 50; // 100
   const isFinals = rounds.length - 1 === round;
-  const hasConnnectors = Boolean(rounds.length) && !isFinals;
+  const hasConnectors = Boolean(rounds.length) && !isFinals;
 
   const matchesBoundsRef: any = React.useRef([]);
   React.useEffect(() => {
@@ -67,8 +67,9 @@ const Round: React.FunctionComponent<Props> = (props): JSX.Element => {
               transform={`translate(0, ${sumPreviousHeight})`}
               margin={margin}
               height={matchBounds.height}
-              hasConnnectors={hasConnnectors}
+              hasConnectors={hasConnectors}
               round={round}
+              nextRound={rounds[round + 1]}
             />
           );
         })}

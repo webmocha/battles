@@ -119,7 +119,12 @@ const Connector: React.FunctionComponent<Props> = (props): JSX.Element => {
 
   return (
     <React.Fragment>
-      <BackPath d={pathDefinition} />
+      <BackPath
+        d={pathDefinition}
+        style={{
+          opacity: shouldDim ? 0 : undefined,
+        }}
+      />
       <Path
         d={pathDefinition}
         ref={pathEl}
@@ -131,6 +136,7 @@ const Connector: React.FunctionComponent<Props> = (props): JSX.Element => {
         }
         style={{
           filter: shouldDim ? "none" : undefined,
+          opacity: shouldDim ? 0.5 : undefined,
         }}
       />
       {animate && index === 1 && (
