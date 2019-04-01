@@ -6,12 +6,14 @@ export interface Download {
   day: string;
 }
 
+export interface PackageEntry {
+  downloads: Download[];
+  package: string;
+  outcome?: number;
+}
+
 export interface DownloadsResponse {
-  [key: string]: {
-    downloads: Download[];
-    package: string;
-    outcome?: number;
-  };
+  [key: string]: PackageEntry;
 }
 
 export const getFightData = (packages: string): Promise<any> => {
