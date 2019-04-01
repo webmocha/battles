@@ -27,10 +27,17 @@ interface Props extends React.SVGProps<SVGPathElement> {
   matchWidth: number;
   matchHeight: number;
   round?: number;
+  shouldDim?: boolean;
 }
 
 const Connector: React.FunctionComponent<Props> = (props): JSX.Element => {
-  const { index, matchWidth, matchHeight, round = 0 } = props;
+  const {
+    index,
+    matchWidth,
+    matchHeight,
+    round = 0,
+    shouldDim = false,
+  } = props;
   const { state } = React.useContext(BracketStoreContext);
   const animate = state.animate;
   const contenderWidth = 120;
@@ -40,9 +47,10 @@ const Connector: React.FunctionComponent<Props> = (props): JSX.Element => {
   const startY = index === 0 ? contenderMiddle : matchHeight - contenderMiddle;
   const horizontalPadding = 10;
   const pathEl: React.RefObject<SVGPathElement> = React.useRef(null);
+  const animatedRef = React.useRef(false);
 
   let totalLength: number | undefined = undefined;
-  if (animate && pathEl.current) {
+  if (animate && pathEl.current && !animatedRef.current) {
     totalLength = pathEl.current.getTotalLength();
   }
 
@@ -54,6 +62,7 @@ const Connector: React.FunctionComponent<Props> = (props): JSX.Element => {
         await next({ x: totalLength - 65 });
         await delay(1000);
         await next({ x: totalLength });
+        animatedRef.current = true;
       }
     },
     config: {
@@ -120,6 +129,9 @@ const Connector: React.FunctionComponent<Props> = (props): JSX.Element => {
             ? pathSpring.x.interpolate((x: number) => totalLength! - x)
             : undefined
         }
+        style={{
+          filter: shouldDim ? "none" : undefined,
+        }}
       />
       {animate && index === 1 && (
         <animated.text

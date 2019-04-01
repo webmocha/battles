@@ -10,6 +10,7 @@ export interface Props extends React.SVGProps<SVGSVGElement> {
   name: string;
   dark?: boolean;
   round?: number;
+  shouldDim?: boolean;
 }
 
 const fontSize = 12;
@@ -40,14 +41,31 @@ const BackPath = styled.path`
 
 const Contender = React.forwardRef<SVGSVGElement, Props>(
   (props, ref): JSX.Element => {
-    const { logo, name, dark, round = 0, ...restProps } = props;
-    const { state } = React.useContext(BracketStoreContext);
+    const {
+      logo,
+      name,
+      dark,
+      round = 0,
+      shouldDim = false,
+      ...restProps
+    } = props;
+    const { state, dispatch } = React.useContext(BracketStoreContext);
     const animate = state.animate;
     const [contentBounds, contentRef] = useBounds();
     const width = 120;
     const height = 100;
     const SVGHeight = height + contentBounds.height - fontSize;
     const contentOffset = height / 2 + 20;
+
+    const onMouseEnter = (): void => {
+      console.log("fire onMOuseEnter!");
+      dispatch({ type: "SET_HIGHLIGHT", name });
+    };
+
+    const onMouseLeave = (): void => {
+      console.log("fire onMOuseLEAVE!");
+      dispatch({ type: "SET_HIGHLIGHT", name: "" });
+    };
 
     const pathDefinition = [
       `M 0 50`,
@@ -73,7 +91,14 @@ const Contender = React.forwardRef<SVGSVGElement, Props>(
     });
 
     return (
-      <svg width={width} height={SVGHeight} ref={ref} {...restProps}>
+      <svg
+        width={width}
+        height={SVGHeight}
+        ref={ref}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        {...restProps}
+      >
         <rect width={width} height={height} fill={dark ? "#333" : "#fff"} />
         <rect
           width={width}
@@ -114,6 +139,15 @@ const Contender = React.forwardRef<SVGSVGElement, Props>(
               )}
             />
           </animated.g>
+        )}
+        {shouldDim && (
+          <rect
+            width={width}
+            height={SVGHeight}
+            fill="#151515"
+            opacity={0.55}
+            pointerEvents="none"
+          />
         )}
       </svg>
     );
