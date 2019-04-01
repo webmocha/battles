@@ -43,7 +43,7 @@ exports.handler = (event, context) => {
 
   const server = awsServerlessExpress.createServer(async (req, res) => {
     await fetchData(req, res);
-    page.render(req, res, "/fight", queryParams);
+    page.render(req, res, "/fight");
   });
 
   awsServerlessExpress.proxy(server, event, context);
