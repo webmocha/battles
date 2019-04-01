@@ -1,7 +1,7 @@
 const fetch = require("isomorphic-unfetch");
 
 const api = async (path) => {
-  const npmPath = path.replace("/api/npm/", "");
+  const npmPath = path.replace("/api/npm/", "").toLowerCase();
   const npmUrl = `https://api.npmjs.org/${npmPath}`;
   try {
     const response = await fetch(npmUrl);
