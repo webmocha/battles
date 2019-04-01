@@ -3,6 +3,7 @@ import Head from "next/head";
 import { ThemeProvider } from "../styles/styled-components";
 import GlobalStyles from "../styles/global";
 import theme from "../styles/theme";
+import Footer from "./Footer";
 
 export interface Props {
   title?: string;
@@ -19,6 +20,7 @@ const Layout: React.FunctionComponent<Props> = (props): JSX.Element => {
           <title>{title}</title>
         </Head>
         {children}
+        <Footer />
       </React.Fragment>
     </ThemeProvider>
   );

@@ -23,6 +23,7 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 300;
     letter-spacing: 0.1px;
     overflow-x: hidden;
+    padding-bottom: 3rem;
   }
 
   h1, h2, h3, h4, h5, h6 {
