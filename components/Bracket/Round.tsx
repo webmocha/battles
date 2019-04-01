@@ -1,5 +1,6 @@
 import * as React from "react";
 import flattenDeep from "lodash/flattenDeep";
+import findLogo from "../../utils/findLogo";
 import useBounds, { Bounds } from "../hooks/useBounds";
 import { BracketStoreContext } from "./Store";
 import Match from "./Match";
@@ -62,7 +63,7 @@ const Round: React.FunctionComponent<Props> = (props): JSX.Element => {
               contenders={match.map((contender) => ({
                 // name: packages[contender.toLowerCase()].package,
                 name: contender,
-                logo: undefined,
+                logo: findLogo(contender.toLowerCase()),
               }))}
               transform={`translate(0, ${sumPreviousHeight})`}
               margin={margin}
