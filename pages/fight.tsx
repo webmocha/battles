@@ -26,7 +26,7 @@ const Title = styled.h1`
 
 const StyledSVGWrapper = styled.div`
   text-align: center;
-  overflow: scroll;
+  overflow: auto;
   padding: 2rem;
   margin-top: 2rem;
 
