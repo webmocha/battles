@@ -51,7 +51,7 @@ const Fight = (props: any): JSX.Element => {
       {hasBadPackages && (
         <p>Invalid packages: {`"${badPackages.join(", ")}"`}</p>
       )}
-      {matchup.length > 0 && <Bracket matchup={matchup} />}
+      {matchup.length > 0 && <Bracket matchup={matchup} animate={true} />}
       <p>
         <Link href="/">
           <a>Back</a>
