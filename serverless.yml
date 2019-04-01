@@ -55,7 +55,7 @@ functions:
     handler: handlers/fight.handler
     events:
       - http:
-          path: /fight
+          path: /fight/{any+}
           method: GET
   proxy:
     handler: handlers/proxy.handler
