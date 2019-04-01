@@ -61,6 +61,7 @@ const Form = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  flex-wrap: wrap;
 
   ${media.small`
     flex-direction: row;
@@ -96,16 +97,18 @@ const Index: React.FunctionComponent = (): JSX.Element => {
 
         <Form>
           {Array.from(Array(inputCount)).map((_, index) => (
-            <SearchInput key={index} index={index} addPackages={addPackages} />
+            <React.Fragment key={index}>
+              <SearchInput index={index} addPackages={addPackages} />
+              {index < inputCount - 1 && <Versus>vs</Versus>}
+            </React.Fragment>
           ))}
 
-          {/* <SearchInput index={0} addPackages={addPackages} />
-          <Versus>vs</Versus> */}
-          {/* <SearchInput index={1} addPackages={addPackages} /> */}
           <StyledButtonIcon
             variant="secondary"
             ripple={true}
-            onClick={() => setInputCount(inputCount + 1)}
+            onClick={() =>
+              inputCount < 8 ? setInputCount(inputCount + 1) : {}
+            }
           >
             <AddIcon width={52} stroke="#FFBB00" />
           </StyledButtonIcon>
