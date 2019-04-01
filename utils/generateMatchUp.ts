@@ -24,6 +24,9 @@ const generateMatchUp = (data: DownloadsResponse): string[][][] => {
   const getWinners = (arr: string[][]): string[] =>
     arr.reduce((acc, items) => {
       const [a, b] = items;
+      if (!b) {
+        return [...acc, a];
+      }
       const winner = data[a].outcome! < data[b].outcome! ? a : b;
       return [...acc, winner];
     }, []);
