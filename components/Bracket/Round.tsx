@@ -3,6 +3,7 @@ import flattenDeep from "lodash/flattenDeep";
 import useBounds, { Bounds } from "../hooks/useBounds";
 import { BracketStoreContext } from "./Store";
 import Match from "./Match";
+import { sumPreviousHeights } from "./utils";
 
 interface Props extends React.SVGProps<SVGSVGElement> {
   matches: string[][];
@@ -48,13 +49,12 @@ const Round: React.FunctionComponent<Props> = (props): JSX.Element => {
         {matches.map((match, index) => {
           const [matchBounds, matchRef] = useBounds();
           matchesBoundsRef.current[index] = matchBounds;
-          // TODO: Move to utils
-          const sumPreviousHeight = matchesBoundsRef.current
-            .slice(0, index)
-            .reduce(
-              (acc: number, bounds: Bounds) => acc + bounds.height + margin,
-              0,
-            );
+          const sumPreviousHeight = sumPreviousHeights(
+            matchesBoundsRef.current,
+            index,
+            margin,
+          );
+
           return (
             <Match
               key={index}

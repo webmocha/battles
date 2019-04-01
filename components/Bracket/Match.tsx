@@ -1,9 +1,10 @@
 import * as React from "react";
 import flattenDeep from "lodash/flattenDeep";
-import useBounds, { Bounds } from "../hooks/useBounds";
+import useBounds from "../hooks/useBounds";
 import Contender, { Props as ContenderProps } from "./Contender";
 import Connector from "./Connector";
 import { BracketStoreContext } from "./Store";
+import { sumPreviousHeights } from "./utils";
 
 interface Props extends React.SVGProps<SVGGElement> {
   contenders: ContenderProps[];
@@ -26,7 +27,7 @@ const Match = React.forwardRef<SVGGElement, Props>(
     } = props;
     const { state } = React.useContext(BracketStoreContext);
     const matchHeight = Number(height);
-    const contendersBoundsRef: React.RefObject<Bounds[]> = React.useRef([]);
+    const contendersBoundsRef: any = React.useRef([]);
     const nextRoundContenders = flattenDeep(nextRound);
 
     return (
@@ -39,13 +40,12 @@ const Match = React.forwardRef<SVGGElement, Props>(
 
           const [contenderBounds, contenderRef] = useBounds();
           contendersBoundsRef.current![index] = contenderBounds;
-          // TODO: Move to utils
-          const sumPreviousHeight = contendersBoundsRef
-            .current!.slice(0, index)
-            .reduce(
-              (acc: number, bounds: Bounds) => acc + bounds.height + margin,
-              0,
-            );
+          const sumPreviousHeight = sumPreviousHeights(
+            contendersBoundsRef.current,
+            index,
+            margin,
+          );
+
           return (
             <React.Fragment key={contender.name}>
               {hasConnectors && (

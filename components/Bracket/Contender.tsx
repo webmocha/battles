@@ -58,12 +58,10 @@ const Contender = React.forwardRef<SVGSVGElement, Props>(
     const contentOffset = height / 2 + 20;
 
     const onMouseEnter = (): void => {
-      console.log("fire onMOuseEnter!");
       dispatch({ type: "SET_HIGHLIGHT", name });
     };
 
     const onMouseLeave = (): void => {
-      console.log("fire onMOuseLEAVE!");
       dispatch({ type: "SET_HIGHLIGHT", name: "" });
     };
 
