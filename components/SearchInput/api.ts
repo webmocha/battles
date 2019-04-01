@@ -1,5 +1,5 @@
 import debounce from "lodash/debounce";
-import * as fetch from "isomorphic-unfetch";
+import fetch from "isomorphic-unfetch";
 
 export interface SearchResultObject {
   package: {

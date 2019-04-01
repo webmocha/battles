@@ -62,7 +62,7 @@ const Round: React.FunctionComponent<Props> = (props): JSX.Element => {
               contenders={match.map((contender) => ({
                 // name: packages[contender.toLowerCase()].package,
                 name: contender,
-                logo: "https://api.adorable.io/avatars/285",
+                logo: undefined,
               }))}
               transform={`translate(0, ${sumPreviousHeight})`}
               margin={margin}

@@ -1,4 +1,4 @@
-import * as fetch from "isomorphic-unfetch";
+import fetch from "isomorphic-unfetch";
 
-export const getFightData = (query) =>
+export const getFightData = (): Promise<any> =>
   fetch("/api/npm/downloads/point/last-day/react");
