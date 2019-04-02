@@ -4,6 +4,8 @@ import styled from "../styles/styled-components";
 import { media } from "../styles/utils/breakpoint";
 import Layout from "../components/Layout";
 import { Button, ButtonIcon } from "../components/Button";
+import Nav from "../components/Nav";
+import Container from "../components/Container";
 import AddIcon from "../components/icons/Add";
 import SearchInput from "../components/SearchInput";
 
@@ -33,13 +35,6 @@ const Blurb = styled.p`
   color: ${(props) => props.theme.colors.liteText};
   font-family: ${(props) => props.theme.fonts.mono};
   font-size: 2rem;
-`;
-
-const Container = styled.div`
-  width: 100%;
-  max-width: 1024px;
-  margin: 0 auto;
-  padding: 20px;
 `;
 
 const FightButton = styled(Button)`
@@ -88,6 +83,7 @@ const Index: React.FunctionComponent = (): JSX.Element => {
   };
   return (
     <Layout title="Home | Battles.dev">
+      <Nav />
       <Container>
         <Title>
           <em>Dev</em>

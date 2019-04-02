@@ -28,9 +28,7 @@ export const getFightData = async (packages: string): Promise<any> => {
   );
 
   const payload = await Promise.all(
-    responses
-      .filter((r) => console.log("status", r.status) || r.status === 200)
-      .map((r) => r.json()),
+    responses.filter((r) => r.status === 200).map((r) => r.json()),
   );
 
   return payload.reduce(

@@ -7,7 +7,6 @@ const GlobalStyles = createGlobalStyle`
   :root {
     font-size: 12px;
     overflow-x: hidden;
-    background: #161719;
     background: ${theme.colors.darkBackground};
 
     ${media.small`
@@ -32,6 +31,7 @@ const GlobalStyles = createGlobalStyle`
     letter-spacing: 0.1px;
     overflow-x: hidden;
     padding-bottom: 3rem;
+    background: ${theme.colors.darkBackground};
   }
 
   h1, h2, h3, h4, h5, h6 {

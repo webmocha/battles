@@ -7,22 +7,10 @@ import generateMatchUp from "../utils/generateMatchUp";
 import { Bracket } from "../components/Bracket";
 import { Button } from "../components/Button";
 import Layout from "../components/Layout";
+import Nav from "../components/Nav";
+import Container from "../components/Container";
+import Title from "../components/Title";
 import { getFightData, DownloadsResponse } from "../api/fight";
-
-const Title = styled.h1`
-  display: flex;
-  flex-direction: column;
-  margin-top: 4rem;
-  font-family: ${(props) => props.theme.fonts.title};
-  font-size: 7.5rem;
-  line-height: 1;
-  text-align: center;
-  color: ${(props) => props.theme.colors.primary};
-
-  ${media.small`
-    margin-top: 7rem;
-  `}
-`;
 
 const StyledSVGWrapper = styled.div`
   text-align: center;
@@ -75,17 +63,20 @@ const Fight = (props: any): JSX.Element => {
 
   return (
     <Layout title="Fight | Battles.dev">
-      <Title>Fight! 💥</Title>
-      {hasBadPackages && (
-        <p>Invalid packages: {`"${badPackages.join(", ")}"`}</p>
-      )}
-      <StyledSVGWrapper>
-        {matchup.length > 0 && <Bracket matchup={matchup} animate={true} />}
-      </StyledSVGWrapper>
+      <Nav />
+      <Container>
+        <Title>Fight! 💥</Title>
+        {hasBadPackages && (
+          <p>Invalid packages: {`"${badPackages.join(", ")}"`}</p>
+        )}
+        <StyledSVGWrapper>
+          {matchup.length > 0 && <Bracket matchup={matchup} animate={true} />}
+        </StyledSVGWrapper>
 
-      <Link href="/">
-        <BackButton ripple={true}>Back</BackButton>
-      </Link>
+        <Link href="/">
+          <BackButton ripple={true}>Back</BackButton>
+        </Link>
+      </Container>
     </Layout>
   );
 };
