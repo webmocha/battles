@@ -4,7 +4,6 @@ import Suggestion from "./Suggestion";
 export const SuggestionsWrapper = styled.div`
   position: relative;
   top: -1px;
-  margin-top: -0.5rem;
   z-index: 999;
 `;
 

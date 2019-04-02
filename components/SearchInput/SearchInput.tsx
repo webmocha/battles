@@ -14,10 +14,11 @@ interface Props {
 
 const Wrapper = styled.div`
   width: 100%;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+
   input {
     width: 100%;
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
   }
 
   ${media.small`
@@ -90,6 +91,8 @@ const SearchInput: React.FunctionComponent<Props> = (props): JSX.Element => {
                       style={{
                         width: "22.25rem",
                         padding: "0.7rem 0.5rem",
+                        margin: 0,
+                        fontSize: "1rem",
                       }}
                     >
                       ...
