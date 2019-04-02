@@ -84,6 +84,7 @@ const Index: React.FunctionComponent = (): JSX.Element => {
 
   const uniquePackages = [...new Set(packages)];
   const scrubPackages = uniquePackages.filter(Boolean);
+  const disableFight = scrubPackages.length < 2;
 
   return (
     <Layout title="Home | Battles.dev">
@@ -115,7 +116,12 @@ const Index: React.FunctionComponent = (): JSX.Element => {
         </Form>
 
         <LinkAs route="./fight/:packages" packages={scrubPackages.join(",")}>
-          <FightButton variant="primary" size="large" ripple={true}>
+          <FightButton
+            variant="primary"
+            size="large"
+            ripple={true}
+            disabled={disableFight}
+          >
             Fight!
           </FightButton>
         </LinkAs>

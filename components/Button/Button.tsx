@@ -32,6 +32,7 @@ const Button = styled.button<Props>`
     font-family: ${theme.fonts.base};
     font-size: 1rem;
     font-weight: 600;
+    transition: opacity 0.25s;
     cursor: pointer;
 
     ${size === "large" &&
@@ -81,6 +82,15 @@ const Button = styled.button<Props>`
 
     &:hover {
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+
+      &:before {
+        content: none;
+      }
     }
   `}
 `;
