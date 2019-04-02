@@ -10,6 +10,7 @@ export interface PackageEntry {
   downloads: Download[];
   package: string;
   outcome?: number;
+  error?: string;
 }
 
 export interface DownloadsResponse {

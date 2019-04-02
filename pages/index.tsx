@@ -81,6 +81,10 @@ const Index: React.FunctionComponent = (): JSX.Element => {
     newPackages[index] = nodePackage;
     setPackages(newPackages);
   };
+
+  const uniquePackages = [...new Set(packages)];
+  const scrubPackages = uniquePackages.filter(Boolean);
+
   return (
     <Layout title="Home | Battles.dev">
       <Nav />
@@ -110,7 +114,7 @@ const Index: React.FunctionComponent = (): JSX.Element => {
           </StyledButtonIcon>
         </Form>
 
-        <LinkAs route="./fight/:packages" packages={packages.join(",")}>
+        <LinkAs route="./fight/:packages" packages={scrubPackages.join(",")}>
           <FightButton variant="primary" size="large" ripple={true}>
             Fight!
           </FightButton>
