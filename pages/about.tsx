@@ -110,13 +110,14 @@ const About = (): JSX.Element => {
             <p>Should I go with Ember or Angular for my new project?</p>
           </blockquote>
 
-          <p>
-            <strong>Just come on over - we{`'`}ve got you.</strong>
-          </p>
+          <p>Just come on over - we{`'`}ve got you.</p>
 
           <p>
-            Each day we{`'`}ll show you which framework reigns supreme over all
-            the others. Q.E.D.
+            <strong>
+              Each day we{`'`}ll show you which framework reigns supreme over
+              all the others.
+            </strong>{" "}
+            Q.E.D.
           </p>
 
           <hr />
