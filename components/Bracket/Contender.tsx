@@ -79,12 +79,12 @@ const Contender = React.forwardRef<SVGSVGElement, Props>(
     const pathSpring: any = useSpring({
       from: { x: 0, opacity: 1 },
       to: async (next: any) => {
-        await delay((round - 1) * 4000 + 2150);
+        await delay((round - 1) * 4000 + 2000);
         await next({ x: pathLength / 2 });
         await next({ opacity: 0 });
       },
       config: {
-        duration: 1000,
+        duration: 750,
         easing: (t: number) => --t * t * t + 1,
       },
     });
