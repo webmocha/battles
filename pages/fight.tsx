@@ -23,7 +23,7 @@ const StyledSVGWrapper = styled.div`
   `}
 `;
 
-const InvalidWarning = styled.div`
+const Warning = styled.div`
   margin-top: 5rem;
   font-size: 1.5rem;
   text-align: center;
@@ -51,9 +51,10 @@ const checkBadPackage = (data: DownloadsResponse): string[] =>
   });
 
 const Fight = (props: any): JSX.Element => {
-  const { payload } = props;
+  const { payload = {} } = props;
   const [packages, setPackages] = React.useState({});
   const [matchup, setMatchup] = React.useState([] as string[][][]);
+  const noPackages = Object.keys(payload).length === 0;
   const badPackages = checkBadPackage(payload);
   const hasBadPackages = badPackages.length > 0;
 
@@ -73,12 +74,17 @@ const Fight = (props: any): JSX.Element => {
       <Container>
         <Title>Fight! 💥</Title>
         {hasBadPackages && (
-          <InvalidWarning>
+          <Warning>
             <p>
               Oops! There{`'`}s an invalid package, make sure your spelling is
               correct.
             </p>
-          </InvalidWarning>
+          </Warning>
+        )}
+        {noPackages && (
+          <Warning>
+            <p>No contenders! Go back and add some packages!</p>
+          </Warning>
         )}
         <StyledSVGWrapper>
           {matchup.length > 0 && <Bracket matchup={matchup} animate={true} />}
