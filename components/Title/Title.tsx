@@ -4,7 +4,7 @@ import { media } from "../../styles/utils/breakpoint";
 const Title = styled.h1`
   display: flex;
   flex-direction: column;
-  margin-top: 4rem;
+  margin-top: 3rem;
   font-family: ${(props) => props.theme.fonts.title};
   font-size: 7.5rem;
   line-height: 1;
@@ -12,7 +12,7 @@ const Title = styled.h1`
   color: ${(props) => props.theme.colors.primary};
 
   ${media.small`
-    margin-top: 7rem;
+    margin-top: 6rem;
   `}
 `;
 

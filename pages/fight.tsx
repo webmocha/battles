@@ -7,6 +7,7 @@ import generateMatchUp from "../utils/generateMatchUp";
 import { Bracket } from "../components/Bracket";
 import { Button } from "../components/Button";
 import Layout from "../components/Layout";
+import Nav from "../components/Nav";
 import Container from "../components/Container";
 import Title from "../components/Title";
 import { getFightData, DownloadsResponse } from "../api/fight";
@@ -62,6 +63,7 @@ const Fight = (props: any): JSX.Element => {
 
   return (
     <Layout title="Fight | Battles.dev">
+      <Nav />
       <Container>
         <Title>Fight! 💥</Title>
         {hasBadPackages && (

@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "../styles/styled-components";
 import GithubIcon from "../components/icons/Github";
 import Layout from "../components/Layout";
+import Nav from "../components/Nav";
 import Container from "../components/Container";
 import Title from "../components/Title";
 
@@ -83,6 +84,7 @@ const StyledGithubLink = styled.div`
 const About = (): JSX.Element => {
   return (
     <Layout title="About | Battles.dev">
+      <Nav links={[{ href: "/", title: "Back" }]} />
       <Container>
         <Title>About️</Title>
         <Content>

@@ -4,6 +4,7 @@ import styled from "../styles/styled-components";
 import { media } from "../styles/utils/breakpoint";
 import Layout from "../components/Layout";
 import { Button, ButtonIcon } from "../components/Button";
+import Nav from "../components/Nav";
 import Container from "../components/Container";
 import AddIcon from "../components/icons/Add";
 import SearchInput from "../components/SearchInput";
@@ -82,6 +83,7 @@ const Index: React.FunctionComponent = (): JSX.Element => {
   };
   return (
     <Layout title="Home | Battles.dev">
+      <Nav />
       <Container>
         <Title>
           <em>Dev</em>
