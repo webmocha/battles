@@ -23,6 +23,12 @@ const StyledSVGWrapper = styled.div`
   `}
 `;
 
+const InvalidWarning = styled.div`
+  margin-top: 5rem;
+  font-size: 1.5rem;
+  text-align: center;
+`;
+
 const BackButton = styled(Button)`
   display: block;
   margin: 5rem auto;
@@ -41,7 +47,7 @@ const processDataOutcome = (data: DownloadsResponse): any => {
 
 const checkBadPackage = (data: DownloadsResponse): string[] =>
   Object.keys(data).filter((key) => {
-    return !data[key];
+    return !data[key] || data[key].error;
   });
 
 const Fight = (props: any): JSX.Element => {
@@ -67,7 +73,12 @@ const Fight = (props: any): JSX.Element => {
       <Container>
         <Title>Fight! 💥</Title>
         {hasBadPackages && (
-          <p>Invalid packages: {`"${badPackages.join(", ")}"`}</p>
+          <InvalidWarning>
+            <p>
+              Oops! There{`'`}s an invalid package, make sure your spelling is
+              correct.
+            </p>
+          </InvalidWarning>
         )}
         <StyledSVGWrapper>
           {matchup.length > 0 && <Bracket matchup={matchup} animate={true} />}
