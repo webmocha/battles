@@ -18,6 +18,7 @@ export interface DownloadsResponse {
 }
 
 export const getFightData = async (packages: string): Promise<any> => {
+  if (!packages) return;
   const twoDaysBefore = format(subDays(new Date(), 2), "YYYY-MM-DD");
   const oneDayBefore = format(subDays(new Date(), 1), "YYYY-MM-DD");
   const responses = await Promise.all(
