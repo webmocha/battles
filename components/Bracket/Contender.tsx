@@ -69,12 +69,12 @@ const Contender = React.forwardRef<SVGSVGElement, Props>(
     };
 
     const pathDefinition = [
-      `M 0 50`,
-      `v -50`,
+      `M 0 ${SVGHeight / 2}`,
+      `v -${SVGHeight / 2}`,
       `h 120`,
-      `v 100`,
+      `v ${SVGHeight}`,
       `h -120`,
-      `v -50`,
+      `v -${SVGHeight / 2}`,
     ].join(" ");
 
     const pathLength = width * 2 + SVGHeight * 2;
