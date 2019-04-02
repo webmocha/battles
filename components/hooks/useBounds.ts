@@ -1,4 +1,5 @@
 import * as React from "react";
+import throttle from "lodash/throttle";
 
 export interface Bounds {
   x: number;
@@ -32,13 +33,12 @@ const useBounds = (): [Bounds, any] => {
 
   React.useEffect(() => {
     if (node) {
-      const updateBounds = (): number =>
-        window.requestAnimationFrame(() => setBounds(getBounds(node)));
+      const updateBounds = throttle(
+        (): number =>
+          window.requestAnimationFrame(() => setBounds(getBounds(node))),
+        200,
+      );
       updateBounds();
-
-      setTimeout(() => {
-        updateBounds();
-      }, 0);
 
       window.addEventListener("resize", updateBounds);
       return () => {
