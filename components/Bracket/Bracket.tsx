@@ -22,7 +22,8 @@ const Bracket: React.FunctionComponent<Props> = (props): JSX.Element => {
   React.useEffect(() => {
     dispatch({
       type: "SET_HEIGHT",
-      height: bracketBounds.height,
+      // Helps Firefox render..
+      height: bracketBounds.height > 0 ? bracketBounds.height : 300,
     });
   }, [bracketBounds.height]);
 
@@ -35,7 +36,7 @@ const Bracket: React.FunctionComponent<Props> = (props): JSX.Element => {
 
   return (
     <svg
-      width="100%"
+      width={bracketBounds.width}
       height={state.height}
       viewBox={`0 0 ${bracketBounds.width} ${bracketBounds.height}`}
       pointerEvents={interactionReady || !state.animate ? "auto" : "none"}

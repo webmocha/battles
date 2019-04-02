@@ -40,9 +40,15 @@ const useBounds = (): [Bounds, any] => {
       );
       updateBounds();
 
+      // Helps Firefox render correctly..
+      const timeoutID = setTimeout(() => {
+        updateBounds();
+      }, 0);
+
       window.addEventListener("resize", updateBounds);
       return () => {
         window.removeEventListener("resize", updateBounds);
+        window.clearTimeout(timeoutID);
       };
     }
   }, [node, bounds.height, bounds.width]);
