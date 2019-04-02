@@ -40,6 +40,7 @@ const Connector: React.FunctionComponent<Props> = (props): JSX.Element => {
   } = props;
   const { state } = React.useContext(BracketStoreContext);
   const animate = state.animate;
+  const animationDelay = state.animationDelay;
   const contenderWidth = 120;
   const contenderMiddle = 50;
   const horizontalLength = (matchWidth - contenderWidth) / 2;
@@ -58,6 +59,7 @@ const Connector: React.FunctionComponent<Props> = (props): JSX.Element => {
     from: { x: 0 },
     to: async (next: any) => {
       if (totalLength) {
+        await delay(animationDelay);
         await delay(round * 4000);
         await next({ x: totalLength - 65 });
         await delay(1000);
@@ -91,6 +93,7 @@ const Connector: React.FunctionComponent<Props> = (props): JSX.Element => {
     },
     to: async (next: any) => {
       if (totalLength) {
+        await delay(animationDelay);
         await next({
           fontSize: boomSize,
           x: boomX - boomSize / 2,

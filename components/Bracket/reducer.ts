@@ -2,12 +2,16 @@ interface State {
   height: number;
   highlight: string;
   animate: boolean;
+  animationDelay: number;
+  // animationDuration: number;
 }
 
 export const initialState: State = {
   height: 0,
   highlight: "",
   animate: false,
+  animationDelay: 2000,
+  // animationDuration: 0,
 };
 
 export type Action =

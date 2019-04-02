@@ -54,6 +54,7 @@ const Contender = React.forwardRef<SVGSVGElement, Props>(
     } = props;
     const { state, dispatch } = React.useContext(BracketStoreContext);
     const animate = state.animate;
+    const animationDelay = state.animationDelay;
     const [contentBounds, contentRef] = useBounds();
     const width = 120;
     const height = 100;
@@ -77,11 +78,14 @@ const Contender = React.forwardRef<SVGSVGElement, Props>(
       `v -${SVGHeight / 2}`,
     ].join(" ");
 
+    const connectorAnimationDuration = 2000;
+
     const pathLength = width * 2 + SVGHeight * 2;
     const pathSpring: any = useSpring({
       from: { x: 0, opacity: 1 },
       to: async (next: any) => {
-        await delay((round - 1) * 4000 + 2000);
+        await delay((round - 1) * 4000);
+        await delay(connectorAnimationDuration + animationDelay);
         await next({ x: pathLength / 2 });
         await next({ opacity: 0 });
       },
