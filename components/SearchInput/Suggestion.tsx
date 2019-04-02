@@ -32,6 +32,8 @@ const Logo = styled.div`
 `;
 
 const Title = styled.p`
+  font-size: 1rem;
+  margin: 0;
   color: #ccc;
 
   em {
@@ -47,6 +49,7 @@ const Description = styled.p`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin: 0;
 `;
 
 const Suggestion: React.FunctionComponent<Props> = (props): JSX.Element => {

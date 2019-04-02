@@ -20,6 +20,8 @@ const Name = styled.p`
   font-size: ${fontSize}px;
   text-align: center;
   color: #fff;
+  margin: 0;
+  line-height: normal;
 `;
 
 const Path = styled(animated.path)`

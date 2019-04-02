@@ -6,10 +6,14 @@ const Wrapper = styled.div`
   width: 100%;
   bottom: 0;
   padding: 1rem;
-  font-size: 1rem;
   text-align: center;
   background: ${(props) => props.theme.colors.darkBackground};
   color: ${(props) => props.theme.colors.liteText};
+
+  p {
+    font-size: 1rem;
+    margin: 0;
+  }
 `;
 
 const StyledLink = styled.a`
