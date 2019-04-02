@@ -1,6 +1,7 @@
 import * as React from "react";
 import Link from "next/link";
 import styled from "../../styles/styled-components";
+import GithubIcon from "../icons/Github";
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,9 +18,27 @@ const StyledLink = styled.a`
   color: ${(props) => props.theme.colors.primary};
   text-decoration: none;
   cursor: pointer;
+  margin: 0 0.5rem;
 
   &:hover {
     text-decoration: underline;
+  }
+`;
+
+const StyledGithubLink = styled.div`
+  margin: 0 0.5rem;
+
+  a:hover {
+    svg {
+      fill: ${(props) => props.theme.colors.primary};
+    }
+  }
+
+  svg {
+    fill: #fff;
+    width: 1.4rem;
+    margin-top: -0.2rem;
+    transition: fill 0.2s;
   }
 `;
 
@@ -38,6 +57,15 @@ const Nav: React.FunctionComponent<Props> = (props): JSX.Element => {
           <StyledLink>{link.title}</StyledLink>
         </Link>
       ))}
+      <StyledGithubLink>
+        <a
+          href="https://github.com/webmocha/battles"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <GithubIcon />
+        </a>
+      </StyledGithubLink>
     </Wrapper>
   );
 };
