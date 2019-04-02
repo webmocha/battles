@@ -13,30 +13,32 @@ interface Props extends React.SVGProps<SVGSVGElement> {
 const Bracket: React.FunctionComponent<Props> = (props): JSX.Element => {
   const { state, dispatch } = React.useContext(BracketStoreContext);
   const { matchup, animate = state.animate } = props;
-  const mouseEventsReady = useTimeout((matchup.length - 1) * 4250);
+  const interactionReady = useTimeout(
+    (matchup.length - 1) * 4250 + state.animationDelay,
+  );
   const [bracketBounds, bracketRef] = useBounds();
   const oddIndexRef = React.useRef(0);
 
   React.useEffect(() => {
     dispatch({
       type: "SET_HEIGHT",
-      height: bracketBounds.height > 0 ? bracketBounds.height : 250,
+      height: bracketBounds.height,
     });
   }, [bracketBounds.height]);
 
   React.useEffect(() => {
     dispatch({
       type: "SET_ANIMATE",
-      animate,
+      animate: interactionReady ? false : animate,
     });
-  }, [animate]);
+  }, [animate, interactionReady]);
 
   return (
     <svg
-      width={bracketBounds.width}
+      width="100%"
       height={state.height}
       viewBox={`0 0 ${bracketBounds.width} ${bracketBounds.height}`}
-      pointerEvents={mouseEventsReady || !state.animate ? "auto" : "none"}
+      pointerEvents={interactionReady || !state.animate ? "auto" : "none"}
     >
       <g ref={bracketRef}>
         {matchup.map((matches, index) => {
@@ -50,7 +52,7 @@ const Bracket: React.FunctionComponent<Props> = (props): JSX.Element => {
 
           return (
             <Round
-              height={state.height}
+              height={bracketBounds.height}
               key={index}
               x={index * 250}
               round={index}
