@@ -5,6 +5,7 @@ import styled from "../styles/styled-components";
 import { media } from "../styles/utils/breakpoint";
 import percentChange from "../utils/percentChange";
 import generateMatchUp from "../utils/generateMatchUp";
+import LoaderSVG from "../components/icons/Loader";
 import { Bracket } from "../components/Bracket";
 import { Button } from "../components/Button";
 import Layout from "../components/Layout";
@@ -14,11 +15,11 @@ import Title from "../components/Title";
 import { getFightData, DownloadsResponse } from "../api/fight";
 
 const StyledSVGWrapper = styled(animated.div)`
+  position: relative;
   text-align: center;
   overflow: auto;
   padding: 2rem;
   margin-top: 2rem;
-  background: ${(props) => props.theme.colors.darkBackground};
 
   ${media.small`
     margin-top: 5rem;
@@ -56,9 +57,11 @@ const Fight = (props: any): JSX.Element => {
   const { payload = {} } = props;
   const [packages, setPackages] = React.useState({});
   const [matchup, setMatchup] = React.useState([] as string[][][]);
-  const noPackages = Object.keys(payload).length === 0;
+  const packagesCount = Object.keys(payload).length;
+  const noPackages = packagesCount === 0;
   const badPackages = checkBadPackage(payload);
   const hasBadPackages = badPackages.length > 0;
+  const hasWarning = hasBadPackages || noPackages;
 
   React.useEffect(() => {
     if (!hasBadPackages) {
@@ -70,10 +73,16 @@ const Fight = (props: any): JSX.Element => {
     setMatchup(generateMatchUp(packages));
   }, [packages]);
 
-  const bracketSpring = useSpring({
+  const fadeInBracket = useSpring({
     to: { opacity: 1 },
     from: { opacity: 0 },
-    delay: 1800,
+    delay: 2200,
+  });
+
+  const fadeOutLoader = useSpring({
+    to: { opacity: 0 },
+    from: { opacity: 1 },
+    delay: 1600,
   });
 
   return (
@@ -94,11 +103,35 @@ const Fight = (props: any): JSX.Element => {
             <p>No contenders! Go back and add some packages!</p>
           </Warning>
         )}
-        <StyledSVGWrapper style={bracketSpring}>
-          {matchup.length > 0 && <Bracket matchup={matchup} animate={true} />}
-        </StyledSVGWrapper>
+        {!hasWarning && (
+          <StyledSVGWrapper>
+            <animated.div style={fadeOutLoader}>
+              <LoaderSVG
+                style={{
+                  position: "absolute",
+                  top: "5rem",
+                  left: 0,
+                  right: 0,
+                  margin: "0 auto",
+                }}
+              />
+            </animated.div>
+            <animated.div
+              style={{
+                ...fadeInBracket,
+                background: "#1E1F20",
+                position: "relative",
+                zIndex: 10,
+              }}
+            >
+              {matchup.length > 0 && (
+                <Bracket matchup={matchup} animate={true} />
+              )}
+            </animated.div>
+          </StyledSVGWrapper>
+        )}
 
-        <animated.div style={bracketSpring}>
+        <animated.div style={fadeInBracket}>
           <Link href="/">
             <BackButton ripple={true}>Back</BackButton>
           </Link>
