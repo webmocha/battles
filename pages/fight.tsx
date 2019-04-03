@@ -1,5 +1,6 @@
 import * as React from "react";
 import Link from "next/link";
+import { useSpring, animated } from "react-spring";
 import styled from "../styles/styled-components";
 import { media } from "../styles/utils/breakpoint";
 import percentChange from "../utils/percentChange";
@@ -12,11 +13,12 @@ import Container from "../components/Container";
 import Title from "../components/Title";
 import { getFightData, DownloadsResponse } from "../api/fight";
 
-const StyledSVGWrapper = styled.div`
+const StyledSVGWrapper = styled(animated.div)`
   text-align: center;
   overflow: auto;
   padding: 2rem;
   margin-top: 2rem;
+  background: ${(props) => props.theme.colors.darkBackground};
 
   ${media.small`
     margin-top: 5rem;
@@ -68,6 +70,12 @@ const Fight = (props: any): JSX.Element => {
     setMatchup(generateMatchUp(packages));
   }, [packages]);
 
+  const bracketSpring = useSpring({
+    to: { opacity: 1 },
+    from: { opacity: 0 },
+    delay: 1800,
+  });
+
   return (
     <Layout title="Fight | Battles.dev">
       <Nav />
@@ -86,13 +94,15 @@ const Fight = (props: any): JSX.Element => {
             <p>No contenders! Go back and add some packages!</p>
           </Warning>
         )}
-        <StyledSVGWrapper>
+        <StyledSVGWrapper style={bracketSpring}>
           {matchup.length > 0 && <Bracket matchup={matchup} animate={true} />}
         </StyledSVGWrapper>
 
-        <Link href="/">
-          <BackButton ripple={true}>Back</BackButton>
-        </Link>
+        <animated.div style={bracketSpring}>
+          <Link href="/">
+            <BackButton ripple={true}>Back</BackButton>
+          </Link>
+        </animated.div>
       </Container>
     </Layout>
   );

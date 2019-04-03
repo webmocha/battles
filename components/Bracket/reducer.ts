@@ -10,7 +10,7 @@ export const initialState: State = {
   height: 0,
   highlight: "",
   animate: false,
-  animationDelay: 2000,
+  animationDelay: 2500,
   // animationDuration: 0,
 };
 
