@@ -5,6 +5,7 @@ import styled from "../styles/styled-components";
 import { media } from "../styles/utils/breakpoint";
 import percentChange from "../utils/percentChange";
 import generateMatchUp from "../utils/generateMatchUp";
+import { BracketStoreContext } from "../components/Bracket/Store";
 import LoaderSVG from "../components/icons/Loader";
 import { Bracket } from "../components/Bracket";
 import { Button } from "../components/Button";
@@ -55,7 +56,10 @@ const checkBadPackage = (data: DownloadsResponse): string[] =>
 
 const Fight = (props: any): JSX.Element => {
   const { payload = {} } = props;
-  const [packages, setPackages] = React.useState({});
+  const {
+    state: { packages },
+    dispatch,
+  } = React.useContext(BracketStoreContext);
   const [matchup, setMatchup] = React.useState([] as string[][][]);
   const packagesCount = Object.keys(payload).length;
   const noPackages = packagesCount === 0;
@@ -65,7 +69,7 @@ const Fight = (props: any): JSX.Element => {
 
   React.useEffect(() => {
     if (!hasBadPackages) {
-      setPackages(processDataOutcome(payload));
+      dispatch({ type: "SET_PACKAGES", packages: processDataOutcome(payload) });
     }
   }, []);
 
