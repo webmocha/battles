@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useSpring, animated } from "react-spring";
+import { useSpring, useTransition, animated } from "react-spring";
 import styled from "../../styles/styled-components";
 import delay from "../../utils/delay";
 import useBounds from "../hooks/useBounds";
@@ -89,6 +89,12 @@ const Contender = React.forwardRef<SVGSVGElement, Props>(
       },
     });
 
+    const transitionDim = useTransition(shouldDim, null, {
+      from: { opacity: 0 },
+      enter: { opacity: 0.55 },
+      leave: { opacity: 0 },
+    });
+
     const onMouseEnter = (): void => {
       dispatch({ type: "SET_HIGHLIGHT", name });
     };
@@ -160,14 +166,18 @@ const Contender = React.forwardRef<SVGSVGElement, Props>(
             />
           </animated.g>
         )}
-        {shouldDim && (
-          <rect
-            width={width}
-            height={SVGHeight}
-            fill="#151515"
-            opacity={0.55}
-            pointerEvents="none"
-          />
+        {transitionDim.map(
+          ({ item, key, props }) =>
+            item && (
+              <animated.rect
+                key={key}
+                width={width}
+                height={SVGHeight}
+                fill="#151515"
+                pointerEvents="none"
+                style={props}
+              />
+            ),
         )}
       </svg>
     );
