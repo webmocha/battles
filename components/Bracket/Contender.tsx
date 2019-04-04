@@ -12,6 +12,7 @@ export interface Props extends React.SVGProps<SVGSVGElement> {
   dark?: boolean;
   round?: number;
   shouldDim?: boolean;
+  match?: string[];
 }
 
 const fontSize = 12;
@@ -50,6 +51,7 @@ const Contender = React.forwardRef<SVGSVGElement, Props>(
       dark,
       round = 0,
       shouldDim = false,
+      match = [],
       ...restProps
     } = props;
     const { state, dispatch } = React.useContext(BracketStoreContext);
@@ -60,14 +62,6 @@ const Contender = React.forwardRef<SVGSVGElement, Props>(
     const height = 100;
     const SVGHeight = height + contentBounds.height - fontSize;
     const contentOffset = height / 2 + 20;
-
-    const onMouseEnter = (): void => {
-      dispatch({ type: "SET_HIGHLIGHT", name });
-    };
-
-    const onMouseLeave = (): void => {
-      dispatch({ type: "SET_HIGHLIGHT", name: "" });
-    };
 
     const pathDefinition = [
       `M 0 ${SVGHeight / 2}`,
@@ -95,6 +89,20 @@ const Contender = React.forwardRef<SVGSVGElement, Props>(
       },
     });
 
+    const onMouseEnter = (): void => {
+      dispatch({ type: "SET_HIGHLIGHT", name });
+    };
+
+    const onMouseLeave = (): void => {
+      if (state.details === null) {
+        dispatch({ type: "SET_HIGHLIGHT", name: "" });
+      }
+    };
+
+    const onClick = (): void => {
+      dispatch({ type: "SET_DETAILS", match });
+    };
+
     return (
       <svg
         width={width}
@@ -102,6 +110,8 @@ const Contender = React.forwardRef<SVGSVGElement, Props>(
         ref={ref}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
+        onClick={onClick}
+        style={{ cursor: "pointer" }}
         {...restProps}
       >
         <rect width={width} height={height} fill={dark ? "#333" : "#fff"} />
