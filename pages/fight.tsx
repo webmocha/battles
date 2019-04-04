@@ -6,7 +6,8 @@ import { media } from "../styles/utils/breakpoint";
 import percentChange from "../utils/percentChange";
 import generateMatchUp from "../utils/generateMatchUp";
 import { BracketStoreContext } from "../components/Bracket/Store";
-import LoaderSVG from "../components/icons/Loader";
+import Details from "../components/Bracket/Details";
+import Loader from "../components/Loader";
 import { Bracket } from "../components/Bracket";
 import { Button } from "../components/Button";
 import Layout from "../components/Layout";
@@ -57,7 +58,7 @@ const checkBadPackage = (data: DownloadsResponse): string[] =>
 const Fight = (props: any): JSX.Element => {
   const { payload = {} } = props;
   const {
-    state: { packages },
+    state: { packages, details },
     dispatch,
   } = React.useContext(BracketStoreContext);
   const [matchup, setMatchup] = React.useState([] as string[][][]);
@@ -75,7 +76,7 @@ const Fight = (props: any): JSX.Element => {
 
   React.useEffect(() => {
     if (packages) {
-    setMatchup(generateMatchUp(packages));
+      setMatchup(generateMatchUp(packages));
     }
   }, [packages]);
 
@@ -112,7 +113,7 @@ const Fight = (props: any): JSX.Element => {
         {!hasWarning && (
           <StyledSVGWrapper>
             <animated.div style={fadeOutLoader}>
-              <LoaderSVG
+              <Loader
                 style={{
                   position: "absolute",
                   top: "5rem",
@@ -136,6 +137,8 @@ const Fight = (props: any): JSX.Element => {
             </animated.div>
           </StyledSVGWrapper>
         )}
+
+        {details && <Details />}
 
         <animated.div style={fadeInBracket}>
           <Link href="/">
