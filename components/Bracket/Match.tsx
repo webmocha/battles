@@ -1,5 +1,5 @@
 import * as React from "react";
-import flattenDeep from "lodash/flattenDeep";
+import { getWinners } from "../../utils/generateMatchUp";
 import useBounds from "../hooks/useBounds";
 import Contender, { Props as ContenderProps } from "./Contender";
 import Connector from "./Connector";
@@ -11,7 +11,6 @@ interface Props extends React.SVGProps<SVGGElement> {
   margin?: number;
   hasConnectors?: boolean;
   round?: number;
-  nextRound?: string[][];
 }
 
 const Match = React.forwardRef<SVGGElement, Props>(
@@ -22,21 +21,22 @@ const Match = React.forwardRef<SVGGElement, Props>(
       margin = 50,
       height,
       round = 0,
-      nextRound,
       ...restProps
     } = props;
     const { state } = React.useContext(BracketStoreContext);
     const matchHeight = Number(height);
     const contendersBoundsRef: any = React.useRef([]);
-    const nextRoundContenders = flattenDeep(nextRound);
+    const match = contenders.map((c) => c.name);
+    const winner = React.useMemo(
+      () => getWinners([match], state.packages!)[0],
+      [match, state.packages],
+    );
 
     return (
       <g ref={ref} {...restProps}>
         {contenders.map((contender, index) => {
           const highlight = state.highlight === contender.name;
           const shouldDim = !highlight && state.highlight !== "";
-          const winner =
-            nextRoundContenders.includes(contender.name) || !hasConnectors;
 
           const [contenderBounds, contenderRef] = useBounds();
           contendersBoundsRef.current![index] = contenderBounds;
@@ -54,7 +54,10 @@ const Match = React.forwardRef<SVGGElement, Props>(
                   matchWidth={250}
                   matchHeight={matchHeight || 250}
                   round={round}
-                  shouldDim={shouldDim || (state.highlight !== "" && !winner)}
+                  shouldDim={
+                    shouldDim ||
+                    (state.highlight !== "" && winner !== contender.name)
+                  }
                 />
               )}
               <Contender
@@ -64,6 +67,7 @@ const Match = React.forwardRef<SVGGElement, Props>(
                 y={sumPreviousHeight}
                 round={round}
                 shouldDim={shouldDim}
+                match={match}
               />
             </React.Fragment>
           );

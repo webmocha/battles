@@ -11,6 +11,8 @@ export interface PackageEntry {
   package: string;
   outcome?: number;
   error?: string;
+  start?: string;
+  end?: string;
 }
 
 export interface DownloadsResponse {

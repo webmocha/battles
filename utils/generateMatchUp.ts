@@ -12,6 +12,19 @@ const groupInPairs = (arr: string[]): string[][] =>
     [] as string[][],
   );
 
+export const getWinners = (
+  contenders: string[][],
+  data: DownloadsResponse,
+): string[] =>
+  contenders.reduce((acc, items) => {
+    const [a, b] = items;
+    if (!b) {
+      return [...acc, a];
+    }
+    const winner = data[a].outcome! > data[b].outcome! ? a : b;
+    return [...acc, winner];
+  }, []);
+
 const generateMatchUp = (data: DownloadsResponse): string[][][] => {
   const keys = Object.keys(data);
   if (keys.length === 0) {
@@ -21,23 +34,13 @@ const generateMatchUp = (data: DownloadsResponse): string[][][] => {
   const initialRound = groupInPairs(keys);
   const matchup: string[][][] = [initialRound];
 
-  const getWinners = (arr: string[][]): string[] =>
-    arr.reduce((acc, items) => {
-      const [a, b] = items;
-      if (!b) {
-        return [...acc, a];
-      }
-      const winner = data[a].outcome! < data[b].outcome! ? a : b;
-      return [...acc, winner];
-    }, []);
-
   const generateMatches = (matches: string[][]): void => {
     const firstMatch = matches[0];
     if (firstMatch.length === 1) {
       return;
     }
 
-    const nextRoundMatches = groupInPairs(getWinners(matches));
+    const nextRoundMatches = groupInPairs(getWinners(matches, data));
     matchup.push(nextRoundMatches);
     generateMatches(nextRoundMatches);
   };
