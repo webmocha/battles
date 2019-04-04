@@ -1,6 +1,6 @@
 import * as React from "react";
 
-interface Props {
+interface Props extends React.SVGProps<SVGSVGElement> {
   style?: {};
   fill?: string;
 }
@@ -10,6 +10,7 @@ const Loader: React.FunctionComponent<Props> = ({
   ...restProps
 }): JSX.Element => (
   <svg width="32px" viewBox="0 0 33 30" {...restProps}>
+    <title>Loading</title>
     <rect x="0" width="3" height="14" fill={fill}>
       <animateTransform
         attributeType="xml"
