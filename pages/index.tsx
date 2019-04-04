@@ -2,6 +2,7 @@ import * as React from "react";
 import LinkAs from "../components/link-as";
 import styled from "../styles/styled-components";
 import { media } from "../styles/utils/breakpoint";
+import { BracketStoreContext } from "../components/Bracket/Store";
 import Layout from "../components/Layout";
 import { Button, ButtonIcon } from "../components/Button";
 import Nav from "../components/Nav";
@@ -76,6 +77,7 @@ const StyledButtonIcon = styled(ButtonIcon)`
 const Index: React.FunctionComponent = (): JSX.Element => {
   const [packages, setPackages] = React.useState([] as string[]);
   const [inputCount, setInputCount] = React.useState(2);
+  const { dispatch } = React.useContext(BracketStoreContext);
   const addPackages = (nodePackage: string, index: number): void => {
     const newPackages = [...packages];
     newPackages[index] = nodePackage;
@@ -85,6 +87,10 @@ const Index: React.FunctionComponent = (): JSX.Element => {
   const uniquePackages = [...new Set(packages)];
   const scrubPackages = uniquePackages.filter(Boolean);
   const disableFight = scrubPackages.length < 2;
+
+  React.useEffect(() => {
+    dispatch({ type: "RESET_BRACKET" });
+  }, []);
 
   return (
     <Layout title="Home | Battles.dev">

@@ -1,17 +1,12 @@
 import { PackageEntry, DownloadsResponse } from "../../api/fight";
 
-interface Details extends PackageEntry {
-  start: string;
-  end: string;
-}
-
 interface State {
   height: number;
   highlight: string;
   animate: boolean;
   animationDelay: number;
-  details: Details[] | null;
-  packages: DownloadsResponse;
+  details: PackageEntry[] | null;
+  packages: DownloadsResponse | null;
   // animationDuration: number;
 }
 
@@ -21,7 +16,7 @@ export const initialState: State = {
   animate: false,
   animationDelay: 2500,
   details: null,
-  packages: {},
+  packages: null,
   // animationDuration: 0,
 };
 
@@ -29,8 +24,10 @@ export type Action =
   | { type: "SET_HEIGHT"; height: number }
   | { type: "SET_ANIMATE"; animate: boolean }
   | { type: "SET_HIGHLIGHT"; name: string }
-  | { type: "SET_DETAILS"; details: Details[] | null }
-  | { type: "SET_PACKAGES"; packages: DownloadsResponse };
+  | { type: "SET_DETAILS"; match: string[] }
+  | { type: "UNSET_DETAILS" }
+  | { type: "SET_PACKAGES"; packages: DownloadsResponse }
+  | { type: "RESET_BRACKET" };
 
 function bracketReducer(state: State, action: Action): State {
   switch (action.type) {
@@ -41,9 +38,20 @@ function bracketReducer(state: State, action: Action): State {
     case "SET_HIGHLIGHT":
       return { ...state, highlight: action.name };
     case "SET_DETAILS":
-      return { ...state, details: action.details };
+      const details =
+        state.packages !== null
+          ? action.match.reduce(
+              (acc, p) => [...acc, state.packages![p]],
+              [] as PackageEntry[],
+            )
+          : null;
+      return { ...state, details };
+    case "UNSET_DETAILS":
+      return { ...state, details: null };
     case "SET_PACKAGES":
       return { ...state, packages: action.packages };
+    case "RESET_BRACKET":
+      return initialState;
     default:
       throw new Error();
   }
