@@ -45,7 +45,7 @@ const processDataOutcome = (data: DownloadsResponse): any => {
       d.downloads[0].downloads,
       d.downloads[1].downloads,
     );
-    return { ...acc, [key]: { ...d, outcome } };
+    return { ...acc, [key]: { ...d, outcome: outcome || 0 } };
   }, {});
 };
 
@@ -71,10 +71,12 @@ const Fight = (props: any): JSX.Element => {
     if (!hasBadPackages) {
       dispatch({ type: "SET_PACKAGES", packages: processDataOutcome(payload) });
     }
-  }, []);
+  }, [payload]);
 
   React.useEffect(() => {
+    if (packages) {
     setMatchup(generateMatchUp(packages));
+    }
   }, [packages]);
 
   const fadeInBracket = useSpring({
