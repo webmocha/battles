@@ -1,4 +1,5 @@
 import { DownloadsResponse } from "../api/fight";
+import get from "lodash/get";
 
 const groupInPairs = (arr: string[]): string[][] =>
   arr.reduce(
@@ -14,14 +15,16 @@ const groupInPairs = (arr: string[]): string[][] =>
 
 export const getWinners = (
   contenders: string[][],
-  data: DownloadsResponse,
+  data: DownloadsResponse = {},
 ): string[] =>
   contenders.reduce((acc, items) => {
     const [a, b] = items;
     if (!b) {
       return [...acc, a];
     }
-    const winner = data[a].outcome! > data[b].outcome! ? a : b;
+    const outcomeA = get(data, `${a}.outcome`, 0);
+    const outcomeB = get(data, `${b}.outcome`, 0);
+    const winner = outcomeA > outcomeB ? a : b;
     return [...acc, winner];
   }, []);
 
