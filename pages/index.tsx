@@ -18,6 +18,7 @@ const Title = styled.h1`
   font-size: 7.5rem;
   line-height: 1;
   text-align: center;
+  color: ${(props) => props.theme.colors.darkText};
 
   ${media.small`
     margin-top: 5rem;

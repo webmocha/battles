@@ -59,6 +59,7 @@ const SearchInput: React.FunctionComponent<Props> = (props): JSX.Element => {
               {...getInputProps({
                 isOpen,
                 placeholder: "Search packages",
+                "aria-label": `Search Input ${index}`,
                 onChange: (event: React.FormEvent<HTMLInputElement>) => {
                   const value = event.currentTarget.value;
                   setItems([]);

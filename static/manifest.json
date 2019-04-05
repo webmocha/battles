@@ -1,0 +1,21 @@
+{
+  "short_name": "Battles",
+  "name": "Battles.dev",
+  "description": "Watch your favorite NPM packages go head-to-head in a no holds barred contest to see which framework reigns supreme!",
+  "icons": [
+    {
+      "src": "https://static.battles.dev/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://static.battles.dev/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "transparent",
+  "display": "standalone",
+  "theme_color": "transparent"
+}

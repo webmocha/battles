@@ -37,12 +37,42 @@ export default class MyDocument extends Document {
 
   public render(): JSX.Element {
     return (
-      <html>
+      <html lang="en">
         <Head>
           <meta charSet="utf-8" />
           <meta
             name="viewport"
             content="initial-scale=1.0, width=device-width"
+          />
+          <meta
+            name="description"
+            content="Watch your favorite NPM packages go head-to-head in a no holds barred contest to see which framework reigns supreme!"
+          />
+          <meta
+            name="keywords"
+            content="JavaScript, Node, Node Modules, NPM, Front-end, Back-end, Frameworks, Packages, Libraries"
+          />
+
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href={`${process.env.STATIC_LOCATION}/apple-touch-icon.png`}
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href={`${process.env.STATIC_LOCATION}/favicon-32x32.png`}
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href={`${process.env.STATIC_LOCATION}/favicon-16x16.png`}
+          />
+          <link
+            rel="manifest"
+            href={`${process.env.STATIC_LOCATION}/manifest.json`}
           />
           <link
             href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700"
