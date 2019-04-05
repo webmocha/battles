@@ -17,7 +17,10 @@ const Text = styled.p`
 
 const DefaultLogo: React.FunctionComponent<Props> = (props): JSX.Element => {
   const { name = "", size = 50, ...restProps } = props;
-  const firstLetter = name.charAt(0);
+  let letter = name.charAt(0);
+  if (letter === "@") {
+    letter = name.charAt(1);
+  }
 
   return (
     <svg
@@ -28,7 +31,7 @@ const DefaultLogo: React.FunctionComponent<Props> = (props): JSX.Element => {
     >
       <rect width={size} height={size} fill="#333" />
       <foreignObject width={size} height={size}>
-        <Text>{firstLetter}</Text>
+        <Text>{letter}</Text>
       </foreignObject>
     </svg>
   );
