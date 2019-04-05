@@ -25,6 +25,7 @@ const StyledSVGWrapper = styled(animated.div)`
 
   ${media.small`
     margin-top: 5rem;
+    overflow: visible;
   `}
 `;
 
