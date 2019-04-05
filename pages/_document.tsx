@@ -6,6 +6,7 @@ import Document, {
   NextDocumentContext,
 } from "next/document";
 import { ServerStyleSheet } from "../styles/styled-components";
+import { GA_TRACKING_ID } from "../utils/gtag";
 
 export default class MyDocument extends Document {
   public static async getInitialProps(ctx: NextDocumentContext): Promise<any> {
@@ -47,6 +48,24 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700"
             rel="stylesheet"
           />
+          {GA_TRACKING_ID && (
+            <React.Fragment>
+              <script
+                async={true}
+                src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+              />
+              <script
+                dangerouslySetInnerHTML={{
+                  __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_TRACKING_ID}');
+            `,
+                }}
+              />
+            </React.Fragment>
+          )}
         </Head>
         <body>
           <Main />
