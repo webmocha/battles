@@ -1,5 +1,6 @@
 import * as React from "react";
-import styled, { css } from "../../styles/styled-components";
+import { useSpring, animated } from "react-spring";
+import styled, { css, keyframes } from "../../styles/styled-components";
 import { media } from "../../styles/utils/breakpoint";
 import { BracketStoreContext } from "./Store";
 import formatNumber from "../../utils/formatNumber";
@@ -20,7 +21,18 @@ const Overlay = styled.div`
   z-index: 999;
 `;
 
-const Modal = styled.div`
+const scaleIn = keyframes`
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+ `;
+
+const Modal = styled(animated.div)`
   display: flex;
   position: absolute;
   top: 40%;
@@ -28,6 +40,7 @@ const Modal = styled.div`
   transform: translate(-50%, -50%);
   z-index: 999;
   flex-direction: column;
+  animation: ${scaleIn} 0.25s ease-out;
 
   ${media.small`
     flex-direction: row;
@@ -184,6 +197,11 @@ const Details: React.FunctionComponent = (): JSX.Element | null => {
         {details &&
           details.map((detail, index) => {
             const logoUrl = findLogo(detail.package.toLowerCase());
+            const { outcome } = useSpring({
+              from: { outcome: 0 },
+              to: { outcome: detail.outcome },
+            });
+
             return (
               <Card
                 key={detail.package}
@@ -210,7 +228,12 @@ const Details: React.FunctionComponent = (): JSX.Element | null => {
                     }
                     style={{ marginRight: "0.3rem" }}
                   />
-                  <p>{detail.outcome}%</p>
+                  <p>
+                    <animated.span>
+                      {outcome.interpolate((num) => num.toFixed(2))}
+                    </animated.span>
+                    %
+                  </p>
                 </Outcome>
 
                 <BottomSection>
