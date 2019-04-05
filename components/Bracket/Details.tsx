@@ -196,7 +196,9 @@ const Details: React.FunctionComponent = (): JSX.Element | null => {
         {details.length > 1 && <Title>Match Overview</Title>}
         {details &&
           details.map((detail, index) => {
-            const logoUrl = findLogo(detail.package.toLowerCase());
+            const logoUrl = findLogo(
+              detail.package ? detail.package.toLowerCase() : "",
+            );
             const { outcome }: any = useSpring({
               from: { outcome: 0 },
               to: { outcome: detail.outcome },

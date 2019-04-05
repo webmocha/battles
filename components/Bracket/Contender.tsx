@@ -37,7 +37,7 @@ const Path = styled(animated.path)`
 
 const BackPath = styled.path`
   fill: #1e1f20;
-  stroke: #252525;
+  stroke: #2f2f2f;
   stroke-width: 4;
   stroke-linecap: round;
   stroke-linejoin: round;

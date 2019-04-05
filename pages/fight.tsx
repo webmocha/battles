@@ -63,8 +63,9 @@ const Fight = (props: any): JSX.Element => {
     dispatch,
   } = React.useContext(BracketStoreContext);
   const [matchup, setMatchup] = React.useState([] as string[][][]);
-  const packagesCount = Object.keys(payload).length;
-  const noPackages = packagesCount === 0;
+  const payloadKeys = Object.keys(payload);
+  const packagesCount = payloadKeys.length;
+  const noPackages = packagesCount === 0 || payloadKeys.includes("undefined");
   const badPackages = checkBadPackage(payload);
   const hasBadPackages = badPackages.length > 0;
   const hasWarning = hasBadPackages || noPackages;
