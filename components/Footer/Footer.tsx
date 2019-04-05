@@ -31,7 +31,11 @@ const Footer: React.FunctionComponent = (): JSX.Element => {
     <Wrapper>
       <p>
         Handcrafted by your friendly engineers at&nbsp;
-        <StyledLink href="https://webmocha.com" target="_blank">
+        <StyledLink
+          href="https://webmocha.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           WebMocha
         </StyledLink>
         , © 2019
