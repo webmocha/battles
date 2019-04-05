@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useSpring, animated } from "react-spring";
+import { useSpring, useTransition, animated } from "react-spring";
 import styled from "../../styles/styled-components";
 import delay from "../../utils/delay";
 import useBounds from "../hooks/useBounds";
@@ -12,6 +12,7 @@ export interface Props extends React.SVGProps<SVGSVGElement> {
   dark?: boolean;
   round?: number;
   shouldDim?: boolean;
+  match?: string[];
 }
 
 const fontSize = 12;
@@ -50,6 +51,7 @@ const Contender = React.forwardRef<SVGSVGElement, Props>(
       dark,
       round = 0,
       shouldDim = false,
+      match = [],
       ...restProps
     } = props;
     const { state, dispatch } = React.useContext(BracketStoreContext);
@@ -60,14 +62,6 @@ const Contender = React.forwardRef<SVGSVGElement, Props>(
     const height = 100;
     const SVGHeight = height + contentBounds.height - fontSize;
     const contentOffset = height / 2 + 20;
-
-    const onMouseEnter = (): void => {
-      dispatch({ type: "SET_HIGHLIGHT", name });
-    };
-
-    const onMouseLeave = (): void => {
-      dispatch({ type: "SET_HIGHLIGHT", name: "" });
-    };
 
     const pathDefinition = [
       `M 0 ${SVGHeight / 2}`,
@@ -95,6 +89,26 @@ const Contender = React.forwardRef<SVGSVGElement, Props>(
       },
     });
 
+    const transitionDim = useTransition(shouldDim, null, {
+      from: { opacity: 0 },
+      enter: { opacity: 0.55 },
+      leave: { opacity: 0 },
+    });
+
+    const onMouseEnter = (): void => {
+      dispatch({ type: "SET_HIGHLIGHT", name });
+    };
+
+    const onMouseLeave = (): void => {
+      if (state.details === null) {
+        dispatch({ type: "SET_HIGHLIGHT", name: "" });
+      }
+    };
+
+    const onClick = (): void => {
+      dispatch({ type: "SET_DETAILS", match });
+    };
+
     return (
       <svg
         width={width}
@@ -102,6 +116,8 @@ const Contender = React.forwardRef<SVGSVGElement, Props>(
         ref={ref}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
+        onClick={onClick}
+        style={{ cursor: "pointer" }}
         {...restProps}
       >
         <rect width={width} height={height} fill={dark ? "#333" : "#fff"} />
@@ -150,14 +166,18 @@ const Contender = React.forwardRef<SVGSVGElement, Props>(
             />
           </animated.g>
         )}
-        {shouldDim && (
-          <rect
-            width={width}
-            height={SVGHeight}
-            fill="#151515"
-            opacity={0.55}
-            pointerEvents="none"
-          />
+        {transitionDim.map(
+          ({ item, key, props }) =>
+            item && (
+              <animated.rect
+                key={key}
+                width={width}
+                height={SVGHeight}
+                fill="#151515"
+                pointerEvents="none"
+                style={props}
+              />
+            ),
         )}
       </svg>
     );

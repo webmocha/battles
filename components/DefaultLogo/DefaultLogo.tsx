@@ -20,7 +20,12 @@ const DefaultLogo: React.FunctionComponent<Props> = (props): JSX.Element => {
   const firstLetter = name.charAt(0);
 
   return (
-    <svg width={size} height={size} {...restProps}>
+    <svg
+      width={size}
+      height={size}
+      viewBox={`0 0 ${size} ${size}`}
+      {...restProps}
+    >
       <rect width={size} height={size} fill="#333" />
       <foreignObject width={size} height={size}>
         <Text>{firstLetter}</Text>

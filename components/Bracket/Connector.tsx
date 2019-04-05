@@ -12,6 +12,7 @@ const Path = styled(animated.path)`
   stroke-linejoin: round;
   fill-opacity: 0;
   filter: url(#glow);
+  transition: opacity 0.5s;
 `;
 
 const BackPath = styled.path`

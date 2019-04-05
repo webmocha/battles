@@ -70,7 +70,6 @@ const Round: React.FunctionComponent<Props> = (props): JSX.Element => {
               height={matchBounds.height}
               hasConnectors={hasConnectors}
               round={round}
-              nextRound={rounds[round + 1]}
             />
           );
         })}

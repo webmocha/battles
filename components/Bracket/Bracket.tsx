@@ -84,7 +84,7 @@ const Bracket: React.FunctionComponent<Props> = (props): JSX.Element => {
   );
 };
 
-const BracketConnected: React.FunctionComponent<Props> = (
+export const BracketConnected: React.FunctionComponent<Props> = (
   props,
 ): JSX.Element => {
   return (
@@ -94,4 +94,4 @@ const BracketConnected: React.FunctionComponent<Props> = (
   );
 };
 
-export default BracketConnected;
+export default Bracket;

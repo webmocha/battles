@@ -1,7 +1,7 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { text, boolean } from "@storybook/addon-knobs";
-import Bracket from "./Bracket";
+import { BracketConnected as Bracket } from "./Bracket";
 import Contender from "./Contender";
 import Match from "./Match";
 import Round from "./Round";

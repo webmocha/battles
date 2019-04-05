@@ -1,9 +1,13 @@
 import * as React from "react";
 import Link from "next/link";
+import { useSpring, animated } from "react-spring";
 import styled from "../styles/styled-components";
 import { media } from "../styles/utils/breakpoint";
 import percentChange from "../utils/percentChange";
 import generateMatchUp from "../utils/generateMatchUp";
+import { BracketStoreContext } from "../components/Bracket/Store";
+import Details from "../components/Bracket/Details";
+import Loader from "../components/Loader";
 import { Bracket } from "../components/Bracket";
 import { Button } from "../components/Button";
 import Layout from "../components/Layout";
@@ -12,7 +16,8 @@ import Container from "../components/Container";
 import Title from "../components/Title";
 import { getFightData, DownloadsResponse } from "../api/fight";
 
-const StyledSVGWrapper = styled.div`
+const StyledSVGWrapper = styled(animated.div)`
+  position: relative;
   text-align: center;
   overflow: auto;
   padding: 2rem;
@@ -41,7 +46,7 @@ const processDataOutcome = (data: DownloadsResponse): any => {
       d.downloads[0].downloads,
       d.downloads[1].downloads,
     );
-    return { ...acc, [key]: { ...d, outcome } };
+    return { ...acc, [key]: { ...d, outcome: outcome || 0 } };
   }, {});
 };
 
@@ -52,21 +57,40 @@ const checkBadPackage = (data: DownloadsResponse): string[] =>
 
 const Fight = (props: any): JSX.Element => {
   const { payload = {} } = props;
-  const [packages, setPackages] = React.useState({});
+  const {
+    state: { packages, details },
+    dispatch,
+  } = React.useContext(BracketStoreContext);
   const [matchup, setMatchup] = React.useState([] as string[][][]);
-  const noPackages = Object.keys(payload).length === 0;
+  const packagesCount = Object.keys(payload).length;
+  const noPackages = packagesCount === 0;
   const badPackages = checkBadPackage(payload);
   const hasBadPackages = badPackages.length > 0;
+  const hasWarning = hasBadPackages || noPackages;
 
   React.useEffect(() => {
     if (!hasBadPackages) {
-      setPackages(processDataOutcome(payload));
+      dispatch({ type: "SET_PACKAGES", packages: processDataOutcome(payload) });
     }
-  }, []);
+  }, [payload]);
 
   React.useEffect(() => {
-    setMatchup(generateMatchUp(packages));
+    if (packages) {
+      setMatchup(generateMatchUp(packages));
+    }
   }, [packages]);
+
+  const fadeInBracket = useSpring({
+    to: { opacity: 1 },
+    from: { opacity: 0 },
+    delay: 2200,
+  });
+
+  const fadeOutLoader = useSpring({
+    to: { opacity: 0 },
+    from: { opacity: 1 },
+    delay: 1600,
+  });
 
   return (
     <Layout title="Fight | Battles.dev">
@@ -86,13 +110,41 @@ const Fight = (props: any): JSX.Element => {
             <p>No contenders! Go back and add some packages!</p>
           </Warning>
         )}
-        <StyledSVGWrapper>
-          {matchup.length > 0 && <Bracket matchup={matchup} animate={true} />}
-        </StyledSVGWrapper>
+        {!hasWarning && (
+          <StyledSVGWrapper>
+            <animated.div style={fadeOutLoader}>
+              <Loader
+                style={{
+                  position: "absolute",
+                  top: "5rem",
+                  left: 0,
+                  right: 0,
+                  margin: "0 auto",
+                }}
+              />
+            </animated.div>
+            <animated.div
+              style={{
+                ...fadeInBracket,
+                background: "#1E1F20",
+                position: "relative",
+                zIndex: 10,
+              }}
+            >
+              {matchup.length > 0 && (
+                <Bracket matchup={matchup} animate={true} />
+              )}
+            </animated.div>
+          </StyledSVGWrapper>
+        )}
 
-        <Link href="/">
-          <BackButton ripple={true}>Back</BackButton>
-        </Link>
+        {details && <Details />}
+
+        <animated.div style={fadeInBracket}>
+          <Link href="/">
+            <BackButton ripple={true}>Back</BackButton>
+          </Link>
+        </animated.div>
       </Container>
     </Layout>
   );
