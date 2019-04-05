@@ -49,9 +49,34 @@ export default class MyDocument extends Document {
             content="Watch your favorite NPM packages go head-to-head in a no holds barred contest to see which framework reigns supreme!"
           />
           <meta
+            name="image"
+            content={`${process.env.STATIC_LOCATION}/dev-battles.png`}
+          />
+          <meta
             name="keywords"
             content="JavaScript, Node, Node Modules, NPM, Front-end, Back-end, Frameworks, Packages, Libraries"
           />
+
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:title" content="Battles.dev" />
+          <meta
+            name="twitter:description"
+            content="Watch your favorite NPM packages go head-to-head in a no holds barred contest to see which framework reigns supreme!"
+          />
+
+          <meta name="og:title" content="Battles.dev" />
+          <meta
+            name="og:description"
+            content="Watch your favorite NPM packages go
+head-to-head in a no holds barred contest to see which framework reigns supreme!"
+          />
+          <meta
+            name="og:image"
+            content={`${process.env.STATIC_LOCATION}/dev-battles.png`}
+          />
+          <meta name="og:url" content="https://battles.dev" />
+          <meta name="og:site_name" content="Battles.dev" />
+          <meta name="og:type" content="website" />
 
           <link
             rel="apple-touch-icon"
