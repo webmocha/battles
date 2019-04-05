@@ -197,7 +197,7 @@ const Details: React.FunctionComponent = (): JSX.Element | null => {
         {details &&
           details.map((detail, index) => {
             const logoUrl = findLogo(detail.package.toLowerCase());
-            const { outcome } = useSpring({
+            const { outcome }: any = useSpring({
               from: { outcome: 0 },
               to: { outcome: detail.outcome },
             });
@@ -230,7 +230,7 @@ const Details: React.FunctionComponent = (): JSX.Element | null => {
                   />
                   <p>
                     <animated.span>
-                      {outcome.interpolate((num) => num.toFixed(2))}
+                      {outcome.interpolate((num: number) => num.toFixed(2))}
                     </animated.span>
                     %
                   </p>
