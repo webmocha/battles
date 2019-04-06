@@ -14,7 +14,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/",
+  "start_url": "https://battles.dev/",
   "background_color": "transparent",
   "display": "standalone",
   "theme_color": "transparent"
