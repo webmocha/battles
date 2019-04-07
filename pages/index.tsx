@@ -1,4 +1,5 @@
 import * as React from "react";
+import debounce from "lodash/debounce";
 import LinkAs from "../components/link-as";
 import styled from "../styles/styled-components";
 import { media } from "../styles/utils/breakpoint";
@@ -86,11 +87,11 @@ const Index: React.FunctionComponent = (): JSX.Element => {
   const [packages, setPackages] = React.useState([] as string[]);
   const [inputCount, setInputCount] = React.useState(2);
   const { dispatch } = React.useContext(BracketStoreContext);
-  const addPackages = (nodePackage: string, index: number): void => {
+  const addPackages = debounce((nodePackage: string, index: number): void => {
     const newPackages = [...packages];
     newPackages[index] = nodePackage;
     setPackages(newPackages);
-  };
+  }, 200);
 
   const uniquePackages = [...new Set(packages)];
   const scrubPackages = uniquePackages.filter(Boolean);
@@ -120,13 +121,13 @@ const Index: React.FunctionComponent = (): JSX.Element => {
 
           <div>
             {inputCount < 8 && (
-          <StyledButtonIcon
-            variant="secondary"
-            ripple={true}
+              <StyledButtonIcon
+                variant="secondary"
+                ripple={true}
                 onClick={() => setInputCount(inputCount + 1)}
-          >
-            <AddIcon width={52} stroke="#FFBB00" />
-          </StyledButtonIcon>
+              >
+                <AddIcon width={52} stroke="#FFBB00" />
+              </StyledButtonIcon>
             )}
             {inputCount > 2 && (
               <StyledButtonIcon

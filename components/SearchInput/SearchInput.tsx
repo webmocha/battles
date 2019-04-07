@@ -17,16 +17,13 @@ const Wrapper = styled.div`
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
 
+  ${media.small`
+    width: 15rem;
+  `}
+
   input {
     width: 100%;
   }
-
-  ${media.small`
-    width: auto;
-    input {
-      width: auto;
-    }
-  `}
 `;
 
 const SearchInput: React.FunctionComponent<Props> = (props): JSX.Element => {
@@ -43,7 +40,9 @@ const SearchInput: React.FunctionComponent<Props> = (props): JSX.Element => {
           if (changes.hasOwnProperty("selectedItem")) {
             setInputValue(changes.selectedItem);
           } else if (changes.hasOwnProperty("inputValue")) {
-            setInputValue(changes.inputValue || "");
+            const value = changes.inputValue || "";
+            setInputValue(value);
+            addPackages(value, index);
           }
         }}
       >
