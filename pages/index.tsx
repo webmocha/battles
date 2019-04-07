@@ -75,6 +75,13 @@ const StyledButtonIcon = styled(ButtonIcon)`
   `}
 `;
 
+const RemoveIcon = styled(AddIcon)`
+  transform: rotate(45deg);
+  path {
+    stroke: ${(props) => props.theme.colors.red};
+  }
+`;
+
 const Index: React.FunctionComponent = (): JSX.Element => {
   const [packages, setPackages] = React.useState([] as string[]);
   const [inputCount, setInputCount] = React.useState(2);
@@ -111,15 +118,31 @@ const Index: React.FunctionComponent = (): JSX.Element => {
             </React.Fragment>
           ))}
 
+          <div>
+            {inputCount < 8 && (
           <StyledButtonIcon
             variant="secondary"
             ripple={true}
-            onClick={() =>
-              inputCount < 8 ? setInputCount(inputCount + 1) : {}
-            }
+                onClick={() => setInputCount(inputCount + 1)}
           >
             <AddIcon width={52} stroke="#FFBB00" />
           </StyledButtonIcon>
+            )}
+            {inputCount > 2 && (
+              <StyledButtonIcon
+                variant="secondary"
+                ripple={true}
+                color="red"
+                onClick={() => {
+                  const newInputCount = inputCount - 1;
+                  setInputCount(newInputCount);
+                  setPackages(packages.slice(0, newInputCount));
+                }}
+              >
+                <RemoveIcon width={52} />
+              </StyledButtonIcon>
+            )}
+          </div>
         </Form>
 
         <LinkAs route="./fight/:packages" packages={scrubPackages.join(",")}>
