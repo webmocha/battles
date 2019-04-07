@@ -94,7 +94,14 @@ const Index: React.FunctionComponent = (): JSX.Element => {
   }, 200);
 
   const uniquePackages = [...new Set(packages)];
-  const scrubPackages = uniquePackages.filter(Boolean);
+  const scrubPackages = uniquePackages.filter(Boolean).map((p) =>
+    p
+      .split(",")[0]
+      .trim()
+      .split(/[\s]+/)
+      .join("-"),
+  );
+
   const disableFight = scrubPackages.length < 2;
 
   React.useEffect(() => {
