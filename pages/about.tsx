@@ -51,7 +51,7 @@ const About = (): JSX.Element => {
 
           <p>
             We{`'`}ve combined years research with AR, VR, ER, xR, 4 cups of
-            coffee, with some machine learning and a bag of chips{" "}
+            coffee, with some machine learning and a bag of chips to
             <strong>end these incessant debates once and for all</strong>.
           </p>
 
