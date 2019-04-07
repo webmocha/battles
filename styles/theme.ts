@@ -9,7 +9,7 @@ export const colors = {
 
   // Text
   liteText: "#DDDDDD",
-  text: "#8A8A8A",
+  text: "#999999",
   // darkText: "#3D4B50",
   darkText: "#5c6e75",
 
