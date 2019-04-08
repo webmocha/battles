@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "nodemon local-dev-server",
-    "build": "next build",
+    "build": "env GA_TRACKING_ID=UA-137708797-1 next build",
     "monkey:patch:encoding": "awk -i inplace '!x{x=sub(\"Iconv = .*\",\"Iconv = null;\")}1' node_modules/encoding/lib/iconv-loader.js && echo 'monkey patched encoding'",
     "deploy:pre": "npm run monkey:patch:encoding && npm run build",
     "deploy:dev": "npm run deploy:pre && serverless deploy",
