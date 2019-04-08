@@ -11,6 +11,7 @@ provider:
   timeout: 15
   environment:
     NODE_ENV: production
+    GA_TRACKING_ID: UA-137708797-1
 
 package:
   exclude:
@@ -45,17 +46,23 @@ functions:
       - http:
           path: /
           method: GET
-  next:
-    handler: handlers/next.handler
-    events:
-      - http:
-          path: /_next/{any+}
-          method: GET
   fight:
     handler: handlers/fight.handler
     events:
       - http:
           path: /fight/{any+}
+          method: GET
+  about:
+    handler: handlers/about.handler
+    events:
+      - http:
+          path: /about
+          method: GET
+  next:
+    handler: handlers/next.handler
+    events:
+      - http:
+          path: /_next/{any+}
           method: GET
   proxy:
     handler: handlers/proxy.handler
