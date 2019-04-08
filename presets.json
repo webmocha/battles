@@ -1,0 +1,21 @@
+[
+  {
+    "title": "Front-end Frameworks",
+    "packages": ["react", "vue", "@angular/cli"]
+  },
+  {
+    "title": "Node Servers",
+    "packages": ["express", "hapi", "koa", "fastify"]
+  },
+  {
+    "title": "CSS-in-JS",
+    "packages": [
+      "styled-components",
+      "jss",
+      "fela",
+      "emotion",
+      "styled-jsx",
+      "glamor"
+    ]
+  }
+]

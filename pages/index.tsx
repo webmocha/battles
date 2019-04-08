@@ -1,5 +1,6 @@
 import * as React from "react";
 import debounce from "lodash/debounce";
+import presets from "../presets.json";
 import LinkAs from "../components/link-as";
 import styled from "../styles/styled-components";
 import { media } from "../styles/utils/breakpoint";
@@ -47,7 +48,7 @@ const Blurb = styled.p`
 
 const FightButton = styled(Button)`
   display: block;
-  margin: 5rem auto;
+  margin: 5rem auto 10rem;
 `;
 
 const Versus = styled.span`
@@ -84,6 +85,33 @@ const RemoveIcon = styled(AddIcon)`
   transform: rotate(45deg);
   path {
     stroke: ${(props) => props.theme.colors.red};
+  }
+`;
+
+const Cards = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 5rem;
+  margin-bottom: 10rem;
+`;
+
+const Card = styled(Button)`
+  display: block;
+  width: 100%;
+  height: 10rem;
+  margin-bottom: 1rem;
+
+  ${media.medium`
+    max-width: 15rem;
+  `}
+
+  span {
+    display: block;
+    font-weight: normal;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    color: #8a8a8a;
   }
 `;
 
@@ -172,6 +200,26 @@ const Index: React.FunctionComponent = (): JSX.Element => {
             Fight!
           </FightButton>
         </LinkAs>
+        <hr />
+      </Container>
+      <Container>
+        <Title as="h2" style={{ marginTop: 0 }}>
+          Rumbles
+        </Title>
+        <Cards>
+          {presets.map((preset) => (
+            <LinkAs
+              key={preset.title}
+              route="./fight/:packages"
+              packages={preset.packages.join(",")}
+            >
+              <Card variant="secondary" ripple={true}>
+                {preset.title}
+                <span>{preset.packages.join(", ")}</span>
+              </Card>
+            </LinkAs>
+          ))}
+        </Cards>
       </Container>
     </Layout>
   );
