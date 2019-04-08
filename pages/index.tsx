@@ -47,7 +47,7 @@ const Blurb = styled.p`
 
 const FightButton = styled(Button)`
   display: block;
-  margin: 5rem auto;
+  margin: 5rem auto 10rem;
 `;
 
 const Versus = styled.span`
@@ -84,6 +84,33 @@ const RemoveIcon = styled(AddIcon)`
   transform: rotate(45deg);
   path {
     stroke: ${(props) => props.theme.colors.red};
+  }
+`;
+
+const Cards = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 5rem;
+  margin-bottom: 10rem;
+`;
+
+const Card = styled(Button)`
+  display: block;
+  width: 100%;
+  height: 10rem;
+  margin-bottom: 1rem;
+
+  ${media.medium`
+    max-width: 15rem;
+  `}
+
+  span {
+    display: block;
+    font-weight: normal;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    color: #8a8a8a;
   }
 `;
 
@@ -172,6 +199,37 @@ const Index: React.FunctionComponent = (): JSX.Element => {
             Fight!
           </FightButton>
         </LinkAs>
+        <hr />
+      </Container>
+      <Container>
+        <Title as="h2" style={{ marginTop: 0 }}>
+          Presets
+        </Title>
+        <Cards>
+          <LinkAs route="./fight/:packages" packages="react,vue,@angular/cli">
+            <Card variant="secondary" ripple={true}>
+              Front-end Frameworks
+              <span>react, vue, @angular/cli</span>
+            </Card>
+          </LinkAs>
+          <LinkAs route="./fight/:packages" packages="express,hapi,koa,fastify">
+            <Card variant="secondary" ripple={true}>
+              Node Servers
+              <span>express, hapi, koa, fastify</span>
+            </Card>
+          </LinkAs>
+          <LinkAs
+            route="./fight/:packages"
+            packages="styled-components,jss,fela,emotion,styled-jsx,glamor"
+          >
+            <Card variant="secondary" ripple={true}>
+              CSS-in-JS
+              <span>
+                styled-components, jss, fela, emotion, styled-jsx, glamor
+              </span>
+            </Card>
+          </LinkAs>
+        </Cards>
       </Container>
     </Layout>
   );
