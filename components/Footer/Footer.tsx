@@ -9,6 +9,7 @@ const Wrapper = styled.div`
   text-align: center;
   background: ${(props) => props.theme.colors.darkBackground};
   color: ${(props) => props.theme.colors.liteText};
+  z-index: 10;
 
   p {
     font-size: 1rem;

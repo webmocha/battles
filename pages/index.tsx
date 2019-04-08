@@ -17,19 +17,23 @@ const Title = styled.h1`
   flex-direction: column;
   margin-top: 1rem;
   font-family: ${(props) => props.theme.fonts.title};
-  font-size: 7.5rem;
+  font-size: 6.5rem;
   line-height: 1;
   text-align: center;
   color: ${(props) => props.theme.colors.darkText};
 
-  ${media.small`
-    margin-top: 5rem;
-  `}
-
   em {
-    font-size: 14rem;
+    font-size: 12rem;
     color: ${(props) => props.theme.colors.primary};
   }
+
+  ${media.small`
+    font-size: 7.5rem;
+    margin-top: 5rem;
+    em {
+      font-size: 14rem;
+    }
+  `}
 `;
 
 const Blurb = styled.p`
@@ -69,10 +73,9 @@ const Form = styled.div`
 
 const StyledButtonIcon = styled(ButtonIcon)`
   margin-top: 1rem;
-  margin-left: 0;
+  margin-left: 1.25rem;
 
   ${media.small`
-    margin-left: 1.25rem;
     margin-top: 0;
   `}
 `;

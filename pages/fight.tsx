@@ -19,7 +19,7 @@ import { getFightData, DownloadsResponse } from "../api/fight";
 const StyledSVGWrapper = styled(animated.div)`
   position: relative;
   text-align: center;
-  overflow: auto;
+  overflow-x: auto;
   padding: 2rem;
   margin-top: 2rem;
 
@@ -96,7 +96,7 @@ const Fight = (props: any): JSX.Element => {
   const fadeOutLoader = useSpring({
     to: { opacity: 0 },
     from: { opacity: 1 },
-    delay: 1600,
+    delay: 1800,
   });
 
   return (
