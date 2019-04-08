@@ -1,5 +1,6 @@
 import * as React from "react";
 import debounce from "lodash/debounce";
+import presets from "../presets.json";
 import LinkAs from "../components/link-as";
 import styled from "../styles/styled-components";
 import { media } from "../styles/utils/breakpoint";
@@ -206,29 +207,18 @@ const Index: React.FunctionComponent = (): JSX.Element => {
           Presets
         </Title>
         <Cards>
-          <LinkAs route="./fight/:packages" packages="react,vue,@angular/cli">
-            <Card variant="secondary" ripple={true}>
-              Front-end Frameworks
-              <span>react, vue, @angular/cli</span>
-            </Card>
-          </LinkAs>
-          <LinkAs route="./fight/:packages" packages="express,hapi,koa,fastify">
-            <Card variant="secondary" ripple={true}>
-              Node Servers
-              <span>express, hapi, koa, fastify</span>
-            </Card>
-          </LinkAs>
-          <LinkAs
-            route="./fight/:packages"
-            packages="styled-components,jss,fela,emotion,styled-jsx,glamor"
-          >
-            <Card variant="secondary" ripple={true}>
-              CSS-in-JS
-              <span>
-                styled-components, jss, fela, emotion, styled-jsx, glamor
-              </span>
-            </Card>
-          </LinkAs>
+          {presets.map((preset) => (
+            <LinkAs
+              key={preset.title}
+              route="./fight/:packages"
+              packages={preset.packages.join(",")}
+            >
+              <Card variant="secondary" ripple={true}>
+                {preset.title}
+                <span>{preset.packages.join(", ")}</span>
+              </Card>
+            </LinkAs>
+          ))}
         </Cards>
       </Container>
     </Layout>
