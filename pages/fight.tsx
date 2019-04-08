@@ -40,6 +40,8 @@ const BackButton = styled(Button)`
   margin: 5rem auto;
 `;
 
+const availableContenderCount = [2, 3, 4, 6, 8];
+
 const processDataOutcome = (data: DownloadsResponse): any => {
   return Object.keys(data).reduce((acc, key) => {
     const d = data[key];
@@ -68,7 +70,10 @@ const Fight = (props: any): JSX.Element => {
   const noPackages = packagesCount === 0 || payloadKeys.includes("undefined");
   const badPackages = checkBadPackage(payload);
   const hasBadPackages = badPackages.length > 0;
-  const hasWarning = hasBadPackages || noPackages;
+  const invalidContenderCount = !availableContenderCount.includes(
+    packagesCount,
+  );
+  const hasWarning = hasBadPackages || noPackages || invalidContenderCount;
 
   React.useEffect(() => {
     if (!hasBadPackages) {
@@ -107,9 +112,14 @@ const Fight = (props: any): JSX.Element => {
             </p>
           </Warning>
         )}
-        {noPackages && (
+        {noPackages && !hasBadPackages && (
           <Warning>
             <p>No contenders! Go back and add some packages!</p>
+          </Warning>
+        )}
+        {invalidContenderCount && (
+          <Warning>
+            <p>Sorry we currently only support 2, 3, 4, 6, or 8 contenders.</p>
           </Warning>
         )}
         {!hasWarning && (
