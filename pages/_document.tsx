@@ -100,9 +100,14 @@ head-to-head in a no holds barred contest to see which framework reigns supreme!
             href={`${process.env.STATIC_LOCATION}/manifest.json`}
           />
           <link
+            href="https://static.battles.dev/fonts/styles.css"
+            rel="stylesheet"
+          />
+          <link
             href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700"
             rel="stylesheet"
           />
+
           {GA_TRACKING_ID && (
             <React.Fragment>
               <script

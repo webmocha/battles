@@ -1,7 +1,6 @@
 import { createGlobalStyle } from "./styled-components";
 import { media } from "./utils/breakpoint";
 import theme from "./theme";
-import fonts from "./fonts";
 
 const GlobalStyles = createGlobalStyle`
   :root {
@@ -86,8 +85,6 @@ const GlobalStyles = createGlobalStyle`
     border: 0;
     border-top: 1px solid ${theme.colors.primary};
   }
-
-  ${fonts}
 `;
 
 export default GlobalStyles;
