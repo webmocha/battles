@@ -10,6 +10,7 @@ import Nav from "../components/Nav";
 import Container from "../components/Container";
 import AddIcon from "../components/icons/Add";
 import SearchInput from "../components/SearchInput";
+import { availableContenderCount } from "./fight";
 
 const Title = styled.h1`
   display: flex;
@@ -87,6 +88,8 @@ const Index: React.FunctionComponent = (): JSX.Element => {
   const [packages, setPackages] = React.useState([] as string[]);
   const [inputCount, setInputCount] = React.useState(2);
   const { dispatch } = React.useContext(BracketStoreContext);
+  const countIndex = availableContenderCount.indexOf(inputCount);
+
   const addPackages = debounce((nodePackage: string, index: number): void => {
     const newPackages = [...packages];
     newPackages[index] = nodePackage;
@@ -102,7 +105,8 @@ const Index: React.FunctionComponent = (): JSX.Element => {
       .join("-"),
   );
 
-  const disableFight = scrubPackages.length < 2;
+  const disableFight =
+    scrubPackages.length < availableContenderCount[countIndex];
 
   React.useEffect(() => {
     dispatch({ type: "RESET_BRACKET" });
@@ -131,7 +135,9 @@ const Index: React.FunctionComponent = (): JSX.Element => {
               <StyledButtonIcon
                 variant="secondary"
                 ripple={true}
-                onClick={() => setInputCount(inputCount + 1)}
+                onClick={() =>
+                  setInputCount(availableContenderCount[countIndex + 1])
+                }
               >
                 <AddIcon width={52} stroke="#FFBB00" />
               </StyledButtonIcon>
@@ -142,7 +148,7 @@ const Index: React.FunctionComponent = (): JSX.Element => {
                 ripple={true}
                 color="red"
                 onClick={() => {
-                  const newInputCount = inputCount - 1;
+                  const newInputCount = availableContenderCount[countIndex - 1];
                   setInputCount(newInputCount);
                   setPackages(packages.slice(0, newInputCount));
                 }}

@@ -40,7 +40,7 @@ const BackButton = styled(Button)`
   margin: 5rem auto;
 `;
 
-const availableContenderCount = [2, 3, 4, 6, 8];
+export const availableContenderCount = [2, 3, 4, 6, 8];
 
 const processDataOutcome = (data: DownloadsResponse): any => {
   return Object.keys(data).reduce((acc, key) => {
