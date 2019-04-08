@@ -204,7 +204,7 @@ const Index: React.FunctionComponent = (): JSX.Element => {
       </Container>
       <Container>
         <Title as="h2" style={{ marginTop: 0 }}>
-          Presets
+          Rumbles
         </Title>
         <Cards>
           {presets.map((preset) => (
