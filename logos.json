@@ -16,6 +16,18 @@
     "logoUrl": "https://cdn.worldvectorlogo.com/logos/bootstrap-4.svg"
   },
   {
+    "packages": ["broccoli"],
+    "logoUrl": "https://raw.githubusercontent.com/broccolijs/broccoli/HEAD/logo/broccoli-logo.generated.png"
+  },
+  {
+    "packages": ["browserify"],
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/en/thumb/2/27/Browserify.svg/1200px-Browserify.svg.png"
+  },
+  {
+    "packages": ["brunch"],
+    "logoUrl": "https://pbs.twimg.com/profile_images/378800000524168669/b6b445836933a987d835737ec2693b29_400x400.jpeg"
+  },
+  {
     "packages": ["chai"],
     "logoUrl": "https://cdn.worldvectorlogo.com/logos/chai.svg"
   },
@@ -42,6 +54,10 @@
   {
     "packages": ["grommet"],
     "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Grommet-icon.svg/600px-Grommet-icon.svg.png"
+  },
+  {
+    "packages": ["grunt"],
+    "logoUrl": "https://gruntjs.com/img/grunt-logo-no-wordmark.svg"
   },
   {
     "packages": ["gulp"],
