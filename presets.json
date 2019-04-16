@@ -30,5 +30,18 @@
       "styled-jsx",
       "glamor"
     ]
+  },
+  {
+    "title": "Templating Engines",
+    "packages": [
+      "mustache",
+      "pug",
+      "handlebars",
+      "ejs",
+      "dot",
+      "nunjucks",
+      "liquidjs",
+      "blueimp-tmpl"
+    ]
   }
 ]

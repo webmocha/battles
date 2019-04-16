@@ -12,6 +12,10 @@
     "logoUrl": "https://www.vectorlogo.zone/logos/backbonejs/backbonejs-icon.svg"
   },
   {
+    "packages": ["blueimp-tmpl"],
+    "logoUrl": "https://s.gravatar.com/avatar/188943e53857bfaca6a5cf4328866e5d?size=200"
+  },
+  {
     "packages": ["bootstrap"],
     "logoUrl": "https://cdn.worldvectorlogo.com/logos/bootstrap-4.svg"
   },
@@ -22,6 +26,14 @@
   {
     "packages": ["dojo"],
     "logoUrl": "https://cdn.worldvectorlogo.com/logos/dojo-1.svg"
+  },
+  {
+    "packages": ["dot"],
+    "logoUrl": "http://olado.github.io/doT/doT-js-100@2x.png"
+  },
+  {
+    "packages": ["ejs"],
+    "logoUrl": "https://camo.githubusercontent.com/3f03c3d6f0972ae074f44400f1aed9f9a16d6002/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f636972616e64612f656e7469746965732f312f343430373237343138666131363866373035656266313734333238303563303466383232323765322e706e67"
   },
   {
     "packages": ["electron"],
@@ -72,6 +84,10 @@
     "logoUrl": "http://lesscss.org/public/img/less_logo.png"
   },
   {
+    "packages": ["liquidjs"],
+    "logoUrl": "https://cdn.shopify.com/assets2/partners/shopify-cheat-sheet/shopify-cheat-sheet-social-790bf73396459c098c9b401e45debf7f28d65746b6dafe5a9317ac68d97f746a.png"
+  },
+  {
     "packages": ["lodash"],
     "logoUrl": "https://lodash.com/assets/img/lodash.svg"
   },
@@ -82,6 +98,10 @@
   {
     "packages": ["marko"],
     "logoUrl": "https://seeklogo.com/images/M/marko-logo-4EE85ACE69-seeklogo.com.png"
+  },
+  {
+    "packages": ["mustache"],
+    "logoUrl": "https://avatars3.githubusercontent.com/u/197655?v=3&s=400"
   },
   {
     "packages": [
@@ -98,6 +118,10 @@
     "logoUrl": "https://cdn.worldvectorlogo.com/logos/npm.svg"
   },
   {
+    "packages": ["nunjucks"],
+    "logoUrl": "https://douglaszaltron.gallerycdn.vsassets.io/extensions/douglaszaltron/nunjucks-vscode-extensionpack/0.0.1/1543237401385/Microsoft.VisualStudio.Services.Icons.Default"
+  },
+  {
     "packages": ["parcel", "parcel-bundler"],
     "logoUrl": "https://parceljs.org/assets/parcel-og.png"
   },
@@ -108,6 +132,10 @@
   {
     "packages": ["postcss"],
     "logoUrl": "https://postcss.org/_/web_modules/Hero/postcss.svg"
+  },
+  {
+    "packages": ["pug"],
+    "logoUrl": "https://cdn.rawgit.com/pugjs/pug-logo/eec436cee8fd9d1726d7839cbe99d1f694692c0c/SVG/pug-final-logo-_-colour-128.svg"
   },
   {
     "packages": ["sass"],
