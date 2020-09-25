@@ -1,7 +1,7 @@
 [
   {
     "title": "Front-end Frameworks",
-    "packages": ["react", "vue", "@angular/cli"]
+    "packages": ["react", "vue", "@angular/cli", "svelte"]
   },
   {
     "title": "Node Servers",
