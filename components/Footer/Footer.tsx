@@ -11,6 +11,16 @@ const Wrapper = styled.div`
   color: ${(props) => props.theme.colors.liteText};
   z-index: 10;
 
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .spacer {
+    margin: 0 5px;
+  }
+
   p {
     font-size: 1rem;
     margin: 0;
@@ -30,17 +40,27 @@ const StyledLink = styled.a`
 const Footer: React.FunctionComponent = (): JSX.Element => {
   return (
     <Wrapper>
-      <p>
-        Handcrafted by your friendly engineers at&nbsp;
+      <div>
+        <p>
+          Handcrafted by your friendly engineers at&nbsp;
+          <StyledLink
+            href="https://webmocha.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            WebMocha
+          </StyledLink>
+          , © 2019
+        </p>
+        <div className="spacer" />
         <StyledLink
-          href="https://webmocha.com"
+          href="https://www.producthunt.com/posts/devbattles"
           target="_blank"
           rel="noopener noreferrer"
         >
-          WebMocha
+          Show us some love on Product Hunt!
         </StyledLink>
-        , © 2019
-      </p>
+      </div>
     </Wrapper>
   );
 };
