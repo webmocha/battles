@@ -17,7 +17,7 @@
       "webpack",
       "broccoli",
       "brunch",
-      "browserify"
+      "snowpack"
     ]
   },
   {

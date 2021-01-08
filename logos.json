@@ -24,10 +24,6 @@
     "logoUrl": "https://raw.githubusercontent.com/broccolijs/broccoli/HEAD/logo/broccoli-logo.generated.png"
   },
   {
-    "packages": ["browserify"],
-    "logoUrl": "https://upload.wikimedia.org/wikipedia/en/thumb/2/27/Browserify.svg/1200px-Browserify.svg.png"
-  },
-  {
     "packages": ["brunch"],
     "logoUrl": "https://pbs.twimg.com/profile_images/378800000524168669/b6b445836933a987d835737ec2693b29_400x400.jpeg"
   },
@@ -176,6 +172,10 @@
   {
     "packages": ["rollup"],
     "logoUrl": "https://rollupjs.org/logo.svg"
+  },
+  {
+    "packages": ["snowpack"],
+    "logoUrl": "https://camo.githubusercontent.com/f1f40ca281f9e25df19973e449360a5cd8d7378c5effb53ad4b96eec29ded4f6/68747470733a2f2f7777772e736e6f777061636b2e6465762f696d672f6c6f676f2e706e67"
   },
   {
     "packages": ["typescript"],
